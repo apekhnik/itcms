@@ -8,15 +8,19 @@ import Profile from "./component/Profile/Profile";
 import { Switch, Route } from "react-router-dom";
 import Dialogs from "./component/Dialogs/Dialogs";
 
-function App() {
+function App({ state }) {
+  const { dialogs, messages } = state;
   return (
     <MainContainer>
       <Header />
       <SideBar />
       <Content>
         <Switch>
-          <Route path="/profile" component={Profile} />
-          <Route path="/dialogs" component={Dialogs} />
+          <Route path="/profile" render={() => <Profile />} />
+          <Route
+            path="/dialogs"
+            render={() => <Dialogs dialogs={dialogs} msg={messages} />}
+          />
         </Switch>
       </Content>
     </MainContainer>

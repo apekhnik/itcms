@@ -16,22 +16,15 @@ const MessageItem = ({ text }) => {
     </div>
   );
 };
-const Dialogs = () => {
+const Dialogs = ({ dialogs, msg }) => {
+  const dialogsList = dialogs.map((d) => (
+    <DialogsItem id={d.id} name={d.name} />
+  ));
+  const msgList = msg.map((m) => <MessageItem text={m} />);
   return (
     <div className={style.dialogs}>
-      <div className={style.dialogs_item}>
-        <DialogsItem id={1} name="anton" />
-        <DialogsItem id={2} name="shure" />
-        <DialogsItem id={3} name="vitalya" />
-        <DialogsItem id={4} name="annet" />
-        <DialogsItem id={5} name="valera" />
-      </div>
-      <div className={style.message}>
-        <MessageItem text="hi" />
-        <MessageItem text="yo" />
-        <MessageItem text="wazzup" />
-        <MessageItem text="howdy" />
-      </div>
+      <div className={style.dialogs_item}>{dialogsList}</div>
+      <div className={style.message}>{msgList}</div>
     </div>
   );
 };

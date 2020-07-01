@@ -4,9 +4,31 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+
+const state = {
+  dialogs: [
+    {
+      id: 1,
+      name: "Шура",
+    },
+    {
+      id: 2,
+      name: "Даша",
+    },
+    {
+      id: 3,
+      name: "Маша",
+    },
+    {
+      id: 4,
+      name: "Вероника",
+    },
+  ],
+  messages: ["yo", "qu", "hi"],
+};
 const app = (
   <BrowserRouter>
-    <App />
+    <App state={state} />
   </BrowserRouter>
 );
 ReactDOM.render(app, document.getElementById("root"));
