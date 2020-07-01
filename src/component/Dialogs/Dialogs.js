@@ -18,9 +18,9 @@ const MessageItem = ({ text }) => {
 };
 const Dialogs = ({ dialogs, msg }) => {
   const dialogsList = dialogs.map((d) => (
-    <DialogsItem id={d.id} name={d.name} />
+    <DialogsItem id={d.id} name={d.name} key={d.id} />
   ));
-  const msgList = msg.map((m) => <MessageItem text={m} />);
+  const msgList = msg.map((m, i) => <MessageItem text={m} key={i} />);
   return (
     <div className={style.dialogs}>
       <div className={style.dialogs_item}>{dialogsList}</div>

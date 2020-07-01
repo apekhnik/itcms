@@ -7,7 +7,7 @@ const SideBar = () => {
       <div className={style.links}>
         <Link to="/dialogs">Dialogs</Link>
 
-        <Link to="/drofile">Profile</Link>
+        <Link to="/profile">Profile</Link>
       </div>
     </div>
   );
