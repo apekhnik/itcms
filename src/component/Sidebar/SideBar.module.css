@@ -1,0 +1,8 @@
+.sidebar {
+  grid-area: nav;
+  background: red;
+}
+.links {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.my-node-enter,
+.my-node-appear {
+  /*We give the list the initial dimension of the list button*/
+  opacity: 0;
+  color: transparent;
+  transform: scale(0.3);
+  color: white;
+}
+/* This is where we can add the transition*/
+.my-node-enter-done,
+.my-node-appear-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 500ms;
+}
+
+/* This fires as soon as the this.state.showList is false */
+.my-node-exit {
+  color: red;
+}
+/* fires as element leaves the DOM*/
+.my-node-exit-done {
+  opacity: 0.3;
+  transform: scale(0.1);
+  transition: all 1000ms;
+}
