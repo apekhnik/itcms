@@ -16,7 +16,7 @@ const MessageItem = ({ text }) => {
     </div>
   );
 };
-const Dialogs = ({ dialogs, msg }) => {
+const Dialogs = ({ dialogs, msg, dispatch, newMessageBody }) => {
   const dialogsList = dialogs.map((d) => (
     <DialogsItem id={d.id} name={d.name} key={d.id} />
   ));
@@ -25,6 +25,20 @@ const Dialogs = ({ dialogs, msg }) => {
     <div className={style.dialogs}>
       <div className={style.dialogs_item}>{dialogsList}</div>
       <div className={style.message}>{msgList}</div>
+      <div className={style.message_enter_area}>
+        <textarea
+          name=""
+          id=""
+          value={newMessageBody}
+          onChange={(e) =>
+            dispatch({
+              type: "ON_NEW_MSG_BODY_CHANGE",
+              payload: e.target.value,
+            })
+          }
+        ></textarea>
+        <button onClick={() => dispatch({ type: "SEND_NEW_MSG" })}>Send</button>
+      </div>
     </div>
   );
 };

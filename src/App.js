@@ -8,8 +8,10 @@ import Profile from "./component/Profile/Profile";
 import { Switch, Route } from "react-router-dom";
 import Dialogs from "./component/Dialogs/Dialogs";
 
-function App({ state, addPost, onInputTextChange }) {
-  const { dialogs, messages, profile } = state;
+function App({ state, dispatch }) {
+  const { dialogsPage, profilePage } = state;
+  const { dialogs, messages, newMessageBody } = dialogsPage;
+  const { inputPostText, posts } = profilePage;
   return (
     <MainContainer>
       <Header />
@@ -20,16 +22,22 @@ function App({ state, addPost, onInputTextChange }) {
             path="/profile"
             render={() => (
               <Profile
-                posts={profile.posts}
-                addPost={addPost}
-                inputPost={profile.inputPostText}
-                onInputTextChange={onInputTextChange}
+                posts={posts}
+                inputPost={inputPostText}
+                dispatch={dispatch}
               />
             )}
           />
           <Route
             path="/dialogs"
-            render={() => <Dialogs dialogs={dialogs} msg={messages} />}
+            render={() => (
+              <Dialogs
+                dialogs={dialogs}
+                msg={messages}
+                dispatch={dispatch}
+                newMessageBody={newMessageBody}
+              />
+            )}
           />
         </Switch>
       </Content>
