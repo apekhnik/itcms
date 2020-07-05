@@ -1,7 +1,5 @@
-const ADD_POST = "ADD_POST",
-  ON_INPUT_TEXT_CHANGE = "ON_INPUT_TEXT_CHANGE",
-  ON_NEW_MSG_BODY_CHANGE = "ON_NEW_MSG_BODY_CHANGE",
-  SEND_NEW_MSG = "SEND_NEW_MSG";
+import profilePageReducer from "./reducers/profilePageReducer";
+import dialogsPageReducer from "./reducers/dialogsPageReducer";
 
 let store = {
   _state: {
@@ -37,44 +35,25 @@ let store = {
     },
     sidebar: {},
   },
-  rerenderApp() {
+  callSubscriber() {
     console.log("was rerendered");
   },
   getState() {
     return this._state;
   },
   subscribe(obs) {
-    this.rerenderApp = obs;
+    this.callSubscriber = obs;
   },
   dispatch(action) {
-    switch (action.type) {
-      case ADD_POST:
-        let post = {
-          id: this._state.profilePage.posts.length + 1,
-          text: this._state.profilePage.inputPostText,
-        };
-        this._state.profilePage.posts.push(post);
-        this._state.profilePage.inputPostText = "";
-        this.rerenderApp();
-        break;
-      case ON_INPUT_TEXT_CHANGE:
-        this._state.profilePage.inputPostText = action.payload;
-        this.rerenderApp();
-        break;
-      case ON_NEW_MSG_BODY_CHANGE:
-        this._state.dialogsPage.newMessageBody = action.payload;
-        this.rerenderApp();
-        break;
-      case SEND_NEW_MSG:
-        this._state.dialogsPage.messages.push(
-          this._state.dialogsPage.newMessageBody
-        );
-        this._state.dialogsPage.newMessageBody = "";
-        this.rerenderApp();
-        break;
-      default:
-        break;
-    }
+    this._state.profilePage = profilePageReducer(
+      this._state.profilePage,
+      action
+    );
+    this._state.dialogsPage = dialogsPageReducer(
+      this._state.dialogsPage,
+      action
+    );
+    this.callSubscriber();
   },
 };
 

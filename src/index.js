@@ -14,4 +14,4 @@ const rerenderApp = () => {
   ReactDOM.render(app, document.getElementById("root"));
 };
 store.subscribe(rerenderApp);
-store.rerenderApp();
+rerenderApp();

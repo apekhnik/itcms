@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
+import { sendNewMsgAction, inputNewMsgAction } from "../../redux/actionCreator";
 const DialogsItem = ({ id, name }) => {
   const path = `/dialogs/${id}`;
   return (
@@ -21,23 +22,19 @@ const Dialogs = ({ dialogs, msg, dispatch, newMessageBody }) => {
     <DialogsItem id={d.id} name={d.name} key={d.id} />
   ));
   const msgList = msg.map((m, i) => <MessageItem text={m} key={i} />);
+  const onInputMessageChange = (e) =>
+    dispatch(inputNewMsgAction(e.target.value));
+  const onMessageSend = () => dispatch(sendNewMsgAction());
   return (
     <div className={style.dialogs}>
       <div className={style.dialogs_item}>{dialogsList}</div>
       <div className={style.message}>{msgList}</div>
       <div className={style.message_enter_area}>
         <textarea
-          name=""
-          id=""
           value={newMessageBody}
-          onChange={(e) =>
-            dispatch({
-              type: "ON_NEW_MSG_BODY_CHANGE",
-              payload: e.target.value,
-            })
-          }
+          onChange={onInputMessageChange}
         ></textarea>
-        <button onClick={() => dispatch({ type: "SEND_NEW_MSG" })}>Send</button>
+        <button onClick={onMessageSend}>Send</button>
       </div>
     </div>
   );
