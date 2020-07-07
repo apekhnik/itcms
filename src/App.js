@@ -8,7 +8,7 @@ import Profile from "./component/Profile/Profile";
 import { Switch, Route } from "react-router-dom";
 import Dialogs from "./component/Dialogs/Dialogs";
 
-function App({ state, dispatch }) {
+function App({ state, dispatch, store }) {
   const { dialogsPage, profilePage } = state;
   const { dialogs, messages, newMessageBody } = dialogsPage;
   const { inputPostText, posts } = profilePage;
@@ -25,6 +25,7 @@ function App({ state, dispatch }) {
                 posts={posts}
                 inputPost={inputPostText}
                 dispatch={dispatch}
+                store={store}
               />
             )}
           />
