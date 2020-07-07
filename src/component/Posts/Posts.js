@@ -1,22 +1,17 @@
 import React from "react";
 import Post from "./Post";
+import Input from "../Input/Input";
 const Posts = ({ postList, addPost, textChangeHandler, inputValue }) => {
   const postListElement = postList.map((p) => (
     <Post text={p.text} key={p.id} />
   ));
   return (
     <div>
-      <div>
-        <form
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            addPost();
-          }}
-        >
-          <input type="text" onChange={textChangeHandler} value={inputValue} />
-        </form>
-      </div>
+      <Input
+        send={addPost}
+        inputValue={inputValue}
+        textChangeHandler={textChangeHandler}
+      />
       {postListElement}
     </div>
   );

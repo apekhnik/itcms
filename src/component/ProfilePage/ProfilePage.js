@@ -2,7 +2,7 @@ import React from "react";
 import Account from "../Account/Account";
 import PostContainer from "../Posts/PostContainer";
 
-const Profile = ({ store }) => {
+const ProfilePage = ({ store }) => {
   return (
     <div>
       <Account />
@@ -10,4 +10,4 @@ const Profile = ({ store }) => {
     </div>
   );
 };
-export default Profile;
+export default ProfilePage;

@@ -6,7 +6,8 @@ import {
 } from "../../redux/actionCreator";
 const PostContainer = ({ store }) => {
   const state = store.getState();
-  const postList = state.profilePage.posts;
+
+  const { posts, inputPostText } = state.profilePage;
   const addPost = () => {
     store.dispatch(addPostAction());
   };
@@ -15,8 +16,8 @@ const PostContainer = ({ store }) => {
   };
   return (
     <Posts
-      postList={postList}
-      inputValue={state.profilePage.inputPostText}
+      postList={posts}
+      inputValue={inputPostText}
       addPost={addPost}
       textChangeHandler={onInputTextChangeHandler}
     />

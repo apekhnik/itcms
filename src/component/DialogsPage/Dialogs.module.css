@@ -1,4 +1,4 @@
-.dialogs {
+.dialogs_page_container {
   display: grid;
   grid-template-columns: 2fr 10fr;
 }
@@ -14,7 +14,7 @@
   margin-bottom: 5px;
   text-decoration: none;
 }
-.message {
+.message_page {
   padding: 10px;
   margin-bottom: 5px;
 }
