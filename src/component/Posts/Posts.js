@@ -1,16 +1,15 @@
 import React from "react";
 import Post from "./Post";
 import Input from "../Input/Input";
-const Posts = ({ postList, addPost, textChangeHandler, inputValue }) => {
-  const postListElement = postList.map((p) => (
-    <Post text={p.text} key={p.id} />
-  ));
+const Posts = ({ posts, addPost, inputTextChange, inputPostText }) => {
+  const postListElement = posts.map((p) => <Post text={p.text} key={p.id} />);
+  const onInputPostChange = (e) => inputTextChange(e.target.value);
   return (
     <div>
       <Input
         send={addPost}
-        inputValue={inputValue}
-        textChangeHandler={textChangeHandler}
+        inputValue={inputPostText}
+        textChangeHandler={onInputPostChange}
       />
       {postListElement}
     </div>

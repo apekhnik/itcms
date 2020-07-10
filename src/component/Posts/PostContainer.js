@@ -4,23 +4,23 @@ import {
   addPostAction,
   inputTextChangeAction,
 } from "../../redux/actionCreator";
-const PostContainer = ({ store }) => {
-  const state = store.getState();
-
-  const { posts, inputPostText } = state.profilePage;
-  const addPost = () => {
-    store.dispatch(addPostAction());
+import { connect } from "react-redux";
+const mapStateToProps = (state) => {
+  return {
+    inputPostText: state.profilePage.inputPostText,
+    posts: state.profilePage.posts,
   };
-  const onInputTextChangeHandler = (e) => {
-    store.dispatch(inputTextChangeAction(e.target.value));
-  };
-  return (
-    <Posts
-      postList={posts}
-      inputValue={inputPostText}
-      addPost={addPost}
-      textChangeHandler={onInputTextChangeHandler}
-    />
-  );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => {
+      dispatch(addPostAction());
+    },
+    inputTextChange: (text) => {
+      dispatch(inputTextChangeAction(text));
+    },
+  };
+};
+const PostContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
+
 export default PostContainer;

@@ -1,17 +1,29 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
-const profilePageReducer = (state, action) => {
+const initialState = {
+  inputPostText: "",
+  posts: [
+    { id: 1, text: "test1" },
+    { id: 2, text: "test2" },
+    { id: 3, text: "test3" },
+  ],
+};
+const profilePageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
+      let newState = { ...state };
       let post = {
-        id: state.posts.length + 1,
-        text: state.inputPostText,
+        id: newState.posts.length + 1,
+        text: newState.inputPostText,
       };
-      state.posts.push(post);
-      state.inputPostText = "";
-      break;
-    case ON_INPUT_TEXT_CHANGE:
-      state.inputPostText = action.payload;
-      break;
+      newState.posts.push(post);
+      newState.inputPostText = "";
+      return newState;
+    }
+    case ON_INPUT_TEXT_CHANGE: {
+      let newState = { ...state };
+      newState.inputPostText = action.payload;
+      return newState;
+    }
     default:
       break;
   }

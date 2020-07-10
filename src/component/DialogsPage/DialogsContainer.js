@@ -3,15 +3,21 @@ import style from "./Dialogs.module.css";
 import DialogList from "./DialogsList/DialogsList";
 import MessageList from "./Messages/MessagesList";
 import Input from "../Input/Input";
-import { inputNewMsgAction, sendNewMsgAction } from "../../redux/actionCreator";
-const DialogsContainer = ({ store }) => {
-  const { dialogs, messages, newMessageBody } = store.getState().dialogsPage;
+
+const DialogsContainer = ({
+  dialogs,
+  messages,
+  newMessageBody,
+  sendNewMessage,
+  messageInputChange,
+}) => {
   const addMessage = () => {
-    store.dispatch(sendNewMsgAction());
+    sendNewMessage();
   };
   const onInputChangeHandler = (e) => {
-    store.dispatch(inputNewMsgAction(e.target.value));
+    messageInputChange(e.target.value);
   };
+
   return (
     <div className={style.dialogs_page_container}>
       <DialogList dialogs={dialogs} />

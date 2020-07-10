@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "./component/Header/Header";
 import SideBar from "./component/Sidebar/SideBar";
 import Content from "./component/Content/Content";
-import Profile from "./component/ProfilePage/ProfilePage";
+import ProfilePage from "./component/ProfilePage/ProfilePage";
 import { Switch, Route } from "react-router-dom";
 import DialogsPage from "./component/DialogsPage/DialogsPage";
 
@@ -15,7 +15,7 @@ function App({ store }) {
       <SideBar />
       <Content>
         <Switch>
-          <Route path="/profile" render={() => <Profile store={store} />} />
+          <Route path="/profile" render={() => <ProfilePage store={store} />} />
           <Route path="/dialogs" render={() => <DialogsPage store={store} />} />
         </Switch>
       </Content>
