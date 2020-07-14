@@ -1,0 +1,19 @@
+.users_item {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  padding: 10px;
+  grid-gap: 10px;
+}
+.users_item div {
+}
+.users_item_head {
+  text-align: center;
+}
+.users_item_body {
+  position: relative;
+}
+.users_item_bodyBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

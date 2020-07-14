@@ -10,19 +10,21 @@ const initialState = {
 const profilePageReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
-      let newState = { ...state };
       let post = {
-        id: newState.posts.length + 1,
-        text: newState.inputPostText,
+        id: state.posts.length + 1,
+        text: state.inputPostText,
       };
-      newState.posts.push(post);
-      newState.inputPostText = "";
-      return newState;
+      return {
+        ...state,
+        posts: [...state.posts, post],
+        inputPostText: "",
+      };
     }
     case ON_INPUT_TEXT_CHANGE: {
-      let newState = { ...state };
-      newState.inputPostText = action.payload;
-      return newState;
+      return {
+        ...state,
+        inputPostText: action.payload,
+      };
     }
     default:
       break;

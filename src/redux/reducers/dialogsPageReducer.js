@@ -24,15 +24,18 @@ const initialState = {
 const dialogsPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case ON_NEW_MSG_BODY_CHANGE: {
-      let newState = { ...state };
-      newState.newMessageBody = action.payload;
-      return newState;
+      return {
+        ...state,
+        newMessageBody: action.payload,
+      };
     }
     case SEND_NEW_MSG: {
-      let newState = { ...state };
-      newState.messages.push(state.newMessageBody);
-      newState.newMessageBody = "";
-      return newState;
+      let newMsg = state.newMessageBody;
+      return {
+        ...state,
+        messages: [...state.messages, newMsg],
+        newMessageBody: "",
+      };
     }
     default:
       break;
