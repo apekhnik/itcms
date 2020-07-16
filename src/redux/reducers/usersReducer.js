@@ -17,14 +17,14 @@ const initialState = {
     {
       id: 3,
       fullName: "Sveta",
-      followed: true,
+      followed: false,
       location: { city: "12", country: "lnr" },
       status: "Ulala lalau",
     },
     {
-      id: 3,
+      id: 4,
       fullName: "Svsssssta",
-      followed: true,
+      followed: false,
       location: { city: "12", country: "lnr" },
       status: "Ulala lalau",
     },
@@ -33,13 +33,14 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FOLLOW":
+      console.log("popali");
       return {
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.payload) {
             return { ...u, followed: true };
           }
-          return state;
+          return u;
         }),
       };
     case "UNFOLLOW":
@@ -50,6 +51,18 @@ const userReducer = (state = initialState, action) => {
             return { ...u, followed: false };
           }
           return state;
+        }),
+      };
+    case "TOGGLE":
+      console.log(action.payload);
+      return {
+        ...state,
+        users: state.users.map((u) => {
+          console.log(u);
+          if (u.id === action.payload) {
+            return { ...u, followed: !u.followed };
+          }
+          return u;
         }),
       };
     default:
