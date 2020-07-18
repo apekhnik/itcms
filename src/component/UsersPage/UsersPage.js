@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import UsersContainer from "./UsersContainer";
+import Users from "./Users";
 import {
   followUserAction,
   unFollowUserAction,
@@ -7,6 +7,9 @@ import {
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
+    currentPage: state.usersPage.currentPage,
+    totalUsersCount: state.usersPage.totalUsersCount,
+    pageSize: state.usersPage.pageSize,
   };
 };
 const mapDispathToProps = (dispatch) => {
@@ -20,7 +23,13 @@ const mapDispathToProps = (dispatch) => {
     toggle: (id) => {
       dispatch({ type: "TOGGLE", payload: id });
     },
+    setUsers: (users) => {
+      dispatch({ type: "SET_USERS", payload: users });
+    },
+    setCurrentPage: (p) => {
+      dispatch({ type: "SET_CURRENT_PAGE", payload: p });
+    },
   };
 };
-const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
+const UserPage = connect(mapStateToProps, mapDispathToProps)(Users);
 export default UserPage;

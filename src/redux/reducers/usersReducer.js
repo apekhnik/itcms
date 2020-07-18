@@ -1,34 +1,8 @@
 const initialState = {
-  users: [
-    {
-      id: 0,
-      fullName: "Leha",
-      followed: true,
-      location: { city: "12", country: "lnr" },
-      status: "Ulala lalau",
-    },
-    {
-      id: 2,
-      fullName: "Shara",
-      followed: true,
-      location: { city: "12", country: "lnr" },
-      status: "Ulala lalau",
-    },
-    {
-      id: 3,
-      fullName: "Sveta",
-      followed: false,
-      location: { city: "12", country: "lnr" },
-      status: "Ulala lalau",
-    },
-    {
-      id: 4,
-      fullName: "Svsssssta",
-      followed: false,
-      location: { city: "12", country: "lnr" },
-      status: "Ulala lalau",
-    },
-  ],
+  users: [],
+  currentPage: 5,
+  totalUsersCount: 25,
+  pageSize: 5,
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -54,16 +28,25 @@ const userReducer = (state = initialState, action) => {
         }),
       };
     case "TOGGLE":
-      console.log(action.payload);
       return {
         ...state,
         users: state.users.map((u) => {
-          console.log(u);
           if (u.id === action.payload) {
             return { ...u, followed: !u.followed };
           }
           return u;
         }),
+      };
+    case "SET_USERS":
+      return {
+        ...state,
+        users: [...action.payload.items],
+        totalUsersCount: action.payload.totalCount,
+      };
+    case "SET_CURRENT_PAGE":
+      return {
+        ...state,
+        currentPage: action.payload,
       };
     default:
       return state;

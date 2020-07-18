@@ -1,6 +1,6 @@
 import React from "react";
 import Users from "./Users";
-const UsersContainer = ({ users, follow, unfollow, toggle }) => {
+const UsersContainer = ({ users, follow, unfollow, toggle, setUsers }) => {
   return (
     <div>
       {
@@ -9,6 +9,7 @@ const UsersContainer = ({ users, follow, unfollow, toggle }) => {
           follow={follow}
           unfollow={unfollow}
           toggle={toggle}
+          setUsers={setUsers}
         />
       }
     </div>
