@@ -4,6 +4,7 @@ import {
   followUserAction,
   unFollowUserAction,
 } from "../../redux/actionCreator";
+import UsersContainer from "./UsersContainer";
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -31,5 +32,5 @@ const mapDispathToProps = (dispatch) => {
     },
   };
 };
-const UserPage = connect(mapStateToProps, mapDispathToProps)(Users);
+const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
 export default UserPage;
