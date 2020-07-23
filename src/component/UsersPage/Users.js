@@ -10,7 +10,7 @@ class Users extends Component {
       .then((response) => this.props.setUsers(response.data))
       .catch((e) => console.error(e));
   }
-  onCurrentChange = (p) => {
+  onCurrentPageChange = (p) => {
     this.props.setCurrentPage(p);
     axios
       .get(
@@ -24,7 +24,7 @@ class Users extends Component {
       this.props.totalUsersCount / this.props.pageSize
     );
     let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= 8; i++) {
       pages.push(i);
     }
 
@@ -33,7 +33,7 @@ class Users extends Component {
         {pages.map((i) => (
           <span
             style={this.props.currentPage === i ? { color: "red" } : {}}
-            onClick={() => this.onCurrentChange(i)}
+            onClick={() => this.onCurrentPageChange(i)}
           >
             {i}
           </span>
