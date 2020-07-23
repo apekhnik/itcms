@@ -2,13 +2,16 @@ import React from "react";
 import UserItem from "./UserItem";
 const Users =(props)=> {
  
-  
+  console.log(props.isLoading)
     const pagesCount = Math.ceil(
       props.totalUsersCount / props.pageSize
     );
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
       pages.push(i);
+    }
+    if(props.isLoading) {
+      return <p>...loading</p>
     }
     return (
       <div>

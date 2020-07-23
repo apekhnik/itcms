@@ -18,11 +18,15 @@ class UsersContainer extends Component {
   }
   onCurrentChange = (p) => {
     this.props.setCurrentPage(p);
+    this.props.setLoadingTrue()
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
       )
-      .then((response) => this.props.setUsers(response.data))
+      .then((response) => {
+        this.props.setUsers(response.data);
+        this.props.setLoadingFalse()
+      })
       .catch((e) => console.error(e));
   };
   render() {
@@ -39,6 +43,7 @@ const mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     totalUsersCount: state.usersPage.totalUsersCount,
     pageSize: state.usersPage.pageSize,
+    isLoading: state.usersPage.isLoading
   };
 };
 const mapDispathToProps = (dispatch) => {
@@ -58,6 +63,9 @@ const mapDispathToProps = (dispatch) => {
     setCurrentPage: (p) => {
       dispatch({ type: "SET_CURRENT_PAGE", payload: p });
     },
+    setLoadingTrue: () => dispatch({type:'SET_LOADING_TRUE'}),
+    setLoadingFalse: () => dispatch({type:'SET_LOADING_FALSE'}),
+    fetchingToggler: () => dispatch({type:'LOADING_TOGGLER'})
   };
 };
 const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
