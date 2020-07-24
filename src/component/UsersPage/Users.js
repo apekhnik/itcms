@@ -1,56 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import UserItem from "./UserItem";
-import * as axios from "axios";
-class Users extends Component {
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => this.props.setUsers(response.data))
-      .catch((e) => console.error(e));
+const Users = (props) => {
+  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= 8; i++) {
+    pages.push(i);
   }
-  onCurrentPageChange = (p) => {
-    this.props.setCurrentPage(p);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
-      )
-      .then((response) => this.props.setUsers(response.data))
-      .catch((e) => console.error(e));
-  };
-  render() {
-    const pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
-    );
-    let pages = [];
-    for (let i = 1; i <= 8; i++) {
-      pages.push(i);
-    }
-
-    return (
-      <div>
-        {pages.map((i) => (
-          <span
-            style={this.props.currentPage === i ? { color: "red" } : {}}
-            onClick={() => this.onCurrentPageChange(i)}
-          >
-            {i}
-          </span>
-        ))}
-        {this.props.users.map((us, index) => {
-          return (
-            <UserItem
-              user={us}
-              follow={this.props.follow}
-              unfollow={this.props.unfollow}
-              toggle={this.props.toggle}
-              key={us.id}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {pages.map((i) => (
+        <span
+          style={props.currentPage === i ? { color: "red" } : {}}
+          onClick={() => props.onCurrentChange(i)}
+        >
+          {i}
+        </span>
+      ))}
+      {props.users.map((us, index) => {
+        return (
+          <UserItem
+            user={us}
+            follow={props.follow}
+            unfollow={props.unfollow}
+            toggle={props.toggle}
+            key={us.id}
+          />
+        );
+      })}
+    </div>
+  );
+};
 export default Users;

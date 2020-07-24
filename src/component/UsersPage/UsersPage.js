@@ -1,9 +1,38 @@
 import { connect } from "react-redux";
-import Users from "./Users";
+import React, {Component} from 'react'
+import Users from './Users'
 import {
   followUserAction,
   unFollowUserAction,
 } from "../../redux/actionCreator";
+import * as axios from 'axios'
+
+class UsersContainer extends Component {
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => this.props.setUsers(response.data))
+      .catch((e) => console.error(e));
+  }
+  onCurrentChange = (p) => {
+    this.props.setCurrentPage(p);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
+      )
+      .then((response) => this.props.setUsers(response.data))
+      .catch((e) => console.error(e));
+  };
+  render() {
+    return <Users onCurrentChange={this.onCurrentChange}
+            {...this.props}
+          />
+  }
+        
+    
+};
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -31,5 +60,7 @@ const mapDispathToProps = (dispatch) => {
     },
   };
 };
-const UserPage = connect(mapStateToProps, mapDispathToProps)(Users);
-export default UserPage;
+const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
+
+
+export default UserPage
