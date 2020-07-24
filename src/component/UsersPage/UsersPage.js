@@ -1,66 +1,67 @@
 import { connect } from "react-redux";
-import React, {Component} from 'react'
-import Users from './Users'
+import React, { Component } from "react";
+import Users from "./Users";
 import {
-  followUserAction,
-  unFollowUserAction,
+  follow,
+  unfollow,
+  setUsers,
+  followToggle,
 } from "../../redux/actionCreator";
-import * as axios from 'axios'
-
+import * as axios from "axios";
+console.log(setUsers);
 class UsersContainer extends Component {
   componentDidMount() {
+    this.props.fetchingToggler(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
       )
-      .then((response) => this.props.setUsers(response.data))
+      .then((response) => {
+        this.props.setUsers(response.data);
+        this.props.fetchingToggler(false);
+      })
       .catch((e) => console.error(e));
   }
   onCurrentChange = (p) => {
     this.props.setCurrentPage(p);
+    this.props.fetchingToggler(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
       )
-      .then((response) => this.props.setUsers(response.data))
+      .then((response) => {
+        this.props.setUsers(response.data);
+        this.props.fetchingToggler(false);
+      })
       .catch((e) => console.error(e));
   };
   render() {
-    return <Users onCurrentChange={this.onCurrentChange}
-            {...this.props}
-          />
+    return <Users onCurrentChange={this.onCurrentChange} {...this.props} />;
   }
-        
-    
-};
+}
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
     currentPage: state.usersPage.currentPage,
     totalUsersCount: state.usersPage.totalUsersCount,
     pageSize: state.usersPage.pageSize,
+    isLoading: state.usersPage.isLoading,
   };
 };
 const mapDispathToProps = (dispatch) => {
   return {
-    follow: (id) => {
-      dispatch(followUserAction(id));
-    },
-    unfollow: (id) => {
-      dispatch(unFollowUserAction(id));
-    },
+    follow,
+    unfollow,
     toggle: (id) => {
-      dispatch({ type: "TOGGLE", payload: id });
+      dispatch(followToggle(id));
     },
-    setUsers: (users) => {
-      dispatch({ type: "SET_USERS", payload: users });
-    },
+    setUsers: (users) => dispatch(setUsers(users)),
     setCurrentPage: (p) => {
       dispatch({ type: "SET_CURRENT_PAGE", payload: p });
     },
+    fetchingToggler: (t) => dispatch({ type: "LOADING_TOGGLER", payload: t }),
   };
 };
 const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
 
-
-export default UserPage
+export default UserPage;
