@@ -6,6 +6,8 @@ import {
   unfollow,
   setUsers,
   followToggle,
+  fetchingToggler,
+  setCurrentPage,
 } from "../../redux/actionCreator";
 import * as axios from "axios";
 console.log(setUsers);
@@ -48,20 +50,27 @@ const mapStateToProps = (state) => {
     isLoading: state.usersPage.isLoading,
   };
 };
-const mapDispathToProps = (dispatch) => {
-  return {
-    follow,
-    unfollow,
-    toggle: (id) => {
-      dispatch(followToggle(id));
-    },
-    setUsers: (users) => dispatch(setUsers(users)),
-    setCurrentPage: (p) => {
-      dispatch({ type: "SET_CURRENT_PAGE", payload: p });
-    },
-    fetchingToggler: (t) => dispatch({ type: "LOADING_TOGGLER", payload: t }),
-  };
-};
-const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
-
+// const mapDispathToProps = (dispatch) => {
+//   return {
+//     follow,
+//     unfollow,
+//     toggle: (id) => {
+//       dispatch(followToggle(id));
+//     },
+//     setUsers: (users) => dispatch(setUsers(users)),
+//     setCurrentPage: (p) => {
+//       dispatch({ type: "SET_CURRENT_PAGE", payload: p });
+//     },
+//     fetchingToggler: (t) => dispatch({ type: "LOADING_TOGGLER", payload: t }),
+//   };
+// };
+// const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
+const UserPage = connect(mapStateToProps, {
+  follow,
+  unfollow,
+  followToggle,
+  setUsers,
+  setCurrentPage,
+  fetchingToggler,
+})(UsersContainer);
 export default UserPage;

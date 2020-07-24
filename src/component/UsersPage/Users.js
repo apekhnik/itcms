@@ -25,7 +25,7 @@ const Users = (props) => {
         return (
           <UserItem
             user={us}
-            follow={props.follow}
+            follow={props.followToggle}
             unfollow={props.unfollow}
             toggle={props.toggle}
             key={us.id}

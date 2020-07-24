@@ -42,11 +42,13 @@ export const unfollow = (id) => {
   };
 };
 export const setUsers = (data) => {
-  console.log(data);
   return {
     type: SET_USERS,
     payload: data,
   };
+};
+export const setCurrentPage = (p) => {
+  return { type: "SET_CURRENT_PAGE", payload: p };
 };
 export const followToggle = (b) => {
   console.log("hello i am AC T");
@@ -54,4 +56,7 @@ export const followToggle = (b) => {
     type: "TOGGLE",
     payload: b,
   };
+};
+export const fetchingToggler = (t) => {
+  return { type: "LOADING_TOGGLER", payload: t };
 };
