@@ -4,6 +4,7 @@ import Avatar from "../Avatar/Avatar";
 const User = ({ user, follow, unfollow, toggle }) => {
   const { name, id, followed, status } = user;
   const followBadge = followed ? "UNFOLLOW" : "FOLLOW";
+
   return (
     <div className={style.users_item}>
       <div className={style.users_item_head}>

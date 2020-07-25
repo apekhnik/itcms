@@ -27,7 +27,7 @@ const Users = (props) => {
             user={us}
             follow={props.followToggle}
             unfollow={props.unfollow}
-            toggle={props.toggle}
+            toggle={props.followToggle}
             key={us.id}
           />
         );

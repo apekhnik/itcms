@@ -10,7 +10,7 @@ import {
   setCurrentPage,
 } from "../../redux/actionCreator";
 import * as axios from "axios";
-console.log(setUsers);
+
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.fetchingToggler(true);
