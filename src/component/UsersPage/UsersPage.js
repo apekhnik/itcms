@@ -9,11 +9,15 @@ import * as axios from 'axios'
 
 class UsersContainer extends Component {
   componentDidMount() {
+    this.props.setLoadingTrue()
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
       )
-      .then((response) => this.props.setUsers(response.data))
+      .then((response) => {
+        this.props.setUsers(response.data);
+        this.props.setLoadingFalse()
+      })
       .catch((e) => console.error(e));
   }
   onCurrentChange = (p) => {
