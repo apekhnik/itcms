@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./UserInfo.module.css";
-const UserInfo = () => {
+const UserInfo = ({lookingForAJobDescription,lookingForAJob, name, aboutMe}) => {
   return (
     <div className={style.info}>
-      <p>User Name</p>
-      <p>Job</p>
-      <p>Subscribe yourself</p>
+      <p>{name}</p>
+      <p>{lookingForAJobDescription}</p>
+      <p>{aboutMe}</p>
     </div>
   );
 };
