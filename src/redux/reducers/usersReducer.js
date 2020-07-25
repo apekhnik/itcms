@@ -1,11 +1,16 @@
-
-import {FOLLOW, UNFOLLOW,SET_CURRENT_PAGE,SET_USERS} from '../type'
+import {
+  FOLLOW,
+  UNFOLLOW,
+  SET_CURRENT_PAGE,
+  SET_USERS,
+  LOADING_TOGGLER,
+} from "../type";
 const initialState = {
   users: [],
   currentPage: 5,
   totalUsersCount: 25,
   pageSize: 5,
-  isLoading: false
+  isLoading: false,
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -40,6 +45,7 @@ const userReducer = (state = initialState, action) => {
         }),
       };
     case SET_USERS:
+      console.log(action.payload.items);
       return {
         ...state,
         users: [...action.payload.items],
@@ -50,23 +56,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.payload,
       };
-    case 'SET_LOADING_TRUE':
-      console.log('[тру')
+    case LOADING_TOGGLER:
       return {
         ...state,
-        isLoading: true
-      }
-    case 'SET_LOADING_FALSE':
-      console.log('фолсе')
-        return {
-          ...state,
-          isLoading: false
-        }
-    case 'LOADING_TOGGLER':
-      return{
-        ...state,
-        isLoading: !state.isLoading
-      }
+        isLoading: action.payload,
+      };
     default:
       return state;
   }

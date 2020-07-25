@@ -1,16 +1,19 @@
 import React from "react";
 import style from "./Users.module.css";
 import Avatar from "../Avatar/Avatar";
+import { NavLink } from "react-router-dom";
 const User = ({ user, follow, unfollow, toggle }) => {
   const { name, id, followed, status } = user;
   const followBadge = followed ? "UNFOLLOW" : "FOLLOW";
   return (
     <div className={style.users_item}>
       <div className={style.users_item_head}>
-        <Avatar
-          src="https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg"
-          size="min"
-        />
+        <NavLink to='/profile'>
+            <Avatar
+              src="https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg"
+              size="min"
+            />
+        </NavLink>
         <div
           onClick={() => {
             toggle(id);

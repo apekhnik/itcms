@@ -5,6 +5,7 @@ import {
   SEND_NEW_MSG,
   FOLLOW,
   UNFOLLOW,
+  SET_USERS,
 } from "./type";
 export const addPostAction = () => {
   return {
@@ -28,15 +29,34 @@ export const sendNewMsgAction = () => {
     type: SEND_NEW_MSG,
   };
 };
-export const followUserAction = (id) => {
+export const follow = (id) => {
   return {
     type: FOLLOW,
     payload: id,
   };
 };
-export const unFollowUserAction = (id) => {
+export const unfollow = (id) => {
   return {
     type: UNFOLLOW,
     payload: id,
   };
+};
+export const setUsers = (data) => {
+  return {
+    type: SET_USERS,
+    payload: data,
+  };
+};
+export const setCurrentPage = (p) => {
+  return { type: "SET_CURRENT_PAGE", payload: p };
+};
+export const followToggle = (b) => {
+  console.log("hello i am AC T");
+  return {
+    type: "TOGGLE",
+    payload: b,
+  };
+};
+export const fetchingToggler = (t) => {
+  return { type: "LOADING_TOGGLER", payload: t };
 };
