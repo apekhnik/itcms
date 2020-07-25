@@ -9,7 +9,7 @@ const User = ({ user, follow, unfollow, toggle }) => {
   return (
     <div className={style.users_item}>
       <div className={style.users_item_head}>
-        <NavLink to='/profile'>
+        <NavLink to={`/profile/${id}`}>
             <Avatar
               src="https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg"
               size="min"

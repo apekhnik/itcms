@@ -3,12 +3,14 @@ import Account from "../Account/Account";
 import PostContainer from "../Posts/PostContainer";
 import * as axios from 'axios'
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class ProfilePageContainer extends Component{
   componentDidMount(){
+    let id = this.props.match.params.userID || 2
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/profile/2`
+        `https://social-network.samuraijs.com/api/1.0/profile/${id}`
       )
       .then((response) => {
         this.props.setProfile(response.data)
@@ -16,7 +18,7 @@ class ProfilePageContainer extends Component{
       .catch((e) => console.error(e));
   }
   render(){
-    console.log(this.props)
+    
     return (
       <div>
         <Account {...this.props}/>
@@ -35,5 +37,5 @@ const mapDispatchToProps = dispatch => {
     setProfile: user => dispatch({type:'SET_CURRENT_PROFILE', payload: user})
   }
 }
-const ProfilePage = connect(mapStateToProps, mapDispatchToProps)(ProfilePageContainer)
+const ProfilePage = connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfilePageContainer))
 export default ProfilePage;

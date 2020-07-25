@@ -15,7 +15,7 @@ function App({ store }) {
       <SideBar />
       <Content>
         <Switch>
-          <Route path="/profile" render={() => <ProfilePage store={store} />} />
+          <Route path="/profile/:userID?" render={() => <ProfilePage store={store} />} />
           <Route path="/dialogs" render={() => <DialogsPage store={store} />} />
           <Route path="/users" render={() => <UsersPage store={store} />} />
         </Switch>
