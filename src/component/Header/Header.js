@@ -9,8 +9,8 @@ const Header = (props) => {
         alt=""
       />
       <div className={style.auth_block}>
-        {props.login ? (
-          "YOU LOG IN LIKE ALEX"
+        {props.isAuth ? (
+          `You LogIn like ${props.login}`
         ) : (
           <NavLink to={"/login"}>LOGIN</NavLink>
         )}

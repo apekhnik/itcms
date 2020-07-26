@@ -1,13 +1,14 @@
 import {} from "../type";
 const initialState = {
-  id: 1000,
-  login: "emelya",
-  email: "ss",
+  id: null,
+  login: null,
+  email: null,
   isAuth: false,
 };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_USER_DATA":
+      console.log(action.payload);
       return {
         ...state,
         ...action.payload,
