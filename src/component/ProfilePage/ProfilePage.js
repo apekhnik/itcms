@@ -7,8 +7,9 @@ import { withRouter } from "react-router-dom";
 
 class ProfilePageContainer extends Component {
   componentDidMount() {
+    let id = this.props.match.params.userID || 2;
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
       .then((response) => {
         this.props.setProfile(response.data);
       })

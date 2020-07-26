@@ -10,7 +10,7 @@ const Users = (props) => {
   if (props.isLoading) {
     return <Loader />;
   }
-  console.log(props.users);
+  
   return (
     <div>
       {pages.map((i) => (
