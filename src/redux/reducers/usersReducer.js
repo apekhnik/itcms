@@ -31,7 +31,7 @@ const userReducer = (state = initialState, action) => {
           if (u.id === action.payload) {
             return { ...u, followed: false };
           }
-          return state;
+          return u;
         }),
       };
     case "TOGGLE":
