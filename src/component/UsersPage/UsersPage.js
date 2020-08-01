@@ -10,14 +10,12 @@ import {
   setCurrentPage,
 } from "../../redux/actionCreator";
 import * as axios from "axios";
+import { usersApi } from "../../API/api";
 
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.fetchingToggler(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
+usersApi.getUsers(this.props.currentPage,this.props.pageSize)
       .then((response) => {
         this.props.setUsers(response.data);
         this.props.fetchingToggler(false);
@@ -27,10 +25,7 @@ class UsersContainer extends Component {
   onCurrentChange = (p) => {
     this.props.setCurrentPage(p);
     this.props.fetchingToggler(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
-      )
+    usersApi.getUsers(p,this.props.pageSize)
       .then((response) => {
         this.props.setUsers(response.data);
         this.props.fetchingToggler(false);

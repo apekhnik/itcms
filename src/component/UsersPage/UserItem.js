@@ -3,20 +3,11 @@ import style from "./Users.module.css";
 import Avatar from "../Avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import * as axios from "axios";
+import { usersApi } from "../../API/api";
 const User = ({ user, follow, unfollow, toggle }) => {
   const { name, id, followed, status } = user;
   const userFollow = () => {
-    axios
-      .post(
-        `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            "API-KEY": "b064f3c9-7a94-4bd3-b37d-8b05c39f7bf0",
-          },
-        }
-      )
+usersApi.follow(id)
       .then((response) => {
         if (response.data.resultCode == 0) {
           follow(id);
@@ -24,13 +15,7 @@ const User = ({ user, follow, unfollow, toggle }) => {
       });
   };
   const userUnfollow = () => {
-    axios
-      .delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-        withCredentials: true,
-        headers: {
-          "API-KEY": "b064f3c9-7a94-4bd3-b37d-8b05c39f7bf0",
-        },
-      })
+    usersApi.unfollow(id)
       .then((response) => {
         if (response.data.resultCode == 0) {
           unfollow(id);
