@@ -60,3 +60,6 @@ export const followToggle = (b) => {
 export const fetchingToggler = (t) => {
   return { type: "LOADING_TOGGLER", payload: t };
 };
+export const followingInProgressToggler = (f, id) => {
+  return { type: "FOLOWING_IN_PROGRESS", payload: { f, id } };
+};

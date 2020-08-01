@@ -10,7 +10,7 @@ const Users = (props) => {
   if (props.isLoading) {
     return <Loader />;
   }
-  
+
   return (
     <div>
       {pages.map((i) => (
@@ -28,6 +28,8 @@ const Users = (props) => {
             follow={props.followToggle}
             unfollow={props.unfollow}
             toggle={props.followToggle}
+            followingInProgressToggler={props.followingInProgressToggler}
+            followingInProgress={props.followingInProgress}
             key={us.id}
           />
         );

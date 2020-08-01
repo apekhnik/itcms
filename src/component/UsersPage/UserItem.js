@@ -4,29 +4,42 @@ import Avatar from "../Avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import * as axios from "axios";
 import { usersApi } from "../../API/api";
-const User = ({ user, follow, unfollow, toggle }) => {
+const User = ({
+  user,
+  follow,
+  unfollow,
+  followingInProgress,
+  followingInProgressToggler,
+}) => {
   const { name, id, followed, status } = user;
-  const userFollow = () => {
-usersApi.follow(id)
-      .then((response) => {
-        if (response.data.resultCode == 0) {
-          follow(id);
-        }
-      });
+  const userFollow = (e) => {
+    followingInProgressToggler(true, id);
+    usersApi.follow(id).then((response) => {
+      if (response.data.resultCode == 0) {
+        follow(id);
+      }
+      followingInProgressToggler(false, id);
+    });
   };
   const userUnfollow = () => {
-    usersApi.unfollow(id)
-      .then((response) => {
-        if (response.data.resultCode == 0) {
-          unfollow(id);
-        }
-      });
+    followingInProgressToggler(true, id);
+    usersApi.unfollow(id).then((response) => {
+      if (response.data.resultCode == 0) {
+        unfollow(id);
+      }
+      followingInProgressToggler(false, id);
+    });
   };
-
+  console.log(followingInProgress);
+  const disabledHelper = followingInProgress.some((e) => e === id);
   const followBadge = followed ? (
-    <button onClick={userUnfollow}>Unfollow</button>
+    <button onClick={userUnfollow} disabled={disabledHelper}>
+      Unfollow
+    </button>
   ) : (
-    <button onClick={userFollow}>Follow</button>
+    <button onClick={userFollow} disabled={disabledHelper}>
+      Follow
+    </button>
   );
 
   return (

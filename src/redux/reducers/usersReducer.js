@@ -11,6 +11,7 @@ const initialState = {
   totalUsersCount: 25,
   pageSize: 5,
   isLoading: false,
+  followingInProgress: [],
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,6 +34,14 @@ const userReducer = (state = initialState, action) => {
           }
           return u;
         }),
+      };
+    case "FOLOWING_IN_PROGRESS":
+      console.log(action.payload.f);
+      return {
+        ...state,
+        followingInProgress: action.payload.f
+          ? [...state.followingInProgress, action.payload.id]
+          : state.followingInProgress.filter((id) => id != id),
       };
     case "TOGGLE":
       return {

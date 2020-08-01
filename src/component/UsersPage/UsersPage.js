@@ -8,6 +8,7 @@ import {
   followToggle,
   fetchingToggler,
   setCurrentPage,
+  followingInProgressToggler,
 } from "../../redux/actionCreator";
 import * as axios from "axios";
 import { usersApi } from "../../API/api";
@@ -15,7 +16,8 @@ import { usersApi } from "../../API/api";
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.fetchingToggler(true);
-usersApi.getUsers(this.props.currentPage,this.props.pageSize)
+    usersApi
+      .getUsers(this.props.currentPage, this.props.pageSize)
       .then((response) => {
         this.props.setUsers(response.data);
         this.props.fetchingToggler(false);
@@ -25,7 +27,8 @@ usersApi.getUsers(this.props.currentPage,this.props.pageSize)
   onCurrentChange = (p) => {
     this.props.setCurrentPage(p);
     this.props.fetchingToggler(true);
-    usersApi.getUsers(p,this.props.pageSize)
+    usersApi
+      .getUsers(p, this.props.pageSize)
       .then((response) => {
         this.props.setUsers(response.data);
         this.props.fetchingToggler(false);
@@ -43,6 +46,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     pageSize: state.usersPage.pageSize,
     isLoading: state.usersPage.isLoading,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 // const mapDispathToProps = (dispatch) => {
@@ -67,5 +71,6 @@ const UserPage = connect(mapStateToProps, {
   setUsers,
   setCurrentPage,
   fetchingToggler,
+  followingInProgressToggler,
 })(UsersContainer);
 export default UserPage;
