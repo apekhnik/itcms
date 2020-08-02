@@ -5,6 +5,7 @@ import {
   SET_USERS,
   LOADING_TOGGLER,
 } from "../type";
+
 const initialState = {
   users: [],
   currentPage: 5,
@@ -36,7 +37,6 @@ const userReducer = (state = initialState, action) => {
         }),
       };
     case "FOLOWING_IN_PROGRESS":
-      console.log(action.payload.f);
       return {
         ...state,
         followingInProgress: action.payload.f
@@ -54,7 +54,6 @@ const userReducer = (state = initialState, action) => {
         }),
       };
     case SET_USERS:
-      console.log(action.payload.items);
       return {
         ...state,
         users: [...action.payload.items],

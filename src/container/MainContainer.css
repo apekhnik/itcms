@@ -1,6 +1,5 @@
 .main-container {
   display: grid;
-
   grid-template-areas:
     "header header header"
     "nav content content";

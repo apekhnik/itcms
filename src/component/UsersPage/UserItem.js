@@ -2,7 +2,6 @@ import React from "react";
 import style from "./Users.module.css";
 import Avatar from "../Avatar/Avatar";
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
 import { usersApi } from "../../API/api";
 const User = ({
   user,
@@ -11,7 +10,8 @@ const User = ({
   followingInProgress,
   followingInProgressToggler,
 }) => {
-  const { name, id, followed, status } = user;
+  const { name, id, followed, status, photos } = user;
+  
   const userFollow = (e) => {
     followingInProgressToggler(true, id);
     usersApi.follow(id).then((response) => {
@@ -30,7 +30,6 @@ const User = ({
       followingInProgressToggler(false, id);
     });
   };
-  console.log(followingInProgress);
   const disabledHelper = followingInProgress.some((e) => e === id);
   const followBadge = followed ? (
     <button onClick={userUnfollow} disabled={disabledHelper}>
@@ -41,13 +40,14 @@ const User = ({
       Follow
     </button>
   );
-
+  const avatarPhoto = photos.small || photos.large ? photos.small || photos.large: 'https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg'
+  console.log(avatarPhoto)
   return (
     <div className={style.users_item}>
       <div className={style.users_item_head}>
         <NavLink to={`/profile/${id}`}>
           <Avatar
-            src="https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg"
+            src={avatarPhoto}
             size="min"
           />
         </NavLink>
