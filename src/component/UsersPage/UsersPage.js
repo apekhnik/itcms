@@ -9,31 +9,18 @@ import {
   fetchingToggler,
   setCurrentPage,
   followingInProgressToggler,
-} from "../../redux/actionCreator";
-import * as axios from "axios";
-import { usersApi } from "../../API/api";
+  getUsersThunkCreator,
+} from "../../redux/reducers/usersReducer";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.fetchingToggler(true);
-    usersApi
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((response) => {
-        this.props.setUsers(response.data);
-        this.props.fetchingToggler(false);
-      })
-      .catch((e) => console.error(e));
+    this.props.getUsersThunkCreator(
+      this.props.currentPage,
+      this.props.pageSize
+    );
   }
   onCurrentChange = (p) => {
-    this.props.setCurrentPage(p);
-    this.props.fetchingToggler(true);
-    usersApi
-      .getUsers(p, this.props.pageSize)
-      .then((response) => {
-        this.props.setUsers(response.data);
-        this.props.fetchingToggler(false);
-      })
-      .catch((e) => console.error(e));
+    this.props.getUsersThunkCreator(p, this.props.pageSize);
   };
   render() {
     return <Users onCurrentChange={this.onCurrentChange} {...this.props} />;
@@ -72,5 +59,6 @@ const UserPage = connect(mapStateToProps, {
   setCurrentPage,
   fetchingToggler,
   followingInProgressToggler,
+  getUsersThunkCreator,
 })(UsersContainer);
 export default UserPage;

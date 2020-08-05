@@ -16,7 +16,6 @@ class ProfilePageContainer extends Component {
       .catch((e) => console.error(e));
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <Account {...this.props} />

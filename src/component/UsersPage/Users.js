@@ -17,6 +17,7 @@ const Users = (props) => {
         <span
           style={props.currentPage === i ? { color: "red" } : {}}
           onClick={() => props.onCurrentChange(i)}
+          key={i}
         >
           {i}
         </span>
