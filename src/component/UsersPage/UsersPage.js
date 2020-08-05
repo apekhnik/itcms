@@ -2,25 +2,18 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import Users from "./Users";
 import {
-  follow,
-  unfollow,
-  setUsers,
-  followToggle,
-  fetchingToggler,
-  setCurrentPage,
   followingInProgressToggler,
-  getUsersThunkCreator,
+  getUsers,
+  followThunk,
+  unFollowThunk,
 } from "../../redux/reducers/usersReducer";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsersThunkCreator(
-      this.props.currentPage,
-      this.props.pageSize
-    );
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
   onCurrentChange = (p) => {
-    this.props.getUsersThunkCreator(p, this.props.pageSize);
+    this.props.getUsers(p, this.props.pageSize);
   };
   render() {
     return <Users onCurrentChange={this.onCurrentChange} {...this.props} />;
@@ -52,13 +45,9 @@ const mapStateToProps = (state) => {
 // };
 // const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
 const UserPage = connect(mapStateToProps, {
-  follow,
-  unfollow,
-  followToggle,
-  setUsers,
-  setCurrentPage,
-  fetchingToggler,
   followingInProgressToggler,
-  getUsersThunkCreator,
+  getUsers,
+  followThunk,
+  unFollowThunk,
 })(UsersContainer);
 export default UserPage;
