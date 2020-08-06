@@ -2,37 +2,52 @@ import React from "react";
 import UserItem from "./UserItem";
 import Loader from "../Loader/Lodaer";
 const Users = (props) => {
-  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  const {
+    onCurrentChange,
+    followThunk,
+    unFollowThunk,
+    followingInProgress,
+    isLoading,
+    users,
+    totalUsersCount,
+    pageSize,
+    currentPage,
+  } = props;
+
+  const pagesCount = Math.ceil(totalUsersCount / pageSize);
+
   let pages = [];
   for (let i = 1; i <= 8; i++) {
     pages.push(i);
   }
-  if (props.isLoading) {
+  const pagination = pages.map((i) => (
+    <span
+      style={currentPage === i ? { color: "red" } : {}}
+      onClick={() => onCurrentChange(i)}
+      key={i}
+    >
+      {i}
+    </span>
+  ));
+  const userList = users.map((us) => {
+    return (
+      <UserItem
+        user={us}
+        followThunk={followThunk}
+        unFollowThunk={unFollowThunk}
+        followingInProgress={followingInProgress}
+        key={us.id}
+      />
+    );
+  });
+  if (isLoading) {
     return <Loader />;
   }
-  console.log(props.onCurrentChange);
+
   return (
     <div>
-      {pages.map((i) => (
-        <span
-          style={props.currentPage === i ? { color: "red" } : {}}
-          onClick={() => props.onCurrentChange(i)}
-          key={i}
-        >
-          {i}
-        </span>
-      ))}
-      {props.users.map((us) => {
-        return (
-          <UserItem
-            user={us}
-            followThunk={props.followThunk}
-            unFollowThunk={props.unFollowThunk}
-            followingInProgress={props.followingInProgress}
-            key={us.id}
-          />
-        );
-      })}
+      {pagination}
+      {userList}
     </div>
   );
 };
