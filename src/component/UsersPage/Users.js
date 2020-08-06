@@ -10,6 +10,7 @@ const Users = (props) => {
   if (props.isLoading) {
     return <Loader />;
   }
+  console.log(props.onCurrentChange);
   return (
     <div>
       {pages.map((i) => (

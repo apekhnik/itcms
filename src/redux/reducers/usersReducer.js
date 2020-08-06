@@ -35,7 +35,7 @@ const userReducer = (state = initialState, action) => {
           return u;
         }),
       };
-    case "FOLOWING_IN_PROGRESS":
+    case FOLOWING_IN_PROGRESS:
       return {
         ...state,
         followingInProgress: action.payload.f

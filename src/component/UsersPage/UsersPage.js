@@ -5,6 +5,7 @@ import {
   followingInProgressToggler,
   getUsers,
   followThunk,
+  setCurrentPage,
   unFollowThunk,
 } from "../../redux/reducers/usersReducer";
 
@@ -13,6 +14,7 @@ class UsersContainer extends Component {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
   onCurrentChange = (p) => {
+    this.props.setCurrentPage(p);
     this.props.getUsers(p, this.props.pageSize);
   };
   render() {
@@ -48,6 +50,7 @@ const UserPage = connect(mapStateToProps, {
   followingInProgressToggler,
   getUsers,
   followThunk,
+  setCurrentPage,
   unFollowThunk,
 })(UsersContainer);
 export default UserPage;
