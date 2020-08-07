@@ -40,7 +40,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         followingInProgress: action.payload.f
           ? [...state.followingInProgress, action.payload.id]
-          : state.followingInProgress.filter((id) => id != id),
+          : state.followingInProgress.filter((id) => id !== action.payload.id),
       };
     case SET_USERS:
       return {
@@ -63,8 +63,8 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export const follow = (id) => ({ type: FOLLOW, payload: id });
-export const unfollow = (id) => ({ type: UNFOLLOW, payload: id });
+export const acceptFollow = (id) => ({ type: FOLLOW, payload: id });
+export const acceptUnfollow = (id) => ({ type: UNFOLLOW, payload: id });
 export const setUsers = (data) => ({ type: SET_USERS, payload: data });
 export const setCurrentPage = (p) => ({ type: SET_CURRENT_PAGE, payload: p });
 export const fetchingToggler = (t) => ({ type: LOADING_TOGGLER, payload: t });
@@ -82,20 +82,20 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
     })
     .catch((e) => console.error(e));
 };
-export const followThunk = (id) => (dispatch) => {
+export const follow = (id) => (dispatch) => {
   dispatch(followingInProgressToggler(true, id));
   usersApi.follow(id).then((response) => {
-    if (response.data.resultCode == 0) {
-      dispatch(follow(id));
+    if (response.data.resultCode === 0) {
+      dispatch(acceptFollow(id));
     }
     dispatch(followingInProgressToggler(false, id));
   });
 };
-export const unFollowThunk = (id) => (dispatch) => {
+export const unfollow = (id) => (dispatch) => {
   dispatch(followingInProgressToggler(true, id));
   usersApi.unfollow(id).then((response) => {
-    if (response.data.resultCode == 0) {
-      dispatch(unfollow(id));
+    if (response.data.resultCode === 0) {
+      dispatch(acceptUnfollow(id));
     }
     dispatch(followingInProgressToggler(false, id));
   });

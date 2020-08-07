@@ -4,8 +4,8 @@ import Loader from "../Loader/Lodaer";
 const Users = (props) => {
   const {
     onCurrentChange,
-    followThunk,
-    unFollowThunk,
+    follow,
+    unfollow,
     followingInProgress,
     isLoading,
     users,
@@ -17,7 +17,7 @@ const Users = (props) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
 
   let pages = [];
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= pagesCount && i < 10; i++) {
     pages.push(i);
   }
   const pagination = pages.map((i) => (
@@ -33,8 +33,8 @@ const Users = (props) => {
     return (
       <UserItem
         user={us}
-        followThunk={followThunk}
-        unFollowThunk={unFollowThunk}
+        follow={follow}
+        unfollow={unfollow}
         followingInProgress={followingInProgress}
         key={us.id}
       />

@@ -2,12 +2,12 @@ import React from "react";
 import style from "./Users.module.css";
 import Avatar from "../Avatar/Avatar";
 import { NavLink } from "react-router-dom";
-const User = ({ user, followingInProgress, followThunk, unFollowThunk }) => {
+const User = ({ user, followingInProgress, follow, unfollow }) => {
   const { name, id, followed, status, photos } = user;
 
-  const userFollow = (e) => followThunk(id);
+  const userFollow = (e) => follow(id);
 
-  const userUnfollow = (e) => unFollowThunk(id);
+  const userUnfollow = (e) => unfollow(id);
 
   const disabledHelper = followingInProgress.some((e) => e === id);
   const followBadge = followed ? (

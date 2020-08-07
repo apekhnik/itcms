@@ -4,9 +4,9 @@ import Users from "./Users";
 import {
   followingInProgressToggler,
   getUsers,
-  followThunk,
+  follow,
   setCurrentPage,
-  unFollowThunk,
+  unfollow,
 } from "../../redux/reducers/usersReducer";
 
 class UsersContainer extends Component {
@@ -49,8 +49,8 @@ const mapStateToProps = (state) => {
 const UserPage = connect(mapStateToProps, {
   followingInProgressToggler,
   getUsers,
-  followThunk,
+  follow,
   setCurrentPage,
-  unFollowThunk,
+  unfollow,
 })(UsersContainer);
 export default UserPage;

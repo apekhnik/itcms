@@ -3,25 +3,24 @@ import Avatar from "../Avatar/Avatar";
 import UserInfo from "../UserInfo/UserInfo";
 import style from "./Account.module.css";
 const Account = (props) => {
-  
-  const {
-    aboutMe,
-    contacts: { facebook, website, vk, twitter, instagram },
-    fullName,
-    lookingForAJob,
-    lookingForAJobDescription,
-    photos: { small, large },
-    userId,
-  } = props.profile;
+  // const {
+  //   aboutMe,
+  //   contacts: { facebook, website, vk, twitter, instagram },
+  //   fullName,
+  //   lookingForAJob,
+  //   lookingForAJobDescription,
+  //   photos: { small, large },
+  //   userId,
+  // } = props.profile;
   return (
     <div className={style.profile}>
-      <Avatar src={large} />
+      <Avatar src={props.photos.large} />
 
       <UserInfo
-        name={fullName}
-        lookingForAJob={lookingForAJob}
-        lookingForAJobDescription={lookingForAJobDescription}
-        aboutMe={aboutMe}
+        name={props.fullName}
+        lookingForAJob={props.lookingForAJob}
+        lookingForAJobDescription={props.lookingForAJobDescription}
+        aboutMe={props.aboutMe}
       />
     </div>
   );
