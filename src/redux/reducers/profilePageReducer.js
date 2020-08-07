@@ -1,4 +1,6 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
+import { usersApi } from "../../API/api";
+const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 const initialState = {
   inputPostText: "",
   posts: [
@@ -49,7 +51,7 @@ const profilePageReducer = (state = initialState, action) => {
         inputPostText: action.payload,
       };
     }
-    case "SET_CURRENT_PROFILE":
+    case SET_CURRENT_PROFILE:
       return {
         ...state,
         profile: action.payload,
@@ -59,5 +61,17 @@ const profilePageReducer = (state = initialState, action) => {
   }
   return state;
 };
-export const getProfileThunkCreator = () => () => {};
+// const addPost = () => ({ type: "ADD_POST" });
+export const fetchProfile = (user) => ({
+  type: SET_CURRENT_PROFILE,
+  payload: user,
+});
+export const setProfile = (id) => (dispatch) => {
+  usersApi
+    .getProfile(id)
+    .then((response) => {
+      dispatch(fetchProfile(response.data));
+    })
+    .catch((e) => console.error(e));
+};
 export default profilePageReducer;

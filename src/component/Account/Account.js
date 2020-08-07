@@ -14,7 +14,7 @@ const Account = (props) => {
   // } = props.profile;
   return (
     <div className={style.profile}>
-      <Avatar src={props.photos.large} />
+      <Avatar src={props.profile.photos.large} />
 
       <UserInfo
         name={props.fullName}
