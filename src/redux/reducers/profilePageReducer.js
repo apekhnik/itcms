@@ -1,4 +1,6 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
+import { usersApi } from "../../API/api";
+const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 const initialState = {
   inputPostText: "",
   posts: [
@@ -7,26 +9,28 @@ const initialState = {
     { id: 3, text: "test3" },
   ],
   profile: {
-    "aboutMe": "я круто чувак 1001%",
-    "contacts": {
-      "facebook": "facebook.com",
-      "website": null,
-      "vk": "vk.com/dimych",
-      "twitter": "https://twitter.com/@sdf",
-      "instagram": "instagra.com/sds",
-      "youtube": null,
-      "github": "github.com",
-      "mainLink": null
+    aboutMe: "я круто чувак 1001%",
+    contacts: {
+      facebook: "facebook.com",
+      website: null,
+      vk: "vk.com/dimych",
+      twitter: "https://twitter.com/@sdf",
+      instagram: "instagra.com/sds",
+      youtube: null,
+      github: "github.com",
+      mainLink: null,
     },
-    "lookingForAJob": true,
-    "lookingForAJobDescription": "не ищу, а дурачусь",
-    "fullName": "samurai dimych",
-    "userId": 2,
-    "photos": {
-      "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-      "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-    }
-  }
+    lookingForAJob: true,
+    lookingForAJobDescription: "не ищу, а дурачусь",
+    fullName: "samurai dimych",
+    userId: 2,
+    photos: {
+      small:
+        "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+      large:
+        "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0",
+    },
+  },
 };
 const profilePageReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -47,14 +51,27 @@ const profilePageReducer = (state = initialState, action) => {
         inputPostText: action.payload,
       };
     }
-    case 'SET_CURRENT_PROFILE':
+    case SET_CURRENT_PROFILE:
       return {
         ...state,
-        profile: action.payload
-      }
+        profile: action.payload,
+      };
     default:
       break;
   }
   return state;
+};
+// const addPost = () => ({ type: "ADD_POST" });
+export const fetchProfile = (user) => ({
+  type: SET_CURRENT_PROFILE,
+  payload: user,
+});
+export const setProfile = (id) => (dispatch) => {
+  usersApi
+    .getProfile(id)
+    .then((response) => {
+      dispatch(fetchProfile(response.data));
+    })
+    .catch((e) => console.error(e));
 };
 export default profilePageReducer;

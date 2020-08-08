@@ -2,38 +2,52 @@ import React from "react";
 import UserItem from "./UserItem";
 import Loader from "../Loader/Lodaer";
 const Users = (props) => {
-  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  const {
+    onCurrentChange,
+    follow,
+    unfollow,
+    followingInProgress,
+    isLoading,
+    users,
+    totalUsersCount,
+    pageSize,
+    currentPage,
+  } = props;
+
+  const pagesCount = Math.ceil(totalUsersCount / pageSize);
+
   let pages = [];
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= pagesCount && i < 10; i++) {
     pages.push(i);
   }
-  if (props.isLoading) {
+  const pagination = pages.map((i) => (
+    <span
+      style={currentPage === i ? { color: "red" } : {}}
+      onClick={() => onCurrentChange(i)}
+      key={i}
+    >
+      {i}
+    </span>
+  ));
+  const userList = users.map((us) => {
+    return (
+      <UserItem
+        user={us}
+        follow={follow}
+        unfollow={unfollow}
+        followingInProgress={followingInProgress}
+        key={us.id}
+      />
+    );
+  });
+  if (isLoading) {
     return <Loader />;
   }
 
   return (
     <div>
-      {pages.map((i) => (
-        <span
-          style={props.currentPage === i ? { color: "red" } : {}}
-          onClick={() => props.onCurrentChange(i)}
-        >
-          {i}
-        </span>
-      ))}
-      {props.users.map((us, index) => {
-        return (
-          <UserItem
-            user={us}
-            follow={props.followToggle}
-            unfollow={props.unfollow}
-            toggle={props.followToggle}
-            followingInProgressToggler={props.followingInProgressToggler}
-            followingInProgress={props.followingInProgress}
-            key={us.id}
-          />
-        );
-      })}
+      {pagination}
+      {userList}
     </div>
   );
 };

@@ -2,38 +2,20 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import Users from "./Users";
 import {
-  follow,
-  unfollow,
-  setUsers,
-  followToggle,
-  fetchingToggler,
-  setCurrentPage,
   followingInProgressToggler,
-} from "../../redux/actionCreator";
-import * as axios from "axios";
-import { usersApi } from "../../API/api";
+  getUsers,
+  follow,
+  setCurrentPage,
+  unfollow,
+} from "../../redux/reducers/usersReducer";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.fetchingToggler(true);
-    usersApi
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((response) => {
-        this.props.setUsers(response.data);
-        this.props.fetchingToggler(false);
-      })
-      .catch((e) => console.error(e));
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
   onCurrentChange = (p) => {
     this.props.setCurrentPage(p);
-    this.props.fetchingToggler(true);
-    usersApi
-      .getUsers(p, this.props.pageSize)
-      .then((response) => {
-        this.props.setUsers(response.data);
-        this.props.fetchingToggler(false);
-      })
-      .catch((e) => console.error(e));
+    this.props.getUsers(p, this.props.pageSize);
   };
   render() {
     return <Users onCurrentChange={this.onCurrentChange} {...this.props} />;
@@ -65,12 +47,10 @@ const mapStateToProps = (state) => {
 // };
 // const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
 const UserPage = connect(mapStateToProps, {
-  follow,
-  unfollow,
-  followToggle,
-  setUsers,
-  setCurrentPage,
-  fetchingToggler,
   followingInProgressToggler,
+  getUsers,
+  follow,
+  setCurrentPage,
+  unfollow,
 })(UsersContainer);
 export default UserPage;

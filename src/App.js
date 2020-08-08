@@ -8,19 +8,18 @@ import { Switch, Route } from "react-router-dom";
 import DialogsPage from "./component/DialogsPage/DialogsPage";
 import UsersPage from "./component/UsersPage/UsersPage";
 import HeaderContainer from "./component/Header/HeaderContainer";
-function App({ store }) {
+import Login from "./component/Login/Login";
+function App() {
   return (
     <MainContainer>
       <HeaderContainer />
       <SideBar />
       <Content>
         <Switch>
-          <Route
-            path="/profile/:userID?"
-            render={() => <ProfilePage store={store} />}
-          />
+          <Route path="/profile/:userID?" render={() => <ProfilePage />} />
           <Route path="/dialogs" render={() => <DialogsPage />} />
           <Route path="/users" render={() => <UsersPage />} />
+          <Route path="/login" component={Login} />
         </Switch>
       </Content>
     </MainContainer>
