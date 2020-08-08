@@ -41,7 +41,7 @@ const User = ({
     </button>
   );
   const avatarPhoto = photos.small || photos.large ? photos.small || photos.large: 'https://horrorzone.ru/uploads/_gallery/45123/megan-fox06.jpg'
-  console.log(avatarPhoto)
+  
   return (
     <div className={style.users_item}>
       <div className={style.users_item_head}>
