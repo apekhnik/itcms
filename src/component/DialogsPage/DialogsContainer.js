@@ -10,7 +10,6 @@ const DialogsContainer = ({
   newMessageBody,
   sendNewMessage,
   messageInputChange,
-  isAuth,
 }) => {
   const addMessage = () => {
     sendNewMessage();

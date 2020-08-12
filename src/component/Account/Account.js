@@ -12,15 +12,16 @@ const Account = (props) => {
   //   photos: { small, large },
   //   userId,
   // } = props.profile;
+  console.log(props);
   return (
     <div className={style.profile}>
       <Avatar src={props.profile.photos.large} />
 
       <UserInfo
-        name={props.fullName}
-        lookingForAJob={props.lookingForAJob}
-        lookingForAJobDescription={props.lookingForAJobDescription}
-        aboutMe={props.aboutMe}
+        name={props.profile.fullName}
+        lookingForAJob={props.profile.lookingForAJob}
+        lookingForAJobDescription={props.profile.lookingForAJobDescription}
+        aboutMe={props.profile.aboutMe}
       />
     </div>
   );
