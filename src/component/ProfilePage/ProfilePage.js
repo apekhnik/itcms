@@ -4,6 +4,7 @@ import PostContainer from "../Posts/PostContainer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { setProfile } from "../../redux/reducers/profilePageReducer";
+import { withAuthRedirect } from "../../HOC/AuthRedirect";
 class ProfilePageContainer extends Component {
   componentDidMount() {
     let id = this.props.match.params.userID || 2;
@@ -21,11 +22,10 @@ class ProfilePageContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth,
   };
 };
-
+const AuthRedirectComponent = withAuthRedirect(ProfilePageContainer);
 const ProfilePage = connect(mapStateToProps, { setProfile })(
-  withRouter(ProfilePageContainer)
+  withRouter(AuthRedirectComponent)
 );
 export default ProfilePage;
