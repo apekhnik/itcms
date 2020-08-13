@@ -1,8 +1,15 @@
 import React from "react";
 import style from "./UserInfo.module.css";
-const UserInfo = ({lookingForAJobDescription,lookingForAJob, name, aboutMe}) => {
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
+const UserInfo = ({
+  lookingForAJobDescription,
+  lookingForAJob,
+  name,
+  aboutMe,
+}) => {
   return (
     <div className={style.info}>
+      <ProfileStatus status="test status" />
       <p>{name}</p>
       <p>{lookingForAJobDescription}</p>
       <p>{aboutMe}</p>

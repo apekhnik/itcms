@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "../Avatar/Avatar";
 import UserInfo from "../UserInfo/UserInfo";
 import style from "./Account.module.css";
+
 const Account = (props) => {
   // const {
   //   aboutMe,
