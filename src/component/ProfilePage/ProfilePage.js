@@ -22,10 +22,6 @@ class ProfilePageContainer extends Component {
 }
 const mapStateToProps = (state) => ({ profile: state.profilePage.profile });
 
-// const AuthRedirectComponent = withAuthRedirect(ProfilePageContainer);
-// const ProfilePage = connect(mapStateToProps, { setProfile })(
-//   withRouter(AuthRedirectComponent)
-// );
 export default compose(
   connect(mapStateToProps, { setProfile }),
   withRouter,

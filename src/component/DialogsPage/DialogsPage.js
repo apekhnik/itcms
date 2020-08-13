@@ -11,15 +11,8 @@ const mapStateToProps = (state) => {
     dialogs: state.dialogPage.dialogs,
     messages: state.dialogPage.messages,
     newMessageBody: state.dialogPage.newMessageBody,
-    isAuth: state.auth.isAuth,
   };
 };
-
-// const AuthRedirectComponent = withAuthRedirect(DialogsContainer);
-// const DialogsPage = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(AuthRedirectComponent);
 export default compose(
   connect(mapStateToProps, { sendNewMessage, messageInputChange }),
   withAuthRedirect

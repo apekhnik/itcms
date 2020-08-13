@@ -61,7 +61,12 @@ const profilePageReducer = (state = initialState, action) => {
   }
   return state;
 };
-// const addPost = () => ({ type: "ADD_POST" });
+export const addPost = () => ({ type: "ADD_POST" });
+
+export const inputTextChange = (text) => ({
+  type: ON_INPUT_TEXT_CHANGE,
+  payload: text,
+});
 export const fetchProfile = (user) => ({
   type: SET_CURRENT_PROFILE,
   payload: user,
