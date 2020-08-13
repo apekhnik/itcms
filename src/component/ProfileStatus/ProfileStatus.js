@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-
+import style from "./ProfileStatus.module.css";
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   return (
-    <div style={{ fontSize: "40px" }}>
+    <div className={style.profilestatus}>
       {!editMode && (
-        <div onDoubleClick={() => setEditMode(true)}>
+        <div
+          onDoubleClick={() => setEditMode(true)}
+          className={style.span_status}
+        >
           <span>{props.status}</span>
         </div>
       )}
       {editMode && (
-        <div>
+        <div className={style.input_status}>
           <input
             type="text"
             autoFocus={true}

@@ -1,0 +1,11 @@
+.profilestatus {
+  font-size: 40px;
+  color: red;
+}
+.span_status {
+}
+.input_status input {
+  outline: none;
+  border: none;
+  font-size: 20px;
+}
