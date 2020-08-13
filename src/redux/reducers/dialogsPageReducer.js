@@ -42,4 +42,9 @@ const dialogsPageReducer = (state = initialState, action) => {
   }
   return state;
 };
+export const sendNewMessage = () => ({ type: SEND_NEW_MSG });
+export const messageInputChange = (msg) => ({
+  type: ON_NEW_MSG_BODY_CHANGE,
+  payload: msg,
+});
 export default dialogsPageReducer;

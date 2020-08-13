@@ -20,11 +20,7 @@ class ProfilePageContainer extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    profile: state.profilePage.profile,
-  };
-};
+const mapStateToProps = (state) => ({ profile: state.profilePage.profile });
 
 // const AuthRedirectComponent = withAuthRedirect(ProfilePageContainer);
 // const ProfilePage = connect(mapStateToProps, { setProfile })(

@@ -12,7 +12,6 @@ const Account = (props) => {
   //   photos: { small, large },
   //   userId,
   // } = props.profile;
-  console.log(props);
   return (
     <div className={style.profile}>
       <Avatar src={props.profile.photos.large} />
