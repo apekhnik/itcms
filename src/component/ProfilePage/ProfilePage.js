@@ -3,13 +3,19 @@ import Account from "../Account/Account";
 import PostContainer from "../Posts/PostContainer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { setProfile } from "../../redux/reducers/profilePageReducer";
+import {
+  setProfile,
+  getStatus,
+  updateStatus,
+} from "../../redux/reducers/profilePageReducer";
 import { withAuthRedirect } from "../../HOC/AuthRedirect";
 import { compose } from "redux";
 class ProfilePageContainer extends Component {
   componentDidMount() {
     let id = this.props.match.params.userID || this.props.autorizedId;
     this.props.setProfile(id);
+    this.props.updateStatus("napas");
+    this.props.getStatus(id);
   }
   render() {
     return (
@@ -26,7 +32,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-  connect(mapStateToProps, { setProfile }),
+  connect(mapStateToProps, { setProfile, getStatus, updateStatus }),
   withRouter,
   withAuthRedirect
 )(ProfilePageContainer);

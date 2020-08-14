@@ -1,5 +1,5 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
-import { usersApi } from "../../API/api";
+import { usersApi, profileApi } from "../../API/api";
 const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 const initialState = {
   inputPostText: "",
@@ -31,6 +31,7 @@ const initialState = {
         "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0",
     },
   },
+  status: "",
 };
 const profilePageReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -78,5 +79,11 @@ export const setProfile = (id) => (dispatch) => {
       dispatch(fetchProfile(response.data));
     })
     .catch((e) => console.error(e));
+};
+export const getStatus = (id) => (dispatch) => {
+  profileApi.getStatus(id).then((res) => console.log(res.data));
+};
+export const updateStatus = (status) => (dispatch) => {
+  profileApi.updateStatus(status);
 };
 export default profilePageReducer;

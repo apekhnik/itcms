@@ -1,6 +1,6 @@
 import {} from "../type";
 
-import { usersApi } from "../../API/api";
+import { authApi } from "../../API/api";
 const SET_USER_DATA = "SET_USER_DATA";
 const initialState = {
   id: null,
@@ -23,7 +23,7 @@ const authReducer = (state = initialState, action) => {
 };
 const setUserAuthData = (data) => ({ type: SET_USER_DATA, payload: data });
 export const setAuthData = () => (dispatch) => {
-  usersApi
+  authApi
     .auth()
     .then((response) => {
       if (response.data.resultCode === 0) {

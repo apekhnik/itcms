@@ -12,6 +12,16 @@ export const usersApi = {
     instanse.get(`users?page=${currentPage}&count=${pageSize}`),
   follow: (id) => instanse.post(`follow/${id}`),
   unfollow: (id) => instanse.delete(`follow/${id}`),
-  getProfile: (id) => instanse.get(`profile/${id}`),
+  getProfile: (id) => {
+    console.warn("устаревший АПИ");
+    return profileApi.getProfile(id);
+  },
+};
+export const authApi = {
   auth: () => instanse.get(`auth/me`),
+};
+export const profileApi = {
+  getProfile: (id) => instanse.get(`profile/${id}`),
+  getStatus: (id) => instanse.get(`profile/status/${id}`),
+  updateStatus: (status) => instanse.put(`profile/status`, { status }),
 };

@@ -8,7 +8,7 @@ const LoginIndicator = ({ login, isAuth, id }) => {
         Login
       </NavLink>
     );
-  console.log(id);
+
   return (
     <div className={style.auth_block}>
       Hello, {login}
