@@ -2,27 +2,26 @@ import React, { useState } from "react";
 import style from "./ProfileStatus.module.css";
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false);
-
+  const status = (
+    <div onClick={() => setEditMode(true)} className={style.span_status}>
+      <span>{props.status}</span>
+    </div>
+  );
+  const editStatus = (
+    <div className={style.editStatus}>
+      <input
+        type="text"
+        autoFocus={true}
+        onBlur={() => setEditMode(false)}
+        value={props.status}
+      />
+      <button>Save</button>
+    </div>
+  );
   return (
     <div className={style.profilestatus}>
-      {!editMode && (
-        <div
-          onDoubleClick={() => setEditMode(true)}
-          className={style.span_status}
-        >
-          <span>{props.status}</span>
-        </div>
-      )}
-      {editMode && (
-        <div className={style.input_status}>
-          <input
-            type="text"
-            autoFocus={true}
-            onBlur={() => setEditMode(false)}
-            value={props.status}
-          />
-        </div>
-      )}
+      {!editMode && status}
+      {editMode && editStatus}
     </div>
   );
 };

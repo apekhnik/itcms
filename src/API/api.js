@@ -12,7 +12,6 @@ export const usersApi = {
     instanse.get(`users?page=${currentPage}&count=${pageSize}`),
   follow: (id) => instanse.post(`follow/${id}`),
   unfollow: (id) => instanse.delete(`follow/${id}`),
-  getProfile: (id) =>
-    instanse.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`),
+  getProfile: (id) => instanse.get(`profile/${id}`),
   auth: () => instanse.get(`auth/me`),
 };

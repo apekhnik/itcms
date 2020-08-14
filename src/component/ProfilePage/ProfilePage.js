@@ -8,7 +8,7 @@ import { withAuthRedirect } from "../../HOC/AuthRedirect";
 import { compose } from "redux";
 class ProfilePageContainer extends Component {
   componentDidMount() {
-    let id = this.props.match.params.userID || 2;
+    let id = this.props.match.params.userID || this.props.autorizedId;
     this.props.setProfile(id);
   }
   render() {
@@ -20,7 +20,10 @@ class ProfilePageContainer extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({ profile: state.profilePage.profile });
+const mapStateToProps = (state) => ({
+  profile: state.profilePage.profile,
+  autorizedId: state.auth.id,
+});
 
 export default compose(
   connect(mapStateToProps, { setProfile }),
