@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "./ProfileStatus.module.css";
+
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false);
   const status = (
@@ -7,15 +8,19 @@ const ProfileStatus = (props) => {
       <span>{props.status}</span>
     </div>
   );
+
   const editStatus = (
     <div className={style.editStatus}>
       <input
         type="text"
         autoFocus={true}
-        onBlur={() => setEditMode(false)}
+        onBlur={() => {
+          setEditMode(false);
+          props.updateStatus(props.status);
+        }}
         value={props.status}
+        onChange={(e) => props.inputUserStatusChange(e.target.value)}
       />
-      <button>Save</button>
     </div>
   );
   return (

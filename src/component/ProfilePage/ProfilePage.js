@@ -7,6 +7,7 @@ import {
   setProfile,
   getStatus,
   updateStatus,
+  inputUserStatusChange,
 } from "../../redux/reducers/profilePageReducer";
 import { withAuthRedirect } from "../../HOC/AuthRedirect";
 import { compose } from "redux";
@@ -14,9 +15,10 @@ class ProfilePageContainer extends Component {
   componentDidMount() {
     let id = this.props.match.params.userID || this.props.autorizedId;
     this.props.setProfile(id);
-    this.props.updateStatus("napas");
     this.props.getStatus(id);
+    this.props.updateStatus("11");
   }
+
   render() {
     return (
       <div>
@@ -28,11 +30,17 @@ class ProfilePageContainer extends Component {
 }
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  status: state.profilePage.status,
   autorizedId: state.auth.id,
 });
 
 export default compose(
-  connect(mapStateToProps, { setProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, {
+    setProfile,
+    getStatus,
+    updateStatus,
+    inputUserStatusChange,
+  }),
   withRouter,
   withAuthRedirect
 )(ProfilePageContainer);

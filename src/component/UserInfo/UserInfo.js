@@ -6,10 +6,17 @@ const UserInfo = ({
   lookingForAJob,
   name,
   aboutMe,
+  updateStatus,
+  status,
+  inputUserStatusChange,
 }) => {
   return (
     <div className={style.info}>
-      <ProfileStatus status="test status" />
+      <ProfileStatus
+        status={status}
+        updateStatus={updateStatus}
+        inputUserStatusChange={inputUserStatusChange}
+      />
       <p>{name}</p>
       <p>{lookingForAJobDescription}</p>
       <p>{aboutMe}</p>

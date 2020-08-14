@@ -1,6 +1,8 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
-import { usersApi, profileApi } from "../../API/api";
-const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
+import { profileApi } from "../../API/api";
+const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE",
+  SET_USER_STATUS = "SET_USER_STATUS",
+  ON_USER_INPUT_STATUS_CHANGE = "ON_USER_INPUT_STATUS_CHANGE";
 const initialState = {
   inputPostText: "",
   posts: [
@@ -57,6 +59,17 @@ const profilePageReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
+    case SET_USER_STATUS:
+      return {
+        ...state,
+        status: action.payload,
+      };
+    case ON_USER_INPUT_STATUS_CHANGE: {
+      return {
+        ...state,
+        status: action.payload,
+      };
+    }
     default:
       break;
   }
@@ -73,15 +86,23 @@ export const fetchProfile = (user) => ({
   payload: user,
 });
 export const setProfile = (id) => (dispatch) => {
-  usersApi
+  profileApi
     .getProfile(id)
     .then((response) => {
       dispatch(fetchProfile(response.data));
     })
     .catch((e) => console.error(e));
 };
+export const inputUserStatusChange = (text) => ({
+  type: ON_USER_INPUT_STATUS_CHANGE,
+  payload: text,
+});
+export const setUserStatus = (status) => ({
+  type: SET_USER_STATUS,
+  payload: status,
+});
 export const getStatus = (id) => (dispatch) => {
-  profileApi.getStatus(id).then((res) => console.log(res.data));
+  profileApi.getStatus(id).then((res) => dispatch(setUserStatus(res.data)));
 };
 export const updateStatus = (status) => (dispatch) => {
   profileApi.updateStatus(status);
