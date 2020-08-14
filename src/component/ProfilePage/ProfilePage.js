@@ -16,7 +16,6 @@ class ProfilePageContainer extends Component {
     let id = this.props.match.params.userID || this.props.autorizedId;
     this.props.setProfile(id);
     this.props.getStatus(id);
-    this.props.updateStatus("11");
   }
 
   render() {

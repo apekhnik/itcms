@@ -105,6 +105,6 @@ export const getStatus = (id) => (dispatch) => {
   profileApi.getStatus(id).then((res) => dispatch(setUserStatus(res.data)));
 };
 export const updateStatus = (status) => (dispatch) => {
-  profileApi.updateStatus(status);
+  profileApi.updateStatus(status).then((response) => console.log(response));
 };
 export default profilePageReducer;
