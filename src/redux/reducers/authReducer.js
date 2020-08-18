@@ -1,5 +1,3 @@
-import {} from "../type";
-
 import { authApi } from "../../API/api";
 const SET_USER_DATA = "SET_USER_DATA";
 const initialState = {
@@ -31,5 +29,11 @@ export const setAuthData = () => (dispatch) => {
       }
     })
     .catch((e) => console.error(e));
+};
+export const userLogin = (login) => (dispatch) => {
+  authApi.login(login).then((response) => console.log(response));
+};
+export const userLogout = () => (dispatch) => {
+  authApi.logout().then((response) => console.log(response));
 };
 export default authReducer;

@@ -19,6 +19,9 @@ export const usersApi = {
 };
 export const authApi = {
   auth: () => instanse.get(`auth/me`),
+  login: ({ email, password, rememberMe }) =>
+    instanse.post("/auth/login", { email, password, rememberMe }),
+  logout: () => instanse.delete("/auth/login"),
 };
 export const profileApi = {
   getProfile: (id) => instanse.get(`profile/${id}`),
