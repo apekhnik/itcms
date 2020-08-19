@@ -3,12 +3,21 @@ import style from "./ProfileStatus.module.css";
 
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false);
-  const status = (
+  const status =
+    props.status === null ? (
+      <div onClick={() => setEditMode(true)} className={style.span_status}>
+        <span>'Изменить статус'</span>
+      </div>
+    ) : (
+      <div onClick={() => setEditMode(true)} className={style.span_status}>
+        <span>{props.status}</span>
+      </div>
+    );
+  const nullStatus = (
     <div onClick={() => setEditMode(true)} className={style.span_status}>
-      <span>{props.status}</span>
+      <span>'Изменить статус'</span>
     </div>
   );
-
   const editStatus = (
     <div className={style.editStatus}>
       <input
@@ -25,7 +34,7 @@ const ProfileStatus = (props) => {
   );
   return (
     <div className={style.profilestatus}>
-      {!editMode && status}
+      {!editMode && (status || nullStatus)}
       {editMode && editStatus}
     </div>
   );

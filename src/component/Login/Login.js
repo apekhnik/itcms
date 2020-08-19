@@ -3,6 +3,7 @@ import { userLogin, userLogout } from "../../redux/reducers/authReducer";
 import { Field, reduxForm } from "redux-form";
 import style from "./Login.module.css";
 import { connect } from "react-redux";
+
 const Login = ({ userLogin, userLogout }) => {
   const onSubmit = (data) => {
     userLogin(data);
@@ -20,10 +21,20 @@ const LoginForm = (props) => {
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={"login"} component={"input"} name={"email"} />
+        <Field
+          placeholder={"login"}
+          component={"input"}
+          name={"email"}
+          className={style.loginForm_input}
+        />
       </div>
       <div>
-        <Field placeholder={"password"} component={"input"} name={"password"} />
+        <Field
+          placeholder={"password"}
+          component={"input"}
+          name={"password"}
+          className={style.loginForm_input}
+        />
       </div>
       <div>
         <Field component={"input"} type={"checkbox"} name={"rememberMe"} />{" "}
