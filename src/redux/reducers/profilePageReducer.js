@@ -18,7 +18,7 @@ const profilePageReducer = (state = initialState, action) => {
     case ADD_POST: {
       let post = {
         id: state.posts.length + 1,
-        text: state.inputPostText,
+        text: action.payload.post,
       };
       return {
         ...state,
@@ -53,7 +53,7 @@ const profilePageReducer = (state = initialState, action) => {
   }
   return state;
 };
-export const addPost = () => ({ type: "ADD_POST" });
+export const addPost = (post) => ({ type: "ADD_POST", payload: post });
 
 export const inputTextChange = (text) => ({
   type: ON_INPUT_TEXT_CHANGE,

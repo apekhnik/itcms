@@ -30,7 +30,7 @@ const dialogsPageReducer = (state = initialState, action) => {
       };
     }
     case SEND_NEW_MSG: {
-      let newMsg = state.newMessageBody;
+      let newMsg = action.payload.message;
       return {
         ...state,
         messages: [...state.messages, newMsg],
@@ -42,7 +42,7 @@ const dialogsPageReducer = (state = initialState, action) => {
   }
   return state;
 };
-export const sendNewMessage = () => ({ type: SEND_NEW_MSG });
+export const sendNewMessage = (m) => ({ type: SEND_NEW_MSG, payload: m });
 export const messageInputChange = (msg) => ({
   type: ON_NEW_MSG_BODY_CHANGE,
   payload: msg,
