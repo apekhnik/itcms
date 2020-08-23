@@ -1,14 +1,14 @@
 import React from "react";
 import classes from "classnames";
 import style from "./Textarea.module.css";
-const Textarea = ({
+export const Textarea = ({
   input,
   placeholder,
   type,
   meta: { touched, error, warning },
 }) => {
   const hasError = touched && error ? <span>{error}</span> : null;
-  const cl = classes(style.textareaControl, hasError ? style.error : "");
+  const cl = classes(style.formControl, hasError ? style.error : "");
 
   return (
     <div className={cl}>
@@ -17,4 +17,19 @@ const Textarea = ({
     </div>
   );
 };
-export default Textarea;
+export const FormInput = ({
+  input,
+  placeholder,
+  type,
+  meta: { touched, error, warning },
+}) => {
+  const hasError = touched && error ? <span>{error}</span> : null;
+  const cl = classes(style.formControl, hasError ? style.error : "");
+
+  return (
+    <div className={cl}>
+      <input {...input} placeholder={placeholder} />
+      <div>{hasError}</div>
+    </div>
+  );
+};

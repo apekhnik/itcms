@@ -1,10 +1,13 @@
 .error {
   border: 1px solid #e74c3c;
 }
-.textareaControl span {
+.formControl span {
   color: #d81b06;
 }
-.textareaControl input {
+.formControl {
+  margin-bottom: 10px;
+}
+.formControl input {
   width: 100%;
   height: 30px;
   border: none;

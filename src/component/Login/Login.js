@@ -1,9 +1,10 @@
 import React from "react";
 import { userLogin, userLogout } from "../../redux/reducers/authReducer";
 import { Field, reduxForm } from "redux-form";
+import { FormInput } from "../../forms/form-controls/Textarea";
 import style from "./Login.module.css";
 import { connect } from "react-redux";
-
+import { required, maxLength } from "../../forms/form-validator/validator";
 const Login = ({ userLogin, userLogout }) => {
   const onSubmit = (data) => {
     userLogin(data);
@@ -20,22 +21,22 @@ const Login = ({ userLogin, userLogout }) => {
 const LoginForm = (props) => {
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
-      <div>
-        <Field
-          placeholder={"login"}
-          component={"input"}
-          name={"email"}
-          className={style.loginForm_input}
-        />
-      </div>
-      <div>
-        <Field
-          placeholder={"password"}
-          component={"input"}
-          name={"password"}
-          className={style.loginForm_input}
-        />
-      </div>
+      <Field
+        placeholder={"login"}
+        component={FormInput}
+        name={"email"}
+        validate={[required, maxLength]}
+        className={style.loginForm_input}
+      />
+
+      <Field
+        placeholder={"password"}
+        component={FormInput}
+        name={"password"}
+        validate={[required, maxLength]}
+        className={style.loginForm_input}
+      />
+
       <div>
         <Field component={"input"} type={"checkbox"} name={"rememberMe"} />{" "}
         remember me
