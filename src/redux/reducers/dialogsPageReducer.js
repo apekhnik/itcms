@@ -30,7 +30,7 @@ const dialogsPageReducer = (state = initialState, action) => {
       };
     }
     case SEND_NEW_MSG: {
-      let newMsg = action.payload.message;
+      let newMsg = action.payload;
       return {
         ...state,
         messages: [...state.messages, newMsg],

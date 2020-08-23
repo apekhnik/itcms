@@ -1,0 +1,12 @@
+.error {
+  border: 1px solid #e74c3c;
+}
+.textareaControl span {
+  color: #d81b06;
+}
+.textareaControl input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+}

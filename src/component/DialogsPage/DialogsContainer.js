@@ -3,16 +3,11 @@ import style from "./Dialogs.module.css";
 import DialogList from "./DialogsList/DialogsList";
 import MessageList from "./Messages/MessagesList";
 import { Field, reduxForm } from "redux-form";
-
-const DialogsContainer = ({
-  dialogs,
-  messages,
-  newMessageBody,
-  sendNewMessage,
-  messageInputChange,
-}) => {
+import Textarea from "../../forms/form-controls/Textarea";
+import {} from "../../forms/form-validator/validator";
+const DialogsContainer = ({ dialogs, messages, sendNewMessage }) => {
   const onSubmit = (data) => {
-    sendNewMessage(data);
+    sendNewMessage(data.message);
   };
   return (
     <div className={style.dialogs_page_container}>
@@ -26,9 +21,10 @@ const dialogForm = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       placeholder={"Enter your message"}
-      component={"input"}
+      component={Textarea}
       name={"message"}
       className={"1"}
+      validate={[]}
     />
   </form>
 );
