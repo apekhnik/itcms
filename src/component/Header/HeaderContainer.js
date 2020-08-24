@@ -6,14 +6,18 @@ class HeaderContainer extends React.Component {
   componentDidMount() {
     this.props.setAuthData();
   }
+
   render() {
-    return <Header login={this.props.login} isAuth={this.props.isAuth} />;
+    const { login, isAuth, id } = this.props;
+    return <Header login={login} isAuth={isAuth} id={id} />;
   }
 }
 const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
     login: state.auth.login,
+    id: state.auth.id,
+    email: state.auth.email,
   };
 };
 

@@ -1,0 +1,16 @@
+.profilestatus {
+  font-size: 40px;
+  color: red;
+  user-select: none;
+}
+.profilestatus:hover {
+  cursor: pointer;
+}
+.span_status {
+}
+.input_editStatus {
+  padding: 5px;
+  background: grey;
+  border: none;
+  font-size: 20px;
+}

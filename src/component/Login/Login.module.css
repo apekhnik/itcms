@@ -1,0 +1,15 @@
+.loginForm {
+  padding: 15px;
+  width: 200px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  background: #1abc9c;
+}
+.loginForm_input {
+  outline: none;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

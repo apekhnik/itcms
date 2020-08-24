@@ -2,34 +2,31 @@ import React from "react";
 import style from "./Dialogs.module.css";
 import DialogList from "./DialogsList/DialogsList";
 import MessageList from "./Messages/MessagesList";
-import Input from "../Input/Input";
-import { Redirect } from "react-router-dom";
-
-const DialogsContainer = ({
-  dialogs,
-  messages,
-  newMessageBody,
-  sendNewMessage,
-  messageInputChange,
-  isAuth,
-}) => {
-  const addMessage = () => {
-    sendNewMessage();
+import { Field, reduxForm } from "redux-form";
+import { Textarea } from "../../forms/form-controls/Textarea";
+import {} from "../../forms/form-validator/validator";
+const DialogsContainer = ({ dialogs, messages, sendNewMessage }) => {
+  const onSubmit = (data) => {
+    sendNewMessage(data.message);
   };
-  const onInputChangeHandler = (e) => {
-    messageInputChange(e.target.value);
-  };
-  if (!isAuth) return <Redirect to={"/login"} />;
   return (
     <div className={style.dialogs_page_container}>
       <DialogList dialogs={dialogs} />
       <MessageList messages={messages} />
-      <Input
-        textChangeHandler={onInputChangeHandler}
-        inputValue={newMessageBody}
-        send={addMessage}
-      />
+      <MessageReduxForm onSubmit={onSubmit} />
     </div>
   );
 };
+const dialogForm = (props) => (
+  <form onSubmit={props.handleSubmit}>
+    <Field
+      placeholder={"Enter your message"}
+      component={Textarea}
+      name={"message"}
+      className={"1"}
+      validate={[]}
+    />
+  </form>
+);
+const MessageReduxForm = reduxForm({ form: "message" })(dialogForm);
 export default DialogsContainer;

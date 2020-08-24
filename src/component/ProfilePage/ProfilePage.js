@@ -3,12 +3,21 @@ import Account from "../Account/Account";
 import PostContainer from "../Posts/PostContainer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { setProfile } from "../../redux/reducers/profilePageReducer";
+import {
+  setProfile,
+  getStatus,
+  updateStatus,
+  inputUserStatusChange,
+} from "../../redux/reducers/profilePageReducer";
+import { withAuthRedirect } from "../../HOC/AuthRedirect";
+import { compose } from "redux";
 class ProfilePageContainer extends Component {
   componentDidMount() {
-    let id = this.props.match.params.userID || 2;
+    let id = this.props.match.params.userID || this.props.autorizedId;
     this.props.setProfile(id);
+    this.props.getStatus(id);
   }
+
   render() {
     return (
       <div>
@@ -18,14 +27,19 @@ class ProfilePageContainer extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth,
-  };
-};
+const mapStateToProps = (state) => ({
+  profile: state.profilePage.profile,
+  status: state.profilePage.status,
+  autorizedId: state.auth.id,
+});
 
-const ProfilePage = connect(mapStateToProps, { setProfile })(
-  withRouter(ProfilePageContainer)
-);
-export default ProfilePage;
+export default compose(
+  connect(mapStateToProps, {
+    setProfile,
+    getStatus,
+    updateStatus,
+    inputUserStatusChange,
+  }),
+  withRouter,
+  withAuthRedirect
+)(ProfilePageContainer);
