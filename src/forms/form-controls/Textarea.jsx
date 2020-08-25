@@ -35,7 +35,7 @@ export const FormInput = ({
 
   return (
     <div className={cl}>
-      <input {...input} placeholder={placeholder} />
+      <input {...input} placeholder={placeholder} type={type} />
       <div>{hasError}</div>
     </div>
     // <FormControls
