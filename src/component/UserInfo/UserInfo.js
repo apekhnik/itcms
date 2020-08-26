@@ -12,12 +12,12 @@ const UserInfo = ({
 }) => {
   return (
     <div className={style.info}>
+      <h1>{name}</h1>
       <ProfileStatus
         status={status}
         updateStatus={updateStatus}
         inputUserStatusChange={inputUserStatusChange}
       />
-      <p>{name}</p>
       <p>{lookingForAJobDescription}</p>
       <p>{aboutMe}</p>
     </div>

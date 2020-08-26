@@ -1,19 +1,20 @@
 import React from "react";
-import { userLogin, userLogout } from "../../redux/reducers/authReducer";
+import { userLogin } from "../../redux/reducers/authReducer";
 import { Field, reduxForm } from "redux-form";
 import { FormInput } from "../../forms/form-controls/Textarea";
 import style from "./Login.module.css";
 import { connect } from "react-redux";
-import { required, maxLength } from "../../forms/form-validator/validator";
-const Login = ({ userLogin, userLogout }) => {
+import { required } from "../../forms/form-validator/validator";
+import { Redirect } from "react-router-dom";
+const Login = ({ userLogin, isAuth }) => {
   const onSubmit = (data) => {
     userLogin(data);
   };
+  if (isAuth) return <Redirect to="/profile" />;
   return (
     <div style={{ textAlign: "center" }}>
       <h1>LOGIN</h1>
       <LoginReduxForm onSubmit={onSubmit} />
-      <button onClick={userLogout}>LOGOUT</button>
     </div>
   );
 };
@@ -47,8 +48,8 @@ const LoginForm = (props) => {
     </form>
   );
 };
-const mapStateToProps = (state) => {
-  return {};
-};
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
-export default connect(mapStateToProps, { userLogin, userLogout })(Login);
+export default connect(mapStateToProps, { userLogin })(Login);
