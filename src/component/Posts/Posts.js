@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 import { Field, reduxForm } from "redux-form";
 import { Textarea } from "../../forms/form-controls/Textarea";
-import { required, maxLength } from "../../forms/form-validator/validator";
+// import { required, maxLength } from "../../forms/form-validator/validator";
 import style from "./Post.module.css";
 
 const Posts = ({ posts, addPost, inputTextChange, inputPostText }) => {
