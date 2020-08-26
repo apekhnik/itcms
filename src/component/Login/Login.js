@@ -25,7 +25,7 @@ const LoginForm = (props) => {
         placeholder={"login"}
         component={FormInput}
         name={"email"}
-        validate={[required, maxLength]}
+        validate={[required]}
         className={style.loginForm_input}
       />
 

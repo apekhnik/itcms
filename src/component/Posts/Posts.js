@@ -27,7 +27,7 @@ const postForm = (props) => (
       name={"post"}
       send={props.addPost}
       value={props.inputPostText}
-      validate={[required, maxLength]}
+      validate={[]}
     />
   </form>
 );
