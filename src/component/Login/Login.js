@@ -10,6 +10,7 @@ const Login = ({ userLogin, isAuth }) => {
   const onSubmit = (data) => {
     userLogin(data);
   };
+  
   if (isAuth) return <Redirect to="/profile" />;
   return (
     <div style={{ textAlign: "center" }}>
@@ -20,6 +21,7 @@ const Login = ({ userLogin, isAuth }) => {
 };
 
 const LoginForm = (props) => {
+  console.log(props)
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
       <Field

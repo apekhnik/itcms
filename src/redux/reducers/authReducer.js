@@ -1,4 +1,5 @@
 import { authApi } from "../../API/api";
+import { stopSubmit } from "redux-form";
 const SET_USER_DATA = "SET_USER_DATA";
 const initialState = {
   id: null,
@@ -36,7 +37,11 @@ export const getAuthDataFromApi = () => (dispatch) => {
     .catch((e) => console.error(e));
 };
 export const userLogin = (login) => (dispatch) => {
+  
+  // dispatch(stopSubmit('login',{  _error: 'Email or password failed!'}))
+  // return
   authApi.login(login).then((response) => {
+    
     if (response.data.resultCode === 0) {
       dispatch(getAuthDataFromApi());
     }
