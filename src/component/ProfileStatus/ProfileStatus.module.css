@@ -1,6 +1,7 @@
 .profilestatus {
-  font-size: 40px;
-  color: red;
+  font-size: 20px;
+  font-style: italic;
+  color: grey;
   user-select: none;
 }
 .profilestatus:hover {
