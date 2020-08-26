@@ -34,7 +34,8 @@ const LoginForm = (props) => {
         placeholder={"password"}
         component={FormInput}
         name={"password"}
-        validate={[required,]}
+        type={"password"}
+        validate={[required]}
         className={style.loginForm_input}
       />
 
