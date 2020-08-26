@@ -5,12 +5,8 @@ import { FormInput } from "../../forms/form-controls/Textarea";
 import style from "./Login.module.css";
 import { connect } from "react-redux";
 import { required } from "../../forms/form-validator/validator";
-<<<<<<< HEAD
 import { Redirect } from "react-router-dom";
 const Login = ({ userLogin, isAuth }) => {
-=======
-const Login = ({ userLogin, userLogout }) => {
->>>>>>> b1eced7... add some stuff
   const onSubmit = (data) => {
     userLogin(data);
   };
