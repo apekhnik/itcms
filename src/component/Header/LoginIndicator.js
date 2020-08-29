@@ -7,14 +7,23 @@ const LoginIndicator = ({ login, isAuth, id, userLogout }) => {
       Login
     </NavLink>
   );
-  const logoutBtn = <button onClick={() => userLogout()}>logout</button>;
-  const linkToProfile = (
-    <NavLink to={`/profile/${id}`}>
-      {login}
-    </NavLink>
+  const logoutBtn = (
+    <button
+      onClick={() => {
+        userLogout();
+      }}
+    >
+      logout
+    </button>
   );
+  const linkToProfile = <NavLink to={`/profile/${id}`}>{login}</NavLink>;
 
   if (!isAuth) return linkToLogin;
-  return <div className={style.auth_block}>Hello, {linkToProfile}{logoutBtn}</div>;
+  return (
+    <div className={style.auth_block}>
+      Hello, {linkToProfile}
+      {logoutBtn}
+    </div>
+  );
 };
 export default LoginIndicator;

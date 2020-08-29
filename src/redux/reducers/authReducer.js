@@ -27,7 +27,7 @@ const setUserAuthData = (data, isAuth) => {
   };
 };
 export const getAuthDataFromApi = () => (dispatch) => {
-  authApi
+  return authApi
     .auth()
     .then((response) => {
       if (response.data.resultCode === 0) {
@@ -37,13 +37,13 @@ export const getAuthDataFromApi = () => (dispatch) => {
     .catch((e) => console.error(e));
 };
 export const userLogin = (login) => (dispatch) => {
-  
-  // dispatch(stopSubmit('login',{  _error: 'Email or password failed!'}))
-  // return
+  let action = stopSubmit("login", { _error: "Wrong email or password" });
+
   authApi.login(login).then((response) => {
-    
     if (response.data.resultCode === 0) {
       dispatch(getAuthDataFromApi());
+    } else {
+      dispatch(action);
     }
   });
 };
