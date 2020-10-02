@@ -13,9 +13,8 @@ import { withAuthRedirect } from "../../HOC/AuthRedirect";
 import { compose } from "redux";
 class ProfilePageContainer extends Component {
   componentDidMount() {
-    console.log(this.props.autorizedId);
     let id = this.props.match.params.userID || this.props.autorizedId;
-    debugger;
+    if (!this.props.autorizedId) this.props.history.push("/login");
     this.props.setProfile(id);
     this.props.getStatus(id);
   }

@@ -9,7 +9,7 @@ const initialState = {
   users: [],
   currentPage: 5,
   totalUsersCount: 25,
-  pageSize: 5,
+  pageSize: 10,
   isLoading: false,
   followingInProgress: [],
 };

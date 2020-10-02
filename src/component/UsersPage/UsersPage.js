@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Users from "./Users";
+
 import {
   followingInProgressToggler,
   getUsers,
