@@ -48,13 +48,22 @@ const profilePageReducer = (state = initialState, action) => {
         status: action.payload,
       };
     }
+    case "SAVE_PHOTO_SUCCESS": {
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photo },
+      };
+    }
     default:
       break;
   }
   return state;
 };
 export const addPost = (post) => ({ type: "ADD_POST", payload: post });
-
+const savePhotoSuccess = (photos) => ({
+  type: "SAVE_PHOTO_SUCCESS",
+  payload: photos,
+});
 export const inputTextChange = (text) => ({
   type: ON_INPUT_TEXT_CHANGE,
   payload: text,
@@ -63,6 +72,7 @@ export const fetchProfile = (user) => ({
   type: SET_CURRENT_PROFILE,
   payload: user,
 });
+
 export const setProfile = (id) => (dispatch) => {
   profileApi
     .getProfile(id)
@@ -84,5 +94,10 @@ export const getStatus = (id) => (dispatch) => {
 };
 export const updateStatus = (status) => (dispatch) => {
   profileApi.updateStatus(status).then((response) => console.log(response));
+};
+export const savePhoto = (photos) => (dispatch) => {
+  profileApi
+    .savePhoto(photos)
+    .then((response) => dispatch(savePhotoSuccess(response.data.data.photos)));
 };
 export default profilePageReducer;
