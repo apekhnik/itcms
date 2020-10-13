@@ -3,20 +3,22 @@ import classes from "classnames";
 import style from "./Textarea.module.css";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const errorDiv = (
-  <div className={style.errorDiv}>
-    <FontAwesomeIcon icon={faExclamationCircle} />
-  </div>
-);
+
 export const Textarea = ({
   input,
   placeholder,
   type,
   meta: { touched, error, warning },
 }) => {
+  const errorDiv = (
+    <div className={style.errorDiv}>
+      <FontAwesomeIcon icon={faExclamationCircle} />
+      <span>{error}</span>
+    </div>
+  );
   const hasError = touched && error ? errorDiv : null;
   const cl = classes(style.formControl, hasError ? style.error : "");
-
+ 
   return (
     <div className={cl}>
       <input {...input} placeholder={placeholder} type={type} />
@@ -30,6 +32,12 @@ export const FormInput = ({
   type,
   meta: { touched, error, warning },
 }) => {
+  const errorDiv = (
+    <div className={style.errorDiv}>
+      <FontAwesomeIcon icon={faExclamationCircle} />
+      <span>{error}</span>
+    </div>
+  );
   const hasError = touched && error ? errorDiv : null;
   const cl = classes(style.formControl, hasError ? style.error : "");
 
