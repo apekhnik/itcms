@@ -27,4 +27,13 @@ export const profileApi = {
   getProfile: (id) => instanse.get(`profile/${id}`),
   getStatus: (id) => instanse.get(`profile/status/${id}`),
   updateStatus: (status) => instanse.put(`profile/status`, { status }),
+  savePhoto: (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    return instanse.put(`profile/photo`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
 };

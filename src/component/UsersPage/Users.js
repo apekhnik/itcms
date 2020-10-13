@@ -1,6 +1,7 @@
 import React from "react";
 import UserItem from "./UserItem";
 import Loader from "../Loader/Lodaer";
+import Paginator from "./Paginator";
 const Users = (props) => {
   const {
     onCurrentChange,
@@ -14,21 +15,6 @@ const Users = (props) => {
     currentPage,
   } = props;
 
-  const pagesCount = Math.ceil(totalUsersCount / pageSize);
-
-  let pages = [];
-  for (let i = 1; i <= pagesCount && i < 10; i++) {
-    pages.push(i);
-  }
-  const pagination = pages.map((i) => (
-    <span
-      style={currentPage === i ? { color: "red" } : {}}
-      onClick={() => onCurrentChange(i)}
-      key={i}
-    >
-      {i}
-    </span>
-  ));
   const userList = users.map((us) => {
     return (
       <UserItem
@@ -46,7 +32,12 @@ const Users = (props) => {
 
   return (
     <div>
-      {pagination}
+      <Paginator
+        totalItemsCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChange={onCurrentChange}
+      />
       {userList}
     </div>
   );
