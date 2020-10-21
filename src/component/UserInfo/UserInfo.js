@@ -1,26 +1,28 @@
 import React from "react";
 import style from "./UserInfo.module.css";
-import ProfileStatus from "../ProfileStatus/ProfileStatus";
+
 const UserInfo = ({
   lookingForAJobDescription,
   lookingForAJob,
   name,
   aboutMe,
-  updateStatus,
-  status,
-  inputUserStatusChange,
+  contacts
 }) => {
+
   return (
     <div className={style.info}>
       <h1>{name}</h1>
-      <ProfileStatus
-        status={status}
-        updateStatus={updateStatus}
-        inputUserStatusChange={inputUserStatusChange}
-      />
-      <p>{lookingForAJobDescription}</p>
-      <p>{aboutMe}</p>
+      
+      <p>Looking for a job {lookingForAJob ? 'yes' : 'no'}</p>
+      <span>{lookingForAJob ? lookingForAJobDescription : null}</span>
+      <p>About me: {aboutMe}</p>
+      {Object.keys(contacts).map((key)=>{
+        return <Contacts key={key} contact={key} value={contacts.key}/>
+      })}
     </div>
   );
 };
 export default UserInfo;
+const Contacts = ({contact, value}) => {
+return <p>{contact}:{value}</p>
+}

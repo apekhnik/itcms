@@ -51,7 +51,7 @@ const profilePageReducer = (state = initialState, action) => {
     case "SAVE_PHOTO_SUCCESS": {
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photo },
+        profile: { ...state.profile, photos: action.payload },
       };
     }
     default:
