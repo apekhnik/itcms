@@ -14,18 +14,18 @@ const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
       // props.savePhoto(e.target.files[0]);
     }
   };
-  const chouse = <div >
+  const chouse = <div className={style.inputBlock}>
     <input type="file" name="file" id="file" onChange={setNewPhoto} className={style.inputfile}/> 
     <label for="file">Choose a file</label>
-    <button onClick={()=>savePhoto(newAva)}className={style.saveButton}>
-        <FontAwesomeIcon icon={faSave} size='2x' />
-    </button>
   </div>
+  const saveButton = <button onClick={()=>savePhoto(newAva)}className={style.saveButton}>
+  <FontAwesomeIcon icon={faSave} size='2x' />
+</button>
   return (
     <div className={style.avatar}>
       <img src={src} alt="" style={imgSize} />
       {isOwner && chouse}
-      
+      {newAva&&saveButton}
       
     </div>
   );
