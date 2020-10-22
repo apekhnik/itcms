@@ -1,7 +1,15 @@
 .avatar {
   width: 150px;
-  
+  position: relative;
   overflow: hidden;
+}
+.inputBlock {
+  position: absolute;
+  bottom: 0;
+}
+.saveButton{
+  background: none;
+  border: none;
 }
 .inputfile {
 	width: 0.1px;
