@@ -11,7 +11,6 @@ const UserInfo = ({
 
   return (
     <div className={style.info}>
-      <h1>{name}</h1>
       
       <p>Looking for a job {lookingForAJob ? 'yes' : 'no'}</p>
       <span>{lookingForAJob ? lookingForAJobDescription : null}</span>

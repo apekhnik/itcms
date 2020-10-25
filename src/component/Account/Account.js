@@ -22,16 +22,13 @@ const Account = (props) => {
   return (
     <div className={style.profile}>
       <Avatar src={ava} isOwner={props.isOwner} loadPhoto={loadPhoto} savePhoto={props.savePhoto}/>
-      {/* <div>
-          {props.isOwner && <input type="file" onChange={loadPhoto} />}
-      </div> */}
-      
+      <div>
+      <h1>{props.profile.fullName}</h1>
       <ProfileStatus
         status={props.status}
         updateStatus={props.updateStatus}
         inputUserStatusChange={props.inputUserStatusChange}
       />
-      <button onClick={()=>setEditMode(!editMode)}>{editMode ? 'save': 'edit'}</button>
       {editMode ? <ProfileDataForm/> :       <UserInfo
         name={props.profile.fullName}
         lookingForAJob={props.profile.lookingForAJob}
@@ -39,6 +36,12 @@ const Account = (props) => {
         aboutMe={props.profile.aboutMe}
         contacts={props.profile.contacts}
       />}
+      </div>
+
+      
+
+      <button onClick={()=>setEditMode(!editMode)}>{editMode ? 'save': 'edit'}</button>
+      
 
     </div>
   );

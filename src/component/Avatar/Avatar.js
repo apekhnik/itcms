@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./Avatar.module.css";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -19,7 +19,7 @@ const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
     <label for="file">Choose a file</label>
   </div>
   const saveButton = <button onClick={()=>savePhoto(newAva)}className={style.saveButton}>
-  <FontAwesomeIcon icon={faSave} size='2x' />
+  <FontAwesomeIcon icon={faUpload} size='2x' />
 </button>
   return (
     <div className={style.avatar}>

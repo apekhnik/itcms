@@ -2,21 +2,24 @@
   width: 150px;
   position: relative;
   overflow: hidden;
-  border: 2px solid red;
+  border: 2px solid #0077C0;
+}
+
+.avatar:hover .inputBlock{
+  bottom: 0px;
 }
 .inputBlock {
   position: absolute;
-  bottom: 0;
-  border: 2px solid black;
-  padding: 0;
+  bottom: -30px;
+  padding-top: 1;
   z-index: 0;
+  transition-duration: .5s;
 }
 .inputBlock::after {
-  content: '';
+  content: ' ';
   position: absolute;
   top:0;
   width: 100%;
-  z-index: 5;
   background: #000;
 }
 .saveButton{
@@ -25,6 +28,9 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  padding-left: 3px;
+  padding-right: 4px;
+  background-color: #0077C0;
 }
 .inputfile {
 	width: 0.1px;
@@ -37,7 +43,7 @@
 .inputfile + label {
   /* font-size: 1.25em;
   font-weight: 700; */
-  font-size: 20px;
+  font-size: 22px;
   color: white;
   display: inline-block;
   cursor: pointer;
@@ -45,7 +51,7 @@
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: red;
+    background-color: #0077C0;
 }
 .avatar img {
   width: 150px;
