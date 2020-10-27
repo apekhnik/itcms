@@ -4,3 +4,6 @@
   align-items: flex-start;
   flex-direction: row;
 }
+.profileDescription{
+  padding-left: 10px;
+}

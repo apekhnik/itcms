@@ -19,7 +19,7 @@ class ProfilePageContainer extends Component {
     this.props.setProfile(id);
     this.props.getStatus(id);
   }
-
+  
   render() {
     console.log(this.props.profile);
     return (

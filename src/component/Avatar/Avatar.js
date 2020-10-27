@@ -16,7 +16,7 @@ const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
   };
   const chouse = <div className={style.inputBlock}>
     <input type="file" name="file" id="file" onChange={setNewPhoto} className={style.inputfile}/> 
-    <label for="file">Choose a file</label>
+    <label htmlFor="file">Choose a file</label>
   </div>
   const saveButton = <button onClick={()=>savePhoto(newAva)}className={style.saveButton}>
   <FontAwesomeIcon icon={faUpload} size='2x' />

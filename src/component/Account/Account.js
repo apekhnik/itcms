@@ -4,7 +4,7 @@ import UserInfo from "../UserInfo/UserInfo";
 import style from "./Account.module.css";
 import Loader from "../Loader/Lodaer";
 import ProfileStatus from '../ProfileStatus/ProfileStatus'
-import ProfileDataForm from '../ProfilePage/ProfileDataForm'
+import ProfileDataChangePage from '../ProfilePage/ProfileDataForm'
 const Account = (props) => {
   const [editMode, setEditMode] = useState(false)
   const loadPhoto = (e) => {
@@ -22,14 +22,14 @@ const Account = (props) => {
   return (
     <div className={style.profile}>
       <Avatar src={ava} isOwner={props.isOwner} loadPhoto={loadPhoto} savePhoto={props.savePhoto}/>
-      <div>
+      <div className={style.profileDescription}>
       <h1>{props.profile.fullName}</h1>
       <ProfileStatus
         status={props.status}
         updateStatus={props.updateStatus}
         inputUserStatusChange={props.inputUserStatusChange}
       />
-      {editMode ? <ProfileDataForm/> :       <UserInfo
+      {editMode ? <ProfileDataChangePage/> :       <UserInfo
         name={props.profile.fullName}
         lookingForAJob={props.profile.lookingForAJob}
         lookingForAJobDescription={props.profile.lookingForAJobDescription}

@@ -12,7 +12,7 @@ const UserInfo = ({
   return (
     <div className={style.info}>
       
-      <p>Looking for a job {lookingForAJob ? 'yes' : 'no'}</p>
+      <p>Looking for a job :{lookingForAJob ? 'yes' : 'no'}</p>
       <span>{lookingForAJob ? lookingForAJobDescription : null}</span>
       <p>About me: {aboutMe}</p>
       {Object.keys(contacts).map((key)=>{
