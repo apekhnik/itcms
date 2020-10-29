@@ -1,9 +1,20 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { FormInput, Textarea } from "../../forms/form-controls/Textarea";
-const ProfileDataForm = () => {
+export const ProfileDataChangePage = () => {
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
-    <form>
+    <div>
+      <h3>test test</h3>
+      <ProfileDataReduxForm onSubmit={onSubmit}/>
+    </div>
+  );
+};
+const ProfileDataForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
       <Field
         placeholder={"Looking for a job"}
         component={FormInput}
@@ -18,17 +29,13 @@ const ProfileDataForm = () => {
         // validate={[required]}
         className=""
       />
+      <button>
+        ++
+      </button>
     </form>
   );
 };
-export const ProfileDataChangePage = () => {
-  return (
-    <div>
-      <h3>test test</h3>
-      <ProfileDataReduxForm />
-    </div>
-  );
-};
+
 const ProfileDataReduxForm = reduxForm({ form: "profileData" })(
   ProfileDataForm
 );
