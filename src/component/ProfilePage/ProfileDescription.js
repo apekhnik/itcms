@@ -16,7 +16,7 @@ const ProfileDescription = (props) => {
       />
       <hr/>
       {isEdit ? (
-        <ProfileDataChangePage />
+        <ProfileDataChangePage profile={props.profile} />
       ) : (
         <UserInfo
           name={props.profile.fullName}

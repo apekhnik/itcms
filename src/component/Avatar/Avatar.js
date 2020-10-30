@@ -15,7 +15,7 @@ const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
   };
   const saveButton = (
     <button onClick={() => savePhoto(newAva)} className={style.saveButton}>
-      <FontAwesomeIcon icon={faUpload} size="1.5x" color='white'/>
+      <FontAwesomeIcon icon={faUpload} size="1x" color='white'/>
     </button>
   );
   const chouse = (
