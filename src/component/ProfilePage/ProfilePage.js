@@ -9,6 +9,7 @@ import {
   updateStatus,
   inputUserStatusChange,
   savePhoto,
+  saveProfile
 } from "../../redux/reducers/profilePageReducer";
 import { withAuthRedirect } from "../../HOC/AuthRedirect";
 import { compose } from "redux";
@@ -21,7 +22,7 @@ class ProfilePageContainer extends Component {
   }
   
   render() {
-    console.log(this.props.profile);
+
     return (
       <div>
         <Account {...this.props} isOwner={!this.props.match.params.userID} />
@@ -43,6 +44,7 @@ export default compose(
     updateStatus,
     inputUserStatusChange,
     savePhoto,
+    saveProfile
   }),
   withRouter,
   withAuthRedirect

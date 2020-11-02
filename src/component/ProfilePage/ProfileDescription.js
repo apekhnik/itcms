@@ -5,7 +5,7 @@ import UserInfo from "../UserInfo/UserInfo";
 import style from './Profile.module.css'
 const ProfileDescription = (props) => {
   const [isEdit, setisEdit] = useState(false);
-
+  
   return (
     <div className={style.profileDescription}>
     <h1>{props.profile.fullName}</h1>
@@ -16,7 +16,7 @@ const ProfileDescription = (props) => {
       />
       <hr/>
       {isEdit ? (
-        <ProfileDataChangePage profile={props.profile} />
+        <ProfileDataChangePage profile={props.profile} saveProfile={props.saveProfile}/>
       ) : (
         <UserInfo
           name={props.profile.fullName}

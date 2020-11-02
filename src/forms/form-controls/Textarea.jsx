@@ -3,7 +3,7 @@ import classes from "classnames";
 import style from "./Textarea.module.css";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Field } from "redux-form";
 export const Textarea = ({
   input,
   placeholder,
@@ -26,6 +26,16 @@ export const Textarea = ({
     </div>
   );
 };
+export const createField = (component,type,placeholder, name, validate, className) =>{ 
+  return <Field
+    component={component}
+    type={type}
+    placeholder={placeholder}
+    name={name}
+    validate={validate}
+    className={className}
+  />
+}
 export const FormInput = ({
   input,
   placeholder,

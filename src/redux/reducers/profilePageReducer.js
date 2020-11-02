@@ -100,4 +100,8 @@ export const savePhoto = (photos) => (dispatch) => {
     .savePhoto(photos)
     .then((response) => dispatch(savePhotoSuccess(response.data.data.photos)));
 };
+export const saveProfile =(profile)=>(dispatch) => {
+  console.log(profile)
+  profileApi.saveProfile(profile).then((response) => console.log(response));
+}
 export default profilePageReducer;
