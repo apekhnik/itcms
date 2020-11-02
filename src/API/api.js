@@ -36,5 +36,5 @@ export const profileApi = {
       },
     });
   },
-  saveProfile: (profile) => instanse.put('profile', {profile})
+  saveProfile: (profile) => instanse.put('profile', {...profile})
 };

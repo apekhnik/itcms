@@ -10,32 +10,16 @@ export const ProfileDataChangePage = (props) => {
   
   const onSubmit = (data) => {
     console.log(data)
-    const test = {
-      AboutMe: "я круто чувак 1001%",
-      contacts: {
-        "facebook": "facebook.com",
-        "website": null,
-        "vk": "vk.com/dimych",
-        "twitter": "https://twitter.com/@sdf",
-        "instagram": "instagra.com/sds",
-        "youtube": null,
-        "github": "github.com",
-        "mainLink": null
-      },
-      lookingForAJob: true,
-      lookingForAJobDescription: "не ищу, а дурачусь",
-      fullName: "samurai dimych",
-      "userId": 888
-    }
-    props.saveProfile(test);
+    
+    props.saveProfile(data);
   };
   return (
     <div>
       <h3>Profile Form</h3>
       <ProfileDataReduxForm
         onSubmit={onSubmit}
-        // initialValues={props.profile}
-        // profile={props.profile}
+        initialValues={props.profile}
+        profile={props.profile}
       />
     </div>
   );
@@ -46,7 +30,7 @@ const ProfileDataForm = (props) => {
     <form onSubmit={props.handleSubmit} className={style.profileChangeForm}>
       Full name{createField(FormInput, "text", "Enter your name", "fullName", [], "")}
       Looking for a job{createField(FormInput, "checkbox", "lookingForAJob", "lookingForAJob", [], "")}
-      {createField(FormInput, "text", "lookingForAJobDescription", "lookingForAJobDescription", [], "")}
+      {createField(FormInput, "text", "LookingForAJobDescription", "lookingForAJobDescription", [], "")}
       {createField(FormInput, "text", "About me", "aboutMe", [], "")}
   
       <button>++</button>
