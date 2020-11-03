@@ -4,6 +4,7 @@ import {
   FormInput,
   Textarea,
   createField,
+  FormInputCheck
 } from "../../forms/form-controls/Textarea";
 import style from "./Profile.module.css";
 export const ProfileDataChangePage = (props) => {
@@ -28,11 +29,14 @@ const ProfileDataForm = (props) => {
   
   return (
     <form onSubmit={props.handleSubmit} className={style.profileChangeForm}>
-      Full name{createField(FormInput, "text", "Enter your name", "fullName", [], "")}
-      Looking for a job{createField(FormInput, "checkbox", "lookingForAJob", "lookingForAJob", [], "")}
-      {createField(FormInput, "text", "LookingForAJobDescription", "lookingForAJobDescription", [], "")}
-      {createField(FormInput, "text", "About me", "aboutMe", [], "")}
-  
+      
+      {createField(FormInput, "text", "Enter your name", "fullName", [], "", 'Имя')}
+      
+      {createField(FormInputCheck, "checkbox", "lookingForAJob", "lookingForAJob", [], "check",'Looking for a job')}
+      
+      
+      {createField(FormInput, "text", "LookingForAJobDescription", "lookingForAJobDescription", [], "", 'О поиске работы')}
+      {createField(FormInput, "text", "About me", "aboutMe", [], "", 'About me')}
       <button>++</button>
     </form>
   );

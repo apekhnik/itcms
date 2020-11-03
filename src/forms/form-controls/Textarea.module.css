@@ -6,14 +6,25 @@
   color: #d81b06;
 }
 .formControl {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   position: relative;
 }
+.formControl label {
+  display: block;
+  width: 50%;
+}
+.check label {
+  display: block;
+  width: 50%;
+}
 .formControl input {
-  width: 100%;
+  width: 95%;
   height: 30px;
-  border: none;
+  border: 2px solid #bdc3c7;
   border-radius: 5px;
+  padding: 5px;
 }
 .errorDiv {
   position: absolute;

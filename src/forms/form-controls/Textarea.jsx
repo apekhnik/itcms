@@ -26,7 +26,7 @@ export const Textarea = ({
     </div>
   );
 };
-export const createField = (component,type,placeholder, name, validate, className) =>{ 
+export const createField = (component,type,placeholder, name, validate, className, label) =>{ 
   return <Field
     component={component}
     type={type}
@@ -34,12 +34,16 @@ export const createField = (component,type,placeholder, name, validate, classNam
     name={name}
     validate={validate}
     className={className}
+    label={label}
   />
 }
 export const FormInput = ({
   input,
   placeholder,
   type,
+  className,
+  name,
+  label,
   meta: { touched, error, warning },
 }) => {
   const errorDiv = (
@@ -49,26 +53,41 @@ export const FormInput = ({
     </div>
   );
   const hasError = touched && error ? errorDiv : null;
-  const cl = classes(style.formControl, hasError ? style.error : "");
+  const cl = classes(style.formControl, hasError ? style.error : "",className );
 
   return (
     <div className={cl}>
-      <input {...input} placeholder={placeholder} type={type} />
+      <label htmlFor={name}>{label}</label>:
+      <input {...input} placeholder={placeholder} type={type} name={name}/>
       <div>{hasError}</div>
     </div>
-    // <FormControls
-    //   className={cl}
-    //   hasError={hasError}
-    //   {...input}
-    //   placeholder={placeholder}
-    // />
+    
   );
 };
-// const FormControls = (props) => {
-//   return (
-//     <div className={props.className}>
-//       <input {...props.input} placeholder={props.placeholder} />
-//       <div>{props.hasError}</div>
-//     </div>
-//   );
-// };
+export const FormInputCheck = ({
+  input,
+  placeholder,
+  type,
+  className,
+  name,
+  label,
+  meta: { touched, error, warning },
+}) => {
+  const errorDiv = (
+    <div className={style.errorDiv}>
+      <FontAwesomeIcon icon={faExclamationCircle} />
+      <span>{error}</span>
+    </div>
+  );
+  const hasError = touched && error ? errorDiv : null;
+  // const cl = classes( hasError ? style.error : "",className );
+
+  return (
+    <div className={style.formControl}>
+      <label htmlFor={name}>{label}</label>:
+      <input {...input} placeholder={placeholder} type={type} name={name} className={className}/>
+      <div>{hasError}</div>
+    </div>
+    
+  );
+};
