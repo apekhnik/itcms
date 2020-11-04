@@ -5,7 +5,13 @@ import UserInfo from "../UserInfo/UserInfo";
 import style from './Profile.module.css'
 const ProfileDescription = (props) => {
   const [isEdit, setisEdit] = useState(false);
-  
+  const onSubmit = (data) => {
+    props.saveProfile(data);
+    setisEdit(false)
+  };
+  const editBtn = <button onClick={() => setisEdit(!isEdit)}>
+  {isEdit ? "save" : "edit"}
+  </button>
   return (
     <div className={style.profileDescription}>
     <h1>{props.profile.fullName}</h1>
@@ -16,7 +22,7 @@ const ProfileDescription = (props) => {
       />
       <hr/>
       {isEdit ? (
-        <ProfileDataChangePage profile={props.profile} saveProfile={props.saveProfile}/>
+        <ProfileDataChangePage profile={props.profile}  onSubmit={onSubmit}/>
       ) : (
         <UserInfo
           name={props.profile.fullName}
@@ -26,9 +32,9 @@ const ProfileDescription = (props) => {
           contacts={props.profile.contacts}
         />
       )}
-      <button onClick={() => setisEdit(!isEdit)}>
-        {isEdit ? "save" : "edit"}
-      </button>
+      {
+        !isEdit && editBtn
+      }
     </div>
   );
 };

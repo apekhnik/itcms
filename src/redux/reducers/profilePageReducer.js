@@ -105,7 +105,7 @@ export const saveProfile =(profile)=>(dispatch, getState) => {
   profileApi.saveProfile(profile).then((response) => {
     const authId = getState().auth.id;
     
-    if(response.data.resultCode == 0){
+    if(response.data.resultCode === 0){
       dispatch(setProfile(authId))
     }
     
