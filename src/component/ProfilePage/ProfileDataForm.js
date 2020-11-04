@@ -34,6 +34,9 @@ const ProfileDataForm = (props) => {
         // return createField(FormInput, "text", {key}, {key}, [], "", {key})
       })}
       <button>++</button>
+      {Object.keys(props.profile.contacts).map((key)=>{
+        return createField(FormInput, "text", 'contacts.'+ key, 'contacts.'+ key, [], "", key)
+      })}
     </form>
   );
 };
