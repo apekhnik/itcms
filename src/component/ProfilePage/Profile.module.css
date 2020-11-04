@@ -10,6 +10,10 @@
     padding: 15px;
     border-radius: 5px;
 }
+hr {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 .fieldChange {
     display: flex;
     flex-direction: row;

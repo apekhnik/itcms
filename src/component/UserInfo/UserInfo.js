@@ -6,25 +6,28 @@ const UserInfo = ({
   lookingForAJob,
   name,
   aboutMe,
-  contacts
+  contacts,
 }) => {
   return (
     <div className={style.info}>
-      
-      <p>Looking for a job :{lookingForAJob ? 'yes' : 'no'}</p>
-      <span>{lookingForAJob ? lookingForAJobDescription : null}</span>
-      <p>About me: {aboutMe}</p>
-      
-      {
-        Object.entries(contacts).map((arr)=><Contacts key={arr[0]} contact={arr[0]} value={arr[1]}/>)
-      }
+      <Contacts
+        contact="В поисках работы"
+        value={lookingForAJob ? "Yes" : "No"}
+      />
+      <Contacts contact="Подробности" value={lookingForAJobDescription} />
+      <Contacts contact="Обо мне" value={aboutMe} />
+
+      {Object.entries(contacts).map((arr) => (
+        <Contacts key={arr[0]} contact={arr[0]} value={arr[1]} />
+      ))}
     </div>
   );
 };
 export default UserInfo;
-const Contacts = ({contact, value}) => {
-
-return <div>
-  <span>{contact}</span> : <p>{value}</p>
-</div>
-}
+const Contacts = ({ contact, value }) => {
+  return (
+    <div className={style.contactDiv}>
+      <span>{contact}:</span> <p>{value}</p>
+    </div>
+  );
+};

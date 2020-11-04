@@ -14,6 +14,8 @@
 .formControl label {
   display: block;
   width: 50%;
+  font-weight: 700;
+  font-size: 18px;
 }
 .check label {
   display: block;
@@ -21,10 +23,11 @@
 }
 .formControl input {
   width: 95%;
-  height: 30px;
-  border: 2px solid #bdc3c7;
-  border-radius: 5px;
   padding: 5px;
+  border: none;
+  border-bottom: 2px solid #bdc3c7;
+
+  
 }
 .errorDiv {
   position: absolute;
