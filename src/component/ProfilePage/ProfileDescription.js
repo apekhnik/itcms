@@ -6,7 +6,7 @@ import style from './Profile.module.css'
 const ProfileDescription = (props) => {
   const [isEdit, setisEdit] = useState(false);
   const onSubmit = (data) => {
-    props.saveProfile(data);
+    props.saveProfile(data)
     setisEdit(false)
   };
   const editBtn = <button onClick={() => setisEdit(!isEdit)}>

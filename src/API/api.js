@@ -22,6 +22,7 @@ export const authApi = {
   login: ({ email, password, rememberMe }) =>
     instanse.post("/auth/login", { email, password, rememberMe }),
   logout: () => instanse.delete("/auth/login"),
+  getCaptcha:() => instanse.get(`security/get-captcha-url`)
 };
 export const profileApi = {
   getProfile: (id) => instanse.get(`profile/${id}`),
@@ -36,5 +37,6 @@ export const profileApi = {
       },
     });
   },
-  saveProfile: (profile) => instanse.put('profile', {...profile})
+  saveProfile: (profile) => instanse.put('profile', {...profile}),
+  
 };

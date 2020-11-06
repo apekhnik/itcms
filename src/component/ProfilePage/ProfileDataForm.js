@@ -8,7 +8,7 @@ import {
 import style from "./Profile.module.css";
 export const ProfileDataChangePage = ({onSubmit, profile}) => {
   
-  
+  console.log(profile)
   return (
     <div>
       <ProfileDataReduxForm

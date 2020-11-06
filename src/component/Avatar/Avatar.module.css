@@ -1,5 +1,6 @@
 .avatar {
-  width: 150px;
+  max-width: 200px;
+  min-width: 150px;
   position: relative;
   overflow: hidden;
   padding: 5px;
@@ -79,5 +80,6 @@
     
 }
 .avatar img {
-  width: 150px;
+  width: 100%;
+  height: auto;
 }

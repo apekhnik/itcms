@@ -3,7 +3,7 @@
   padding: 10px;
   align-items: flex-start;
   flex-direction: row;
-  
+  width: 100%;
 }
 .profileDescription{
   padding-left: 10px;

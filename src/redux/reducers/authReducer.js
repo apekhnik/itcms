@@ -1,19 +1,26 @@
 import { authApi } from "../../API/api";
 import { stopSubmit } from "redux-form";
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "SET_USER_DATA",
+      SET_CAPTCHA = 'SET_CAPTCHA';
 const initialState = {
   id: null,
   login: null,
   email: null,
   isAuth: false,
+  captcha: null
 };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.payload,
-      };
+        ...action.payload
+      }
+    case SET_CAPTCHA:
+      return{
+        ...state,
+        captcha: action.payload
+      }
     default:
       break;
   }
@@ -26,6 +33,7 @@ const setUserAuthData = (data, isAuth) => {
     payload: { id, email, login, isAuth },
   };
 };
+const captchaSuccess = (captcha) => ({type:SET_CAPTCHA, payload: captcha})
 export const getAuthDataFromApi = () => (dispatch) => {
   return authApi
     .auth()
@@ -38,14 +46,22 @@ export const getAuthDataFromApi = () => (dispatch) => {
 };
 export const userLogin = (login) => (dispatch) => {
   let action = stopSubmit("login", { _error: "Wrong email or password" });
-
+  console.log(login)
   authApi.login(login).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(getAuthDataFromApi());
+    }else if(response.data.resultCode === 10){
+      dispatch(getCaptcha())
     } else {
       dispatch(action);
     }
   });
+};
+export const getCaptcha = () => (dispatch) => {
+  authApi.getCaptcha().then(res=>{
+    console.log(res.data.url)
+    dispatch(captchaSuccess(res.data.url))
+  })
 };
 export const userLogout = () => (dispatch) => {
   authApi.logout().then((response) => {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Account from "../Account/Account";
 import PostContainer from "../Posts/PostContainer";
 import { connect } from "react-redux";
+import style from './Profile.module.css'
 import { withRouter } from "react-router-dom";
 import {
   setProfile,
@@ -24,7 +25,7 @@ class ProfilePageContainer extends Component {
   render() {
 
     return (
-      <div>
+      <div className={style.profilePage}>
         <Account {...this.props} isOwner={!this.props.match.params.userID} />
         <PostContainer store={this.props.store} />
       </div>

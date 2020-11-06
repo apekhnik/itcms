@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
   const [newAva, setNewava] = useState("");
 
-  const imgSize = size === "min" ? { width: "70px", height: "70px" } : {};
+  const imgSize = size === "min" ? { width: "90px", height: "120px" } : {};
   const setNewPhoto = (e) => {
     if (e.target.files.length) {
       setNewava(e.target.files[0]);
@@ -34,11 +34,9 @@ const Avatar = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
   
   return (
     <div className={style.avatar}>
-      <img src={src} alt="" style={imgSize} />
-
+      <img src={src} alt=""  />
       <div className={style.avatarEdit}>
         {isOwner && chouse}
-        
       </div>
     </div>
   );
