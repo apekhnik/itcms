@@ -19,8 +19,8 @@ export const usersApi = {
 };
 export const authApi = {
   auth: () => instanse.get(`auth/me`),
-  login: ({ email, password, rememberMe }) =>
-    instanse.post("/auth/login", { email, password, rememberMe }),
+  login: ({ email, password, rememberMe, captcha }) =>
+    instanse.post("/auth/login", { email, password, rememberMe, captcha }),
   logout: () => instanse.delete("/auth/login"),
   getCaptcha:() => instanse.get(`security/get-captcha-url`)
 };
