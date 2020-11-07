@@ -1,10 +1,19 @@
 .loginForm {
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
   padding: 15px;
-  width: 200px;
-  margin: 0 auto;
-  border: none;
-  border-radius: 10px;
-  background: #1abc9c;
+  border-radius: 5px;
+  width: 400px;
+}
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+.loginPage h2 {
+  /* margin: 0 auto;
+  display: block; */
+  text-align: center;
 }
 .loginForm_input {
   outline: none;

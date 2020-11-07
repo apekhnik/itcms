@@ -13,8 +13,7 @@ const Login = ({ userLogin, isAuth, captcha }) => {
 
   if (isAuth) return <Redirect to="/profile" />;
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>LOGIN</h1>
+    <div className={style.loginPage}>
       <LoginReduxForm onSubmit={onSubmit} captcha={captcha} />
     </div>
   );
@@ -50,12 +49,11 @@ const LoginForm = (props) => {
   );
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
+      <h2>Авторизация</h2>
       {login}
       {password}
-
       {props.captcha && <img src={props.captcha} />}
       {props.captcha && antiBot}
-
       <div>
         <Field component={"input"} type={"checkbox"} name={"rememberMe"} />{" "}
         remember me
