@@ -29,6 +29,15 @@ const LoginForm = (props) => {
     "",
     ""
   );
+  const rememberMe = createField(
+    FormInput,
+    "checkbox",
+    "",
+    "rememberMe",
+    [required],
+    "",
+    "Запомнить меня"
+  );
   const login = createField(
     FormInput,
     "text",
@@ -40,7 +49,7 @@ const LoginForm = (props) => {
   );
   const password = createField(
     FormInput,
-    "text",
+    "password",
     "Password",
     "password",
     [required],
@@ -54,10 +63,7 @@ const LoginForm = (props) => {
       {password}
       {props.captcha && <img src={props.captcha} />}
       {props.captcha && antiBot}
-      <div>
-        <Field component={"input"} type={"checkbox"} name={"rememberMe"} />{" "}
-        remember me
-      </div>
+      {rememberMe}
       <div>
         <button>Click</button>
       </div>

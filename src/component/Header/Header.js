@@ -5,7 +5,7 @@ const Header = ({ login, isAuth, id, userLogout }) => {
   return (
     <div className={style.header}>
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRJAxZAiRvNkkO7CdVVTrWeiuGNAeTTOBslyT5_B1p-SAHoAYqt&usqp=CAU"
+        src="https://c7.hotpng.com/preview/867/960/5/samurai-logo-art-samurai.jpg"
         alt=""
       />
       <LoginIndicator

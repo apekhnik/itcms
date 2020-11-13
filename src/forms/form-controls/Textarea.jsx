@@ -52,14 +52,16 @@ export const FormInput = ({
       <span>{error}</span>
     </div>
   );
+  
   const hasError = touched && error ? errorDiv : null;
+  console.log(hasError)
   const cl = classes(style.formControl, hasError ? style.error : "",className );
-
+  const errorSpan = classes(hasError ? style.error1 : "")
   return (
     <div className={cl}>
       <label htmlFor={name}>{label}</label>:
-      <input {...input} placeholder={placeholder} type={type} name={name}/>
-      <div>{hasError}</div>
+      <input {...input} placeholder={placeholder} type={type} name={name} className={errorSpan}/>
+      {hasError}
     </div>
     
   );

@@ -11,9 +11,8 @@
   height: 400px;
 }
 .loginPage h2 {
-  /* margin: 0 auto;
-  display: block; */
   text-align: center;
+  margin-bottom: 10px;
 }
 .loginForm_input {
   outline: none;
