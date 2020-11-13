@@ -11,30 +11,30 @@ import HeaderContainer from "./component/Header/HeaderContainer";
 import Login from "./component/Login/Login";
 import { Component } from "react";
 import { connect } from "react-redux";
-import Loader from "./component/Loader/Lodaer";
+import Preloader from "./component/Loader/Preloader";
 import { setInitialized } from "./redux/reducers/appReducer";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
+import style from './App.module.css'
 class App extends Component {
   componentDidMount() {
     this.props.setInitialized();
   }
   render() {
-    if (!this.props.initialized)
-      return (
-        <div style={{ background: "black" }}>
-          <Loader />
-        </div>
-      );
+    if (!this.props.initialized)  return <Preloader/>
     return (
       <MainContainer>
         <HeaderContainer />
         <SideBar />
         <Content>
           <Switch>
+            <Route path="/" exact render={() => <Redirect to='/profile'/>} />
             <Route path="/profile/:userID?" render={() => <ProfilePage />} />
             <Route path="/dialogs" render={() => <DialogsPage />} />
             <Route path="/users" render={() => <UsersPage />} />
+            
             <Route path="/login" component={Login} />
+            <Route path='*'  render={()=><div>404</div>}/>
           </Switch>
         </Content>
       </MainContainer>
