@@ -4,7 +4,7 @@
 }
 
 .error1 {
-  border: 3px solid #e74c3c!important;
+  border: 3px solid #e74c3c !important;
   border-radius: 5px;
 }
 .formControl span {
@@ -27,34 +27,22 @@
   display: block;
   width: 50%;
 }
+.check input {
+}
 .formControl input {
   width: 95%;
   padding: 5px;
   border: none;
   border-bottom: 2px solid #bdc3c7;
-
-  
 }
 .errorDiv {
   position: absolute;
-  top: 0;
-  right: 0;
-  box-sizing: border-box;
+  top: 3px;
+  right: 3px;
 }
-.errorDiv:hover span {
-  opacity: 1;
-}
-.errorDiv span {
-  opacity: 0;
-  position: absolute;
-  left: -170px;
-  top: -20px;
- width: 200px;
- border: 1px solid orangered;
-}
+
 .errorDiv svg {
   color: red;
 }
 .errorDiv svg:hover {
-  
 }

@@ -4,6 +4,7 @@ import style from "./Textarea.module.css";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field } from "redux-form";
+import Tooltip from "../../component/Tooltip/Tooltip";
 export const Textarea = ({
   input,
   placeholder,
@@ -18,25 +19,36 @@ export const Textarea = ({
   );
   const hasError = touched && error ? errorDiv : null;
   const cl = classes(style.formControl, hasError ? style.error : "");
- 
+
   return (
     <div className={cl}>
       <input {...input} placeholder={placeholder} type={type} />
-      <div>{hasError}</div>
+
+      {hasError}
     </div>
   );
 };
-export const createField = (component,type,placeholder, name, validate, className, label) =>{ 
-  return <Field
-    component={component}
-    type={type}
-    placeholder={placeholder}
-    name={name}
-    validate={validate}
-    className={className}
-    label={label}
-  />
-}
+export const createField = (
+  component,
+  type,
+  placeholder,
+  name,
+  validate,
+  className,
+  label
+) => {
+  return (
+    <Field
+      component={component}
+      type={type}
+      placeholder={placeholder}
+      name={name}
+      validate={validate}
+      className={className}
+      label={label}
+    />
+  );
+};
 export const FormInput = ({
   input,
   placeholder,
@@ -48,22 +60,27 @@ export const FormInput = ({
 }) => {
   const errorDiv = (
     <div className={style.errorDiv}>
-      <FontAwesomeIcon icon={faExclamationCircle} />
-      <span>{error}</span>
+      <Tooltip position="top" content={error} style={{ fontSize: "14px" }}>
+        <FontAwesomeIcon icon={faExclamationCircle} />
+      </Tooltip>
     </div>
   );
-  
+
   const hasError = touched && error ? errorDiv : null;
-  console.log(hasError)
-  const cl = classes(style.formControl, hasError ? style.error : "",className );
-  const errorSpan = classes(hasError ? style.error1 : "")
+  const cl = classes(style.formControl, hasError ? style.error : "", className);
+  const errorSpan = classes(hasError ? style.error1 : "");
   return (
     <div className={cl}>
-      <label htmlFor={name}>{label}</label>:
-      <input {...input} placeholder={placeholder} type={type} name={name} className={errorSpan}/>
+      <label htmlFor={name}>{label}</label>
+      <input
+        {...input}
+        placeholder={placeholder}
+        type={type}
+        name={name}
+        className={errorSpan}
+      />
       {hasError}
     </div>
-    
   );
 };
 export const FormInputCheck = ({
@@ -87,9 +104,14 @@ export const FormInputCheck = ({
   return (
     <div className={style.formControl}>
       <label htmlFor={name}>{label}</label>:
-      <input {...input} placeholder={placeholder} type={type} name={name} className={className}/>
+      <input
+        {...input}
+        placeholder={placeholder}
+        type={type}
+        name={name}
+        className={className}
+      />
       <div>{hasError}</div>
     </div>
-    
   );
 };

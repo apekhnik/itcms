@@ -1,11 +1,16 @@
 import React from "react";
 import { userLogin } from "../../redux/reducers/authReducer";
 import { Field, reduxForm } from "redux-form";
-import { FormInput, createField } from "../../forms/form-controls/Textarea";
+import {
+  FormInput,
+  createField,
+  FormInputCheck,
+} from "../../forms/form-controls/Textarea";
 import style from "./Login.module.css";
 import { connect } from "react-redux";
 import { required } from "../../forms/form-validator/validator";
 import { Redirect } from "react-router-dom";
+import Tooltip from "../Tooltip/Tooltip";
 const Login = ({ userLogin, isAuth, captcha }) => {
   const onSubmit = (data) => {
     userLogin(data);
@@ -30,12 +35,12 @@ const LoginForm = (props) => {
     ""
   );
   const rememberMe = createField(
-    FormInput,
+    FormInputCheck,
     "checkbox",
     "",
     "rememberMe",
-    [required],
-    "",
+    [],
+    "check",
     "Запомнить меня"
   );
   const login = createField(
@@ -58,7 +63,9 @@ const LoginForm = (props) => {
   );
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
-      <h2>Авторизация</h2>
+      <Tooltip content="hui" position="left">
+        <h2>Авторизация</h2>
+      </Tooltip>
       {login}
       {password}
       {props.captcha && <img src={props.captcha} />}
