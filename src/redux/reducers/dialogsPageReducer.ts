@@ -1,5 +1,14 @@
 import { SEND_NEW_MSG, ON_NEW_MSG_BODY_CHANGE } from "../type";
-const initialState = {
+type initialState = {
+  dialogs: Array<{ id: number, name: string }>
+  messages: Array<string>,
+  newMessageBody: string,
+}
+type action = {
+  type: string
+  payload?: string
+}
+const initialState: initialState = {
   dialogs: [
     {
       id: 1,
@@ -21,7 +30,7 @@ const initialState = {
   messages: ["yo", "qu", "hi"],
   newMessageBody: "",
 };
-const dialogsPageReducer = (state = initialState, action) => {
+const dialogsPageReducer = (state: initialState = initialState, action: action) => {
   switch (action.type) {
     case ON_NEW_MSG_BODY_CHANGE: {
       return {
@@ -42,8 +51,8 @@ const dialogsPageReducer = (state = initialState, action) => {
   }
   return state;
 };
-export const sendNewMessage = (m) => ({ type: SEND_NEW_MSG, payload: m });
-export const messageInputChange = (msg) => ({
+export const sendNewMessage = (m: string): action => ({ type: SEND_NEW_MSG, payload: m });
+export const messageInputChange = (msg: string): action => ({
   type: ON_NEW_MSG_BODY_CHANGE,
   payload: msg,
 });

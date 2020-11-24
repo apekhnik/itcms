@@ -1,11 +1,17 @@
 import { getAuthDataFromApi } from "./authReducer";
 const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS",
   SET_INITIALIZED_FAILED = "SET_INITIALIZED_FAILED";
-
-const initialState = {
+type initialState = {
+  initialized: boolean
+}
+const initialState: initialState = {
   initialized: false,
 };
-const appReducer = (state = initialState, action) => {
+type action = {
+  type: string
+  payload?: string
+}
+const appReducer = (state: initialState = initialState, action: action) => {
   switch (action.type) {
     case SET_INITIALIZED_SUCCESS:
       return {
@@ -22,10 +28,10 @@ const appReducer = (state = initialState, action) => {
   }
   return state;
 };
-const initializedSuccess = () => ({ type: SET_INITIALIZED_SUCCESS });
-export const dischargeInitialized = () => ({ type: SET_INITIALIZED_FAILED });
-export const setInitialized = () => (dispatch) => {
+const initializedSuccess = (): action => ({ type: SET_INITIALIZED_SUCCESS });
+export const dischargeInitialized = (): action => ({ type: SET_INITIALIZED_FAILED });
+export const setInitialized = () => (dispatch): void => {
   let initPromise = dispatch(getAuthDataFromApi());
-  initPromise.then((res) => dispatch(initializedSuccess()));
+  initPromise.then((res: any) => dispatch(initializedSuccess()));
 };
 export default appReducer;
