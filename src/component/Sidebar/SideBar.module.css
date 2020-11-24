@@ -1,6 +1,6 @@
 .sidebar {
   grid-area: nav;
-  background: red;
+  background: #0984e3;
 }
 .links {
   display: flex;

@@ -1,13 +1,11 @@
 import React from "react";
 import style from "./Header.module.css";
 import LoginIndicator from "./LoginIndicator";
+import Logo from '../Logo/Logo'
 const Header = ({ login, isAuth, id, userLogout }) => {
   return (
     <div className={style.header}>
-      <img
-        src="https://c7.hotpng.com/preview/867/960/5/samurai-logo-art-samurai.jpg"
-        alt=""
-      />
+      <Logo/>
       <LoginIndicator
         login={login}
         isAuth={isAuth}
