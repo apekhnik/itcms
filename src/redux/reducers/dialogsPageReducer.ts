@@ -30,7 +30,7 @@ const initialState: initialState = {
   messages: ["yo", "qu", "hi"],
   newMessageBody: "",
 };
-const dialogsPageReducer = (state: initialState = initialState, action: action) => {
+const dialogsPageReducer = (state = initialState, action: action): initialState => {
   switch (action.type) {
     case ON_NEW_MSG_BODY_CHANGE: {
       return {
