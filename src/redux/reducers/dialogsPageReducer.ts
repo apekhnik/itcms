@@ -1,9 +1,10 @@
 import { SEND_NEW_MSG, ON_NEW_MSG_BODY_CHANGE } from "../type";
 type initialState = {
-  dialogs: Array<{ id: number, name: string }>
+  dialogs: Array<DialogItemType>
   messages: Array<string>,
   newMessageBody: string,
 }
+type DialogItemType = { id: number, name: string }
 type action = {
   type: string
   payload?: string

@@ -30,7 +30,7 @@ const appReducer = (state: initialState = initialState, action: action) => {
 };
 const initializedSuccess = (): action => ({ type: SET_INITIALIZED_SUCCESS });
 export const dischargeInitialized = (): action => ({ type: SET_INITIALIZED_FAILED });
-export const setInitialized = () => (dispatch): void => {
+export const setInitialized = () => (dispatch:any): void => {
   let initPromise = dispatch(getAuthDataFromApi());
   initPromise.then((res: any) => dispatch(initializedSuccess()));
 };

@@ -2,7 +2,10 @@ type action = {
   type: string,
   payload?: any
 }
-const sidebarReducer = (state, action: action) => {
+type SideBarInitialStateType = {
+
+}
+const sidebarReducer = (state:SideBarInitialStateType, action: action) => {
   return state;
 };
 export default sidebarReducer;
