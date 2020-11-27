@@ -7,7 +7,7 @@ type initialState = {
 type DialogItemType = { id: number, name: string }
 type action = {
   type: string
-  payload?: string
+  payload: string
 }
 const initialState: initialState = {
   dialogs: [
