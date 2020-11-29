@@ -14,5 +14,6 @@ const rootReducer = combineReducers({
   auth: authReducer,
   form: formReducer,
 });
+export type AppstateType = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 export default store;

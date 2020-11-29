@@ -1,20 +1,36 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Users from "./Users";
+import { AppstateType } from '../../redux/store'
 
 import {
-  followingInProgressToggler,
   getUsers,
   follow,
   setCurrentPage,
   unfollow,
+  UserType,
 } from "../../redux/reducers/usersReducer";
 
-class UsersContainer extends Component {
+type MapStateType = {
+  users: Array<UserType>
+  pageSize: number
+  currentPage: number
+  totalUsersCount: number
+  isLoading: boolean
+  followingInProgress: Array<number>
+}
+type MapDispatchType = {
+  getUsers: (currentPage: number, pageSize: number) => void
+  setCurrentPage: (p: number) => void
+  follow: (id: number) => void
+  unfollow: (id: number) => void
+}
+type MainType = MapStateType & MapDispatchType
+class UsersContainer extends Component<MainType> {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
-  onCurrentChange = (p) => {
+  onCurrentChange = (p: number) => {
     this.props.setCurrentPage(p);
     this.props.getUsers(p, this.props.pageSize);
   };
@@ -22,7 +38,7 @@ class UsersContainer extends Component {
     return <Users onCurrentChange={this.onCurrentChange} {...this.props} />;
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppstateType):MapStateType => {
   return {
     users: state.usersPage.users,
     currentPage: state.usersPage.currentPage,
@@ -32,23 +48,8 @@ const mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
-// const mapDispathToProps = (dispatch) => {
-//   return {
-//     follow,
-//     unfollow,
-//     toggle: (id) => {
-//       dispatch(followToggle(id));
-//     },
-//     setUsers: (users) => dispatch(setUsers(users)),
-//     setCurrentPage: (p) => {
-//       dispatch({ type: "SET_CURRENT_PAGE", payload: p });
-//     },
-//     fetchingToggler: (t) => dispatch({ type: "LOADING_TOGGLER", payload: t }),
-//   };
-// };
-// const UserPage = connect(mapStateToProps, mapDispathToProps)(UsersContainer);
-const UserPage = connect(mapStateToProps, {
-  followingInProgressToggler,
+
+const UserPage = connect<MapStateType, MapDispatchType, {}, AppstateType>(mapStateToProps, {
   getUsers,
   follow,
   setCurrentPage,

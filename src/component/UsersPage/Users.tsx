@@ -2,7 +2,19 @@ import React from "react";
 import UserItem from "./UserItem";
 import Loader from "../Loader/Lodaer";
 import Paginator from "./Paginator";
-const Users = (props) => {
+import {UserType} from '../../redux/reducers/usersReducer'
+type PropsType = {
+  onCurrentChange:(p:number)=>void
+  follow:(id:number)=>void
+  unfollow:(id:number)=>void
+  followingInProgress:Array<number>
+  isLoading:boolean
+  users:Array<UserType>
+  totalUsersCount:number
+  pageSize:number
+  currentPage:number
+}
+const Users:React.FC<PropsType> = (props) => {
   const {
     onCurrentChange,
     follow,

@@ -1,35 +1,41 @@
 import React from "react";
 import { useState } from "react";
 import style from "./Users.module.css";
-const Paginator = ({
+type PropsType = {
+  totalItemsCount:number
+  pageSize:number
+  currentPage:number
+  onPageChange:(i:number)=>void
+  portionSize?:number 
+}
+let Paginator:React.FC<PropsType>= ({
   totalItemsCount,
   pageSize,
   currentPage,
   onPageChange,
   portionSize = 10,
 }) => {
-  const pagesCount = Math.ceil(totalItemsCount / pageSize);
+  let pagesCount = Math.ceil(totalItemsCount / pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-  const portionCount = Math.ceil(pagesCount / portionSize);
+  let portionCount = Math.ceil(pagesCount / portionSize);
 
-  const [portionNumber, setPortionNumber] = useState(
+  let [portionNumber, setPortionNumber] = useState(
     Math.ceil(currentPage / portionSize)
   );
-  const leftPortionNumber = (portionNumber - 1) * portionSize + 1;
-  const rightPortionNumber = portionNumber * portionSize;
+  let leftPortionNumber = (portionNumber - 1) * portionSize + 1;
+  let rightPortionNumber = portionNumber * portionSize;
 
-  const pagination = pages
+  let pagination = pages
     .filter((p) => p >= leftPortionNumber && p <= rightPortionNumber)
     .map((i) => (
-      <span
+<span
         style={currentPage === i ? { color: "red" } : {}}
         onClick={() => onPageChange(i)}
         key={i}
-        className={style.paginator}
-      >
+        className={style.paginator}>
         {i}
       </span>
     ));
@@ -47,6 +53,6 @@ const Paginator = ({
         </button>
       )}
     </div>
-  );
+  )
 };
 export default Paginator;

@@ -6,14 +6,14 @@ const FOLLOW = "FOLLOW",
   LOADING_TOGGLER = "LOADING_TOGGLER",
   FOLOWING_IN_PROGRESS = "FOLOWING_IN_PROGRESS";
   type InitialState = {
-    users: Array<User>
+    users: Array<UserType>
     currentPage: number
     totalUsersCount: number
     pageSize: number
     isLoading: boolean
-    followingInProgress: Array<{}> | never,
+    followingInProgress: Array<number> | never,
   }
-  type User = {
+  export type UserType = {
     name: string
     id: number
     photos: {
@@ -102,7 +102,7 @@ type SetUsersActionCreatorType = {
 }
 type UsersResponseType = {
   error: null
-  items: Array<User>
+  items: Array<UserType>
   totalCount: number
 }
 export const setUsers = (data:UsersResponseType): SetUsersActionCreatorType => ({ type: SET_USERS, payload: data });
