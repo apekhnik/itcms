@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import style from "./ProfileStatus.module.css";
-
-const ProfileStatus = (props) => {
+type PropsType = {
+  status: string
+  updateStatus: (status: string)=>void
+  inputUserStatusChange:(value: string)=>void
+}
+const ProfileStatus:React.FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const status =
     props.status === null ? (

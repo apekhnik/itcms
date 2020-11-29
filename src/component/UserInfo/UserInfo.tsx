@@ -1,7 +1,13 @@
 import React from "react";
 import style from "./UserInfo.module.css";
-
-const UserInfo = ({
+type UserInfoPropsType = {
+  lookingForAJobDescription: string
+  lookingForAJob: boolean
+  name: string
+  aboutMe: string
+  contacts: string
+}
+const UserInfo:React.FC<UserInfoPropsType> = ({
   lookingForAJobDescription,
   lookingForAJob,
   name,
@@ -24,7 +30,11 @@ const UserInfo = ({
   );
 };
 export default UserInfo;
-const Contacts = ({ contact, value }) => {
+type ContactsPropsType = {
+  contact:string 
+  value :string
+}
+const Contacts:React.FC<ContactsPropsType> = ({ contact, value }) => {
   return (
     <div className={style.contactDiv}>
       <span>{contact}:</span> <p>{value}</p>

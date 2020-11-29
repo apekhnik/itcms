@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./SideBar.module.css";
 import { Link } from "react-router-dom";
-const SideBar = () => {
+const SideBar:React.FC = () => {
   return (
     <div className={style.sidebar}>
       <div className={style.links}>

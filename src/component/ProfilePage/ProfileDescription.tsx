@@ -3,15 +3,24 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import ProfileDataChangePage from "./ProfileDataForm";
 import UserInfo from "../UserInfo/UserInfo";
 import style from './Profile.module.css'
-const ProfileDescription = (props) => {
+import {ProfileType} from '../../redux/reducers/profilePageReducer'
+type PropsType = {
+  saveProfile:(data:any)=>void
+  profile: ProfileType
+  status: string
+  updateStatus:(status: string)=>void
+  inputUserStatusChange:(status: string)=>void
+}
+const ProfileDescription:React.FC<PropsType> = (props) => {
   const [isEdit, setisEdit] = useState(false);
-  const onSubmit = (data) => {
+  const onSubmit = (data:any) => {
     props.saveProfile(data)
     setisEdit(false)
   };
   const editBtn = <button onClick={() => setisEdit(!isEdit)}>
   {isEdit ? "save" : "edit"}
   </button>
+  
   return (
     <div className={style.profileDescription}>
     <h1>{props.profile.fullName}</h1>
@@ -28,7 +37,9 @@ const ProfileDescription = (props) => {
           name={props.profile.fullName}
           lookingForAJob={props.profile.lookingForAJob}
           lookingForAJobDescription={props.profile.lookingForAJobDescription}
+          //@ts-ignore
           aboutMe={props.profile.aboutMe}
+          //@ts-ignore
           contacts={props.profile.contacts}
         />
       )}

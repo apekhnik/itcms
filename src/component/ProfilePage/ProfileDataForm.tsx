@@ -6,20 +6,31 @@ import {
   FormInputCheck
 } from "../../forms/form-controls/Textarea";
 import style from "./Profile.module.css";
-export const ProfileDataChangePage = ({onSubmit, profile}) => {
+import {ProfileType} from '../../redux/reducers/profilePageReducer'
+type Propstype = {
+  profile: ProfileType
+  onSubmit: (data:any)=>void
+}
+export const ProfileDataChangePage:React.FC<Propstype> = ({onSubmit, profile}) => {
   
-  console.log(profile)
+  
   return (
     <div>
       <ProfileDataReduxForm
         onSubmit={onSubmit}
         initialValues={profile}
+        //@ts-ignore
         profile={profile}
       />
     </div>
   );
 };
-const ProfileDataForm = (props) => {
+
+type DataFormType = {
+  handleSubmit:()=>void
+  profile: ProfileType
+}
+const ProfileDataForm:React.FC<DataFormType> = (props) => {
   
   return (
     <form onSubmit={props.handleSubmit} className={style.profileChangeForm}>
@@ -37,6 +48,7 @@ const ProfileDataForm = (props) => {
 };
 
 const ProfileDataReduxForm = reduxForm({ form: "profileData" })(
+  //@ts-ignore
   ProfileDataForm
 );
 export default ProfileDataChangePage;

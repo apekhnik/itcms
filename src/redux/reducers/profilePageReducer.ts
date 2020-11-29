@@ -5,28 +5,30 @@ const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE",
   ON_USER_INPUT_STATUS_CHANGE = "ON_USER_INPUT_STATUS_CHANGE",
   SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 type ProfileContactsType= {
-  github: string
-  vk: string
-  facebook: string
-  instagram: string
-  twitter: string
-  website: string
-  youtube: string
-  mainLink: string
+  github: string | null
+  vk: string | null
+  facebook: string | null
+  instagram: string | null
+  twitter: string | null
+  website: string | null
+  youtube: string | null
+  mainLink: string | null
+  
 }
-type ProfileType = {
+export type ProfileType = {
   userId: number
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
   contacts: ProfileContactsType
-
+  aboutMe?: string 
+  photos: PhotosType
 }
 type PostItemType = {
   id: number
   text: string
 }
-type PhotosType = {
+export type PhotosType = {
   small: string
   large: string
 }
