@@ -1,4 +1,7 @@
 import { getAuthDataFromApi } from "./authReducer";
+import {Dispatch} from 'redux'
+import { AppstateType } from "../store";
+import { ThunkAction } from "redux-thunk";
 const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS",
   SET_INITIALIZED_FAILED = "SET_INITIALIZED_FAILED";
 type initialStateType = {
@@ -7,11 +10,8 @@ type initialStateType = {
 const initialState: initialStateType = {
   initialized: false,
 };
-type action = {
-  type: string
-  payload?: string
-}
-const appReducer = (state = initialState, action: action): initialStateType => {
+
+const appReducer = (state = initialState, action: InitializedActionsType): initialStateType => {
   switch (action.type) {
     case SET_INITIALIZED_SUCCESS:
       return {
@@ -28,9 +28,18 @@ const appReducer = (state = initialState, action: action): initialStateType => {
   }
   return state;
 };
-const initializedSuccess = (): action => ({ type: SET_INITIALIZED_SUCCESS });
-export const dischargeInitialized = (): action => ({ type: SET_INITIALIZED_FAILED });
-export const setInitialized = () => (dispatch: any): void => {
+type InitializedActionsType = InitializedSuccessActionType | DischargeInitializedType
+type InitializedSuccessActionType = {
+  type: typeof SET_INITIALIZED_SUCCESS
+}
+const initializedSuccess = (): InitializedSuccessActionType => ({ type: SET_INITIALIZED_SUCCESS });
+type DischargeInitializedType = {
+  type: typeof SET_INITIALIZED_FAILED
+}
+export const dischargeInitialized = (): DischargeInitializedType => ({ type: SET_INITIALIZED_FAILED });
+
+export const setInitialized = () => (dispatch: Dispatch<InitializedActionsType>, getState: AppstateType): void => {
+  //@ts-ignore
   let initPromise = dispatch(getAuthDataFromApi());
   initPromise.then((res: any) => dispatch(initializedSuccess()));
 };

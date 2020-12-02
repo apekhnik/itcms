@@ -11,8 +11,15 @@ import { connect } from "react-redux";
 import { required } from "../../forms/form-validator/validator";
 import { Redirect } from "react-router-dom";
 import Tooltip from "../Tooltip/Tooltip";
-const Login = ({ userLogin, isAuth, captcha }) => {
-  const onSubmit = (data) => {
+import {LoginData} from '../../redux/reducers/authReducer'
+import {AppstateType} from '../../redux/store'
+type PropsType = {
+  userLogin:(data:LoginData)=>void,
+  isAuth:boolean
+  captcha: string
+}
+const Login:React.FC<PropsType> = ({ userLogin, isAuth, captcha }) => {
+  const onSubmit = (data:LoginData) => {
     
     userLogin(data);
   };
@@ -20,6 +27,7 @@ const Login = ({ userLogin, isAuth, captcha }) => {
   if (isAuth) return <Redirect to="/profile" />;
   return (
     <div className={style.loginPage}>
+      //@ts-ignore
       <LoginReduxForm onSubmit={onSubmit} captcha={captcha} />
     </div>
   );
@@ -83,7 +91,7 @@ const LoginForm = (props) => {
     </form>
   );
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:AppstateType) => ({
   isAuth: state.auth.isAuth,
   captcha: state.auth.captcha,
 });

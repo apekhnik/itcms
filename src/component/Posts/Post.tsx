@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Post.module.css";
-const Post = ({ text }) => {
+
+const Post:React.FC<{text:string}> = ({ text }) => {
   return (
     <div className={style.post}>
       <img

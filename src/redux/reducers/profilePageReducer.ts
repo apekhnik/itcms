@@ -1,10 +1,12 @@
 import { ADD_POST, ON_INPUT_TEXT_CHANGE } from "../type";
 import { profileApi } from "../../API/api";
+import { ThunkAction } from "redux-thunk";
+import { AppstateType } from "../store";
 const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE",
   SET_USER_STATUS = "SET_USER_STATUS",
   ON_USER_INPUT_STATUS_CHANGE = "ON_USER_INPUT_STATUS_CHANGE",
   SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
-type ProfileContactsType= {
+type ProfileContactsType = {
   github: string | null
   vk: string | null
   facebook: string | null
@@ -13,7 +15,7 @@ type ProfileContactsType= {
   website: string | null
   youtube: string | null
   mainLink: string | null
-  
+
 }
 export type ProfileType = {
   userId: number
@@ -21,10 +23,10 @@ export type ProfileType = {
   lookingForAJobDescription: string
   fullName: string
   contacts: ProfileContactsType
-  aboutMe?: string 
+  aboutMe?: string
   photos: PhotosType
 }
-type PostItemType = {
+export type PostItemType = {
   id: number
   text: string
 }
@@ -38,7 +40,7 @@ type InitialStateType = {
   profile: null | ProfileType
   status: string
 }
-const initialState:InitialStateType = {
+const initialState: InitialStateType = {
   inputPostText: "",
   posts: [
     { id: 1, text: "test1" },
@@ -47,13 +49,13 @@ const initialState:InitialStateType = {
   ],
   profile: null,
   status: "",
-};
-const profilePageReducer = (state = initialState, action: any) => {
+}; type ActionTypes = AddPostActionCreator | InputTextChangeActionCreator | SavePhotoSuccessActionCreator | SetProfileFromFetchActionCreatorType | InputUserStatusChangeActionCreatorType | SetUserStatusActionCreatorType
+const profilePageReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case ADD_POST: {
       let post = {
         id: state.posts.length + 1,
-        text: action.payload.post,
+        text: action.payload.text,
       };
       return {
         ...state,
@@ -86,7 +88,7 @@ const profilePageReducer = (state = initialState, action: any) => {
     case SAVE_PHOTO_SUCCESS: {
       return {
         ...state,
-        profile: { ...state.profile, photos: action.payload },
+        profile: { ...state.profile, photos: action },
       };
     }
     default:
@@ -124,11 +126,11 @@ const setProfileFromFetch = (user: ProfileType): SetProfileFromFetchActionCreato
   payload: user,
 });
 type InputUserStatusChangeActionCreatorType = {
-  type:typeof  ON_USER_INPUT_STATUS_CHANGE
+  type: typeof ON_USER_INPUT_STATUS_CHANGE
   payload: string
 }
 
-export const inputUserStatusChange = (text:string):InputUserStatusChangeActionCreatorType => ({
+export const inputUserStatusChange = (text: string): InputUserStatusChangeActionCreatorType => ({
   type: ON_USER_INPUT_STATUS_CHANGE,
   payload: text,
 });
@@ -140,34 +142,51 @@ export const setUserStatus = (status: string): SetUserStatusActionCreatorType =>
   type: SET_USER_STATUS,
   payload: status,
 });
-export const setProfile = (id:number) => (dispatch:any) => {
-  profileApi
-    .getProfile(id)
-    .then((response:any) => {
-      dispatch(setProfileFromFetch(response.data));
-    })
-    .catch((e:any) => console.error(e));
-};
-export const getStatus = (id:any) => (dispatch:any) => {
-  profileApi.getStatus(id).then((res:any) => dispatch(setUserStatus(res.data)));
-};
-export const updateStatus = (status:string) => (dispatch:any) => {
-  profileApi.updateStatus(status).then((response:any) => console.log(response));
-};
-export const savePhoto = (photos:PhotosType) => (dispatch:any) => {
-  profileApi
-    .savePhoto(photos)
-    .then((response:any) => dispatch(savePhotoSuccess(response.data.data.photos)));
-};
-export const saveProfile = (profile:ProfileType) => (dispatch:any, getState:any) => {
+type ThunkActionType = ThunkAction<Promise<void>, AppstateType, unknown, ActionTypes>
+export const setProfile = (id: number): ThunkActionType => {
+  return async (dispatch) => {
+    try {
+      let response = await profileApi.getProfile(id)
+      dispatch(setProfileFromFetch(response.data))
+    } catch (error) {
 
-  profileApi.saveProfile(profile).then((response:any) => {
+    }
+  }
+}
+export const getStatus = (id: number): ThunkActionType => {
+  return async (dispatch) => {
+    try {
+      let response = await profileApi.getStatus(id)
+      dispatch(setUserStatus(response.data))
+    } catch (error) {
+    }
+  }
+}
+export const updateStatus = (status: string): ThunkActionType => {
+  return async (dispatch) => {
+    try {
+      profileApi.updateStatus(status)
+    } catch (error) {
+    }
+  };
+}
+export const savePhoto = (photos: PhotosType): ThunkActionType => {
+  return async (dispatch) => {
+    try {
+      let response = await profileApi.savePhoto(photos)
+      dispatch(savePhotoSuccess(response.data.data.photos))
+    } catch (error) {
+    }
+  }
+}
+export const saveProfile = (profile: ProfileType): ThunkActionType => {
+  return async (dispatch, getState) => {
+    let response = profileApi.saveProfile(profile)
     const authId = getState().auth.id;
-
     if (response.data.resultCode === 0) {
+      //@ts-ignore
       dispatch(setProfile(authId))
     }
-
-  });
+  }
 }
 export default profilePageReducer;
