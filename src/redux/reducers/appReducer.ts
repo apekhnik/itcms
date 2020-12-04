@@ -41,6 +41,7 @@ export const dischargeInitialized = (): DischargeInitializedType => ({ type: SET
 export const setInitialized = () => (dispatch: Dispatch<InitializedActionsType>, getState: AppstateType): void => {
   //@ts-ignore
   let initPromise = dispatch(getAuthDataFromApi());
+  //@ts-ignore
   initPromise.then((res: any) => dispatch(initializedSuccess()));
 };
 export default appReducer;

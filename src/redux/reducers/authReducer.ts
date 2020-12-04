@@ -80,10 +80,9 @@ export type LoginData = {
 
 export const userLogin = (login: LoginData): ThunkActionType => {
   return async (dispatch) => {
-
-    let action = stopSubmit("login", { _error: "Wrong email or password" });
-    let response = await authApi.login(login)
-
+    try {
+      let action = stopSubmit("login", { _error: "Wrong email or password" });
+      let response = await authApi.login(login)
       if (response.data.resultCode === 0) {
         dispatch(getAuthDataFromApi());
       } else if (response.data.resultCode === 10) {
@@ -92,6 +91,9 @@ export const userLogin = (login: LoginData): ThunkActionType => {
         //@ts-ignore
         dispatch(action);
       }
+    } catch (error) {
+
+    }
   };
 }
 export const getCaptcha = (): ThunkActionType => {
@@ -113,5 +115,6 @@ export const userLogout = (): ThunkActionType => {
       }
     } catch (error) {
     }
-  }}
-  export default authReducer;
+  }
+}
+export default authReducer;

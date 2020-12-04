@@ -6,16 +6,16 @@ import {
 import { connect } from "react-redux";
 import {AppstateType} from '../../redux/store'
 import {PostItemType} from '../../redux/reducers/profilePageReducer'
-const mapStateToProps = (state:AppstateType) => {
+const mapStateToProps = (state) => {
   return {
     inputPostText: state.profilePage.inputPostText,
     posts: state.profilePage.posts,
   };
 };
-type MapStateType = {
-  inputPostText: string
-  posts: Array<PostItemType>
-}
-type MapDispatchType = {}
+// type MapStateType = {
+//   inputPostText: string
+//   posts: Array<PostItemType>
+// }
+// type MapDispatchType = {}
 
-export default connect<MapStateType,MapDispatchType,{}, AppstateType>(mapStateToProps, { addPost, inputTextChange })(Posts);
+export default connect(mapStateToProps, { addPost, inputTextChange })(Posts);

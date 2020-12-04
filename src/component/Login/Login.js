@@ -13,13 +13,13 @@ import { Redirect } from "react-router-dom";
 import Tooltip from "../Tooltip/Tooltip";
 import {LoginData} from '../../redux/reducers/authReducer'
 import {AppstateType} from '../../redux/store'
-type PropsType = {
-  userLogin:(data:LoginData)=>void,
-  isAuth:boolean
-  captcha: string
-}
-const Login:React.FC<PropsType> = ({ userLogin, isAuth, captcha }) => {
-  const onSubmit = (data:LoginData) => {
+// type PropsType = {
+//   userLogin:(data:LoginData)=>void,
+//   isAuth:boolean
+//   captcha: string
+// }
+const Login = ({ userLogin, isAuth, captcha }) => {
+  const onSubmit = (data) => {
     
     userLogin(data);
   };
@@ -32,7 +32,7 @@ const Login:React.FC<PropsType> = ({ userLogin, isAuth, captcha }) => {
     </div>
   );
 };
-
+//@ts-ignore
 const LoginForm = (props) => {
   const antiBot = createField(
     FormInput,
@@ -72,7 +72,9 @@ const LoginForm = (props) => {
   );
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
+      //@ts-ignore
       <Tooltip content="hui" position="left">
+      //@ts-ignore
         <h2>Авторизация</h2>
       </Tooltip>
       {login}
@@ -91,9 +93,10 @@ const LoginForm = (props) => {
     </form>
   );
 };
-const mapStateToProps = (state:AppstateType) => ({
+const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   captcha: state.auth.captcha,
 });
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
+//@ts-ignore
 export default connect(mapStateToProps, { userLogin })(Login);

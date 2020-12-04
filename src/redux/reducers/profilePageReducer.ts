@@ -50,7 +50,7 @@ const initialState: InitialStateType = {
   profile: null,
   status: "",
 }; type ActionTypes = AddPostActionCreator | InputTextChangeActionCreator | SavePhotoSuccessActionCreator | SetProfileFromFetchActionCreatorType | InputUserStatusChangeActionCreatorType | SetUserStatusActionCreatorType
-const profilePageReducer = (state = initialState, action: ActionTypes) => {
+const profilePageReducer = (state = initialState, action: ActionTypes):InitialStateType=> {
   switch (action.type) {
     case ADD_POST: {
       let post = {
@@ -86,9 +86,11 @@ const profilePageReducer = (state = initialState, action: ActionTypes) => {
       };
     }
     case SAVE_PHOTO_SUCCESS: {
+
       return {
         ...state,
-        profile: { ...state.profile, photos: action },
+         //@ts-ignore
+        profile: { ...state.profile, photos: action.payload },
       };
     }
     default:
@@ -174,19 +176,25 @@ export const savePhoto = (photos: PhotosType): ThunkActionType => {
   return async (dispatch) => {
     try {
       let response = await profileApi.savePhoto(photos)
-      dispatch(savePhotoSuccess(response.data.data.photos))
+
+      console.log(response)
+      dispatch(savePhotoSuccess(response))
     } catch (error) {
     }
   }
 }
 export const saveProfile = (profile: ProfileType): ThunkActionType => {
   return async (dispatch, getState) => {
-    let response = profileApi.saveProfile(profile)
-    const authId = getState().auth.id;
-    if (response.data.resultCode === 0) {
-      //@ts-ignore
-      dispatch(setProfile(authId))
-    }
+    profileApi.saveProfile(profile).then(response=>{
+      
+      const authId = getState().auth.id;
+      
+      if (response.data.resultCode === 0) {
+        //@ts-ignore
+        dispatch(setProfile(authId))
+      }
+    })
+
   }
 }
 export default profilePageReducer;
