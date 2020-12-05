@@ -1,8 +1,8 @@
-import React, { Component, useState, CSSProperties, ReactHTML } from "react";
+import React, { Component, useState, CSSProperties, ReactHTML, ReactNode } from "react";
 import "./Tooltip.css";
 import cl from "classnames";
 type PropsType = {
-  children: ReactHTML
+  children: ReactNode
   content: string,
   position: "top"| "right"| "bottom"| "left"
   style: CSSProperties

@@ -176,8 +176,6 @@ export const savePhoto = (photos: PhotosType): ThunkActionType => {
   return async (dispatch) => {
     try {
       let response = await profileApi.savePhoto(photos)
-
-      console.log(response)
       dispatch(savePhotoSuccess(response))
     } catch (error) {
     }

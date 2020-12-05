@@ -68,14 +68,14 @@ export const profileApi = {
   savePhoto: async (file: any) => {
     const formData = new FormData();
     formData.append("image", file);
-    let data = await instanse.put<SavePhotoType>(`profile/photo`, formData, {
+    let response = await instanse.put<SavePhotoType>(`profile/photo`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
-    return data.data.data.photos
+    return response.data.data.photos
   },
   //@ts-ignore
-  saveProfile: (profile) => instanse.put('profile', { ...profile }),
+  saveProfile: (profile: ProfileType) => instanse.put<UpdateStatusType>('profile', { ...profile }),
 
 };

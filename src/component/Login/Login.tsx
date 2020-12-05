@@ -1,6 +1,6 @@
 import React from "react";
 import { userLogin } from "../../redux/reducers/authReducer";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, InjectedFormProps } from "redux-form";
 import {
   FormInput,
   createField,
@@ -18,22 +18,23 @@ import {AppstateType} from '../../redux/store'
 //   isAuth:boolean
 //   captcha: string
 // }
-const Login = ({ userLogin, isAuth, captcha }) => {
-  const onSubmit = (data) => {
-    
+const Login:React.FC<MapStatePropsType&MapDispatchType> = ({ userLogin, isAuth, captcha }) => {
+  const onSubmit = (data:LoginData) => {
     userLogin(data);
   };
 
   if (isAuth) return <Redirect to="/profile" />;
   return (
     <div className={style.loginPage}>
-      //@ts-ignore
+      
       <LoginReduxForm onSubmit={onSubmit} captcha={captcha} />
     </div>
   );
 };
-//@ts-ignore
-const LoginForm = (props) => {
+type LoginFormOwnProps = {
+  captcha: string
+}
+const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFormOwnProps> = (props) => {
   const antiBot = createField(
     FormInput,
     "text",
@@ -73,8 +74,7 @@ const LoginForm = (props) => {
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
       //@ts-ignore
-      <Tooltip content="hui" position="left">
-      //@ts-ignore
+      <Tooltip content="hui" position="left"> 
         <h2>Авторизация</h2>
       </Tooltip>
       {login}
@@ -93,10 +93,17 @@ const LoginForm = (props) => {
     </form>
   );
 };
-const mapStateToProps = (state) => ({
+type MapStatePropsType = {
+  isAuth: boolean
+  captcha: string
+}
+type MapDispatchType = {
+  userLogin: (data:LoginData) => void
+}
+const mapStateToProps = (state:AppstateType) => ({
   isAuth: state.auth.isAuth,
   captcha: state.auth.captcha,
 });
-const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
+const LoginReduxForm = reduxForm<LoginData, LoginFormOwnProps>({ form: "login" })(LoginForm);
 //@ts-ignore
 export default connect(mapStateToProps, { userLogin })(Login);
