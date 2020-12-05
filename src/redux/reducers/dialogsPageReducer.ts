@@ -31,7 +31,8 @@ const initialState: initialState = {
   messages: ["yo", "qu", "hi"],
   newMessageBody: "",
 };
-const dialogsPageReducer = (state = initialState, action: action): initialState => {
+type ActionTypes = MessageInputActionType | SendMessageActiontype
+const dialogsPageReducer = (state = initialState, action: ActionTypes): initialState => {
   switch (action.type) {
     case ON_NEW_MSG_BODY_CHANGE: {
       return {
@@ -52,8 +53,16 @@ const dialogsPageReducer = (state = initialState, action: action): initialState 
   }
   return state;
 };
-export const sendNewMessage = (m: string): action => ({ type: SEND_NEW_MSG, payload: m });
-export const messageInputChange = (msg: string): action => ({
+type SendMessageActiontype = {
+  type: typeof SEND_NEW_MSG,
+  payload: string
+}
+export const sendNewMessage = (m: string): SendMessageActiontype => ({ type: SEND_NEW_MSG, payload: m });
+type MessageInputActionType = {
+  type: typeof ON_NEW_MSG_BODY_CHANGE,
+  payload: string
+}
+export const messageInputChange = (msg: string): MessageInputActionType => ({
   type: ON_NEW_MSG_BODY_CHANGE,
   payload: msg,
 });

@@ -1,6 +1,10 @@
 import React from "react";
-
-const Input = ({ textChangeHandler, inputValue, send }) => {
+type Props = {
+  textChangeHandler: () => void
+  inputValue: number | string
+  send: () => void
+}
+const Input: React.FC<Props> = ({ textChangeHandler, inputValue, send }) => {
   return (
     <div>
       <form
