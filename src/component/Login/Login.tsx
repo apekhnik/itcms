@@ -32,7 +32,7 @@ const Login:React.FC<MapStatePropsType&MapDispatchType> = ({ userLogin, isAuth, 
   );
 };
 type LoginFormOwnProps = {
-  captcha: string
+  captcha: string | null
 }
 const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFormOwnProps> = (props) => {
   const antiBot = createField(
@@ -73,8 +73,7 @@ const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFor
   );
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
-      //@ts-ignore
-      <Tooltip content="hui" position="left"> 
+      <Tooltip content="hui" position="top"> 
         <h2>Авторизация</h2>
       </Tooltip>
       {login}

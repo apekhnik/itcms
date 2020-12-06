@@ -1,5 +1,5 @@
 import React from "react";
-import {  reduxForm } from "redux-form";
+import {  reduxForm, InjectedFormProps } from "redux-form";
 import {
   FormInput,
   createField,
@@ -7,11 +7,13 @@ import {
 } from "../../forms/form-controls/Textarea";
 import style from "./Profile.module.css";
 import {ProfileType} from '../../redux/reducers/profilePageReducer'
-type Propstype = {
+type MapPropstype = {
   profile: ProfileType
+}
+type MapDispatchPropstype = {
   onSubmit: (data:any)=>void
 }
-export const ProfileDataChangePage:React.FC<Propstype> = ({onSubmit, profile}) => {
+export const ProfileDataChangePage:React.FC<MapPropstype&MapDispatchPropstype> = ({onSubmit, profile}) => {
   
   
   return (
@@ -19,7 +21,6 @@ export const ProfileDataChangePage:React.FC<Propstype> = ({onSubmit, profile}) =
       <ProfileDataReduxForm
         onSubmit={onSubmit}
         initialValues={profile}
-        //@ts-ignore
         profile={profile}
       />
     </div>
@@ -27,10 +28,10 @@ export const ProfileDataChangePage:React.FC<Propstype> = ({onSubmit, profile}) =
 };
 
 type DataFormType = {
-  handleSubmit:()=>void
+  handleSubmit?:()=>void
   profile: ProfileType
 }
-const ProfileDataForm:React.FC<DataFormType> = (props) => {
+const ProfileDataForm:React.FC<InjectedFormProps<ProfileType,DataFormType>&DataFormType> = (props) => {
   
   return (
     <form onSubmit={props.handleSubmit} className={style.profileChangeForm}>
@@ -47,8 +48,7 @@ const ProfileDataForm:React.FC<DataFormType> = (props) => {
   );
 };
 
-const ProfileDataReduxForm = reduxForm({ form: "profileData" })(
-  //@ts-ignore
+const ProfileDataReduxForm = reduxForm<ProfileType,DataFormType>({ form: "profileData" })(
   ProfileDataForm
 );
 export default ProfileDataChangePage;

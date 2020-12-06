@@ -5,7 +5,7 @@ type PropsType = {
   children: ReactNode
   content: string,
   position: "top"| "right"| "bottom"| "left"
-  style: CSSProperties
+  style?: CSSProperties
 }
 const Tooltip:React.FC<PropsType> =(props)=>{
   const [visible, setVisible] = useState(false)
