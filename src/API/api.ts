@@ -75,7 +75,7 @@ export const profileApi = {
     })
     return response.data.data.photos
   },
-  //@ts-ignore
+  
   saveProfile: (profile: ProfileType) => instanse.put<UpdateStatusType>('profile', { ...profile }),
 
 };
