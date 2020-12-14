@@ -95,15 +95,15 @@ const LoginForm: React.FC<InjectedFormProps<LoginData, LoginFormOwnProps> & Logi
 };
 type MapStatePropsType = {
   isAuth: boolean
-  captcha: string
+  captcha: string | null
 }
 type MapDispatchType = {
   userLogin: (data: LoginData) => void
 }
-const mapStateToProps = (state: AppstateType) => ({
+const mapStateToProps = (state: AppstateType):MapStatePropsType => ({
   isAuth: state.auth.isAuth,
   captcha: state.auth.captcha,
 });
 const LoginReduxForm = reduxForm<LoginData, LoginFormOwnProps>({ form: "login" })(LoginForm);
-//@ts-ignore
-export default connect(mapStateToProps, { userLogin })(Login);
+
+export default connect<MapStatePropsType,MapDispatchType, {},AppstateType>(mapStateToProps, { userLogin })(Login);

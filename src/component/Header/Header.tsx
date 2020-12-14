@@ -3,15 +3,15 @@ import style from "./Header.module.css";
 import LoginIndicator from "./LoginIndicator";
 import Logo from '../Logo/Logo'
 type HeaderType = {
-  login: string
+  login: string | null
   isAuth: boolean
-  id: string
+  id: number | null
   userLogout: () => void
 }
-const Header:React.FC<HeaderType> = ({ login, isAuth, id, userLogout }) => {
+const Header: React.FC<HeaderType> = ({ login, isAuth, id, userLogout }) => {
   return (
     <div className={style.header}>
-      <Logo/>
+      <Logo />
       <LoginIndicator
         login={login}
         isAuth={isAuth}

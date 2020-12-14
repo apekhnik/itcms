@@ -2,11 +2,20 @@ import React from "react";
 import style from "./Dialogs.module.css";
 import DialogList from "./DialogsList/DialogsList";
 import MessageList from "./Messages/MessagesList";
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Textarea } from "../../forms/form-controls/Textarea";
-import {} from "../../forms/form-validator/validator";
-const DialogsContainer = ({ dialogs, messages, sendNewMessage }) => {
-  const onSubmit = (data) => {
+import { } from "../../forms/form-validator/validator";
+import { DialogItemType } from "../../redux/reducers/dialogsPageReducer";
+type PropsType = {
+  dialogs: DialogItemType[]
+  messages: string[]
+  sendNewMessage: (text: string) => void
+}
+type DialogType = {
+  message: string
+}
+const DialogsContainer: React.FC<PropsType> = ({ dialogs, messages, sendNewMessage }) => {
+  const onSubmit = (data: DialogType) => {
     sendNewMessage(data.message);
   };
   return (
@@ -17,7 +26,7 @@ const DialogsContainer = ({ dialogs, messages, sendNewMessage }) => {
     </div>
   );
 };
-const dialogForm = (props) => (
+const dialogForm: React.FC<InjectedFormProps<DialogType, {}> & {}> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       placeholder={"Enter your message"}
@@ -28,5 +37,5 @@ const dialogForm = (props) => (
     />
   </form>
 );
-const MessageReduxForm = reduxForm({ form: "message" })(dialogForm);
+const MessageReduxForm = reduxForm<DialogType, {}>({ form: "message" })(dialogForm);
 export default DialogsContainer;

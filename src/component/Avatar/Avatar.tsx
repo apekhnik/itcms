@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import style from "./Avatar.module.css";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FileType } from "../Account/Account";
 type PropsType = {
   src: string | null
-  size: string
-  isOwner?:boolean
-  loadPhoto?:()=>void
-  savePhoto?:(newAva:any)=>void
+  size?: string
+  isOwner?: boolean
+  loadPhoto?: (file: FileType) => void
+  savePhoto?: (newAva: any) => void
 }
-const Avatar:React.FC<PropsType> = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
+const Avatar: React.FC<PropsType> = ({ src, size, isOwner, loadPhoto, savePhoto }) => {
   const [newAva, setNewava] = useState("");
 
   const imgSize = size === "min" ? { width: "90px", height: "120px" } : {};
-  const setNewPhoto = (e:any) => {
+  const setNewPhoto = (e: any) => {
     if (e.target.files.length) {
       setNewava(e.target.files[0]);
       console.log(e.target.files[0])

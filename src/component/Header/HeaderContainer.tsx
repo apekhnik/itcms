@@ -11,7 +11,7 @@ const HeaderContainer: React.FC<MapState & MapDisp> = ({ login, isAuth, id, user
   )
 }
 
-const mapStateToProps = (state: AppstateType) => {
+const mapStateToProps = (state: AppstateType): MapState => {
   return {
     isAuth: state.auth.isAuth,
     login: state.auth.login,
@@ -19,14 +19,14 @@ const mapStateToProps = (state: AppstateType) => {
   };
 };
 type MapState = {
-  login: string
+  login: string | null
   isAuth: boolean
-  id: string
+  id: number | null
 }
 type MapDisp = {
   userLogout: () => void
 }
-export default connect(mapStateToProps, {
+export default connect<MapState, MapDisp, {}, AppstateType>(mapStateToProps, {
   userLogout,
-  //@ts-ignore
+
 })(HeaderContainer);
