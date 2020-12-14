@@ -4,7 +4,7 @@ type initialState = {
   messages: Array<string>,
   newMessageBody: string,
 }
-type DialogItemType = { id: number, name: string }
+export type DialogItemType = { id: number, name: string }
 type action = {
   type: string
   payload: string

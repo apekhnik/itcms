@@ -5,14 +5,25 @@ import { compose } from "redux";
 import {
   sendNewMessage,
   messageInputChange,
+  DialogItemType,
 } from "../../redux/reducers/dialogsPageReducer";
-const mapStateToProps = (state) => {
+import { AppstateType } from "../../redux/store";
+const mapStateToProps = (state: AppstateType) => {
   return {
     dialogs: state.dialogPage.dialogs,
     messages: state.dialogPage.messages,
     newMessageBody: state.dialogPage.newMessageBody,
   };
 };
+type MapStateType = {
+  dialogs: DialogItemType
+  messages: string
+  newMessageBody: string
+}
+type MapDispatchType = {
+  sendNewMessage:(text:string)=>void
+  messageInputChange:(text:string)=>void
+}
 export default compose(
   connect(mapStateToProps, { sendNewMessage, messageInputChange }),
   withAuthRedirect

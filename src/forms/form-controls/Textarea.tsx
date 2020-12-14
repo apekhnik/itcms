@@ -1,11 +1,18 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import classes from "classnames";
 import style from "./Textarea.module.css";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field } from "redux-form";
 import Tooltip from "../../component/Tooltip/Tooltip";
-export const Textarea = ({
+import {FieldValidatorType} from '../form-validator/validator'
+type TextareaType = {
+  input:string
+  placeholder:string
+  type:string
+  meta: { touched:boolean, error:string, warning:string },
+}
+export const Textarea:React.FC<TextareaType> = ({
   input,
   placeholder,
   type,
@@ -28,15 +35,16 @@ export const Textarea = ({
     </div>
   );
 };
-export const createField = (
-  component,
-  type,
-  placeholder,
-  name,
-  validate,
-  className,
-  label
-) => {
+
+export function createField<FieldNameType extends string>(
+  component:ReactNode,
+  type:string,
+  placeholder:string,
+  name:FieldNameType,
+  validate:Array<FieldValidatorType>,
+  className:string,
+  label:ReactNode
+) {
   return (
     <Field
       component={component}
@@ -49,7 +57,16 @@ export const createField = (
     />
   );
 };
-export const FormInput = ({
+type FormInputType = {
+  input:string
+  placeholder:string
+  type:string
+  className:string
+  name:string
+  label:string
+  meta: { touched:boolean, error:string, warning:string }
+}
+export const FormInput:React.FC<FormInputType> = ({
   input,
   placeholder,
   type,
@@ -83,7 +100,7 @@ export const FormInput = ({
     </div>
   );
 };
-export const FormInputCheck = ({
+export const FormInputCheck:React.FC<FormInputType>  = ({
   input,
   placeholder,
   type,

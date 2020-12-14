@@ -11,31 +11,32 @@ import { connect } from "react-redux";
 import { required } from "../../forms/form-validator/validator";
 import { Redirect } from "react-router-dom";
 import Tooltip from "../Tooltip/Tooltip";
-import {LoginData} from '../../redux/reducers/authReducer'
-import {AppstateType} from '../../redux/store'
+import { LoginData } from '../../redux/reducers/authReducer'
+import { AppstateType } from '../../redux/store'
 // type PropsType = {
 //   userLogin:(data:LoginData)=>void,
 //   isAuth:boolean
 //   captcha: string
 // }
-const Login:React.FC<MapStatePropsType&MapDispatchType> = ({ userLogin, isAuth, captcha }) => {
-  const onSubmit = (data:LoginData) => {
+const Login: React.FC<MapStatePropsType & MapDispatchType> = ({ userLogin, isAuth, captcha }) => {
+  const onSubmit = (data: LoginData) => {
     userLogin(data);
   };
 
   if (isAuth) return <Redirect to="/profile" />;
   return (
     <div className={style.loginPage}>
-      
+
       <LoginReduxForm onSubmit={onSubmit} captcha={captcha} />
     </div>
   );
 };
 type LoginFormOwnProps = {
-  captcha: string
+  captcha: string | null
 }
-const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFormOwnProps> = (props) => {
-  const antiBot = createField(
+type LoginFormField = Extract<keyof LoginData, string>
+const LoginForm: React.FC<InjectedFormProps<LoginData, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
+  const antiBot = createField<LoginFormField>(
     FormInput,
     "text",
     "Anti-bot",
@@ -44,7 +45,7 @@ const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFor
     "",
     ""
   );
-  const rememberMe = createField(
+  const rememberMe = createField<LoginFormField>(
     FormInputCheck,
     "checkbox",
     "",
@@ -53,7 +54,7 @@ const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFor
     "check",
     "Запомнить меня"
   );
-  const login = createField(
+  const login = createField<LoginFormField>(
     FormInput,
     "text",
     "Login",
@@ -62,7 +63,7 @@ const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFor
     "",
     "Login"
   );
-  const password = createField(
+  const password = createField<LoginFormField>(
     FormInput,
     "password",
     "Password",
@@ -73,8 +74,7 @@ const LoginForm:React.FC<InjectedFormProps<LoginData,LoginFormOwnProps>&LoginFor
   );
   return (
     <form className={style.loginForm} onSubmit={props.handleSubmit}>
-      //@ts-ignore
-      <Tooltip content="hui" position="left"> 
+      <Tooltip content="hui" position="top">
         <h2>Авторизация</h2>
       </Tooltip>
       {login}
@@ -98,9 +98,9 @@ type MapStatePropsType = {
   captcha: string
 }
 type MapDispatchType = {
-  userLogin: (data:LoginData) => void
+  userLogin: (data: LoginData) => void
 }
-const mapStateToProps = (state:AppstateType) => ({
+const mapStateToProps = (state: AppstateType) => ({
   isAuth: state.auth.isAuth,
   captcha: state.auth.captcha,
 });
