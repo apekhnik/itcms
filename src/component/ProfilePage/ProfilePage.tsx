@@ -48,7 +48,19 @@ const mapStateToProps = (state: AppstateType) => ({
   status: state.profilePage.status,
   autorizedId: state.auth.id,
 });
-
+// type MapStateType = {
+//   profile: ProfileType | null
+//   status: string
+//   autorizedId: number | null
+// }
+// type MapDispatchType = {
+//   setProfile: (id: number) => void
+//   getStatus: (id: number) => void
+//   updateStatus: (status: string) => void
+//   inputUserStatusChange: (status: string) => void
+//   savePhoto: (file: FileType) => void
+//   saveProfile: (profile: ProfileType) => void
+// }
 export default compose(
   connect(mapStateToProps, {
     setProfile,
